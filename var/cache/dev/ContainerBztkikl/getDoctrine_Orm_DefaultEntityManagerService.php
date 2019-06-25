@@ -43,7 +43,9 @@ $a->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
 $a->setNamingStrategy(new \Doctrine\ORM\Mapping\UnderscoreNamingStrategy());
 $a->setQuoteStrategy(new \Doctrine\ORM\Mapping\DefaultQuoteStrategy());
 $a->setEntityListenerResolver(${($_ = isset($this->services['doctrine.orm.default_entity_listener_resolver']) ? $this->services['doctrine.orm.default_entity_listener_resolver'] : ($this->services['doctrine.orm.default_entity_listener_resolver'] = new \Doctrine\Bundle\DoctrineBundle\Mapping\ContainerEntityListenerResolver($this))) && false ?: '_'});
-$a->setRepositoryFactory(new \Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory(${($_ = isset($this->services['service_locator.sr6ctxe']) ? $this->services['service_locator.sr6ctxe'] : ($this->services['service_locator.sr6ctxe'] = new \Symfony\Component\DependencyInjection\ServiceLocator([]))) && false ?: '_'}));
+$a->setRepositoryFactory(new \Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory(new \Symfony\Component\DependencyInjection\ServiceLocator(['App\\Repository\\TripRepository' => function () {
+    return ${($_ = isset($this->services['App\\Repository\\TripRepository']) ? $this->services['App\\Repository\\TripRepository'] : $this->load('getTripRepositoryService.php')) && false ?: '_'};
+}])));
 
 $this->services['doctrine.orm.default_entity_manager'] = $instance = \Doctrine\ORM\EntityManager::create(${($_ = isset($this->services['doctrine.dbal.default_connection']) ? $this->services['doctrine.dbal.default_connection'] : $this->load('getDoctrine_Dbal_DefaultConnectionService.php')) && false ?: '_'}, $a);
 

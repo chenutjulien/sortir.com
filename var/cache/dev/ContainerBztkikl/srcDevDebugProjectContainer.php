@@ -1,6 +1,6 @@
 <?php
 
-namespace ContainerNkxbm4e;
+namespace ContainerBztkikl;
 
 use Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -35,6 +35,7 @@ class srcDevDebugProjectContainer extends Container
 
         $this->services = [];
         $this->normalizedIds = [
+            'app\\repository\\triprepository' => 'App\\Repository\\TripRepository',
             'symfony\\bundle\\frameworkbundle\\controller\\redirectcontroller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\RedirectController',
             'symfony\\bundle\\frameworkbundle\\controller\\templatecontroller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\TemplateController',
         ];
@@ -102,6 +103,7 @@ class srcDevDebugProjectContainer extends Container
             'web_profiler.debug_toolbar' => 'getWebProfiler_DebugToolbarService',
         ];
         $this->fileMap = [
+            'App\\Repository\\TripRepository' => 'getTripRepositoryService.php',
             'Symfony\\Bundle\\FrameworkBundle\\Controller\\RedirectController' => 'getRedirectControllerService.php',
             'Symfony\\Bundle\\FrameworkBundle\\Controller\\TemplateController' => 'getTemplateControllerService.php',
             'annotations.cache' => 'getAnnotations_CacheService.php',
@@ -220,7 +222,6 @@ class srcDevDebugProjectContainer extends Container
             'monolog.logger.doctrine' => 'getMonolog_Logger_DoctrineService.php',
             'router.cache_warmer' => 'getRouter_CacheWarmerService.php',
             'routing.loader' => 'getRouting_LoaderService.php',
-            'service_locator.sr6ctxe' => 'getServiceLocator_Sr6ctxeService.php',
             'services_resetter' => 'getServicesResetterService.php',
             'session' => 'getSessionService.php',
             'session.storage.filesystem' => 'getSession_Storage_FilesystemService.php',
@@ -243,6 +244,7 @@ class srcDevDebugProjectContainer extends Container
         ];
         $this->privates = [
             'session.storage' => true,
+            'App\\Repository\\TripRepository' => true,
             'annotation_reader' => true,
             'annotations.cache' => true,
             'annotations.cache_warmer' => true,
@@ -387,7 +389,6 @@ class srcDevDebugProjectContainer extends Container
             'sensio_framework_extra.converter.listener' => true,
             'sensio_framework_extra.converter.manager' => true,
             'sensio_framework_extra.view.listener' => true,
-            'service_locator.sr6ctxe' => true,
             'session.save_listener' => true,
             'session.storage.filesystem' => true,
             'session.storage.metadata_bag' => true,
