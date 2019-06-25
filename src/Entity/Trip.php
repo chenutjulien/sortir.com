@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,6 +47,22 @@ class Trip
      * @ORM\Column(type="text", nullable=true)
      */
     private $cancelReason;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="trips")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $organiser;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="inscriptions")
+     */
+    private $registereds;
+
+    public function __construct()
+    {
+        $this->registereds = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,6 +137,46 @@ class Trip
     public function setCancelReason(?string $cancelReason): self
     {
         $this->cancelReason = $cancelReason;
+
+        return $this;
+    }
+
+    public function getOrganiser(): ?User
+    {
+        return $this->organiser;
+    }
+
+    public function setOrganiser(?User $organiser): self
+    {
+        $this->organiser = $organiser;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getRegistereds(): Collection
+    {
+        return $this->registereds;
+    }
+
+    public function addRegistered(User $registered): self
+    {
+        if (!$this->registereds->contains($registered)) {
+            $this->registereds[] = $registered;
+            $registered->addInscription($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegistered(User $registered): self
+    {
+        if ($this->registereds->contains($registered)) {
+            $this->registereds->removeElement($registered);
+            $registered->removeInscription($this);
+        }
 
         return $this;
     }

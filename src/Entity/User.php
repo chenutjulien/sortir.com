@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -55,6 +57,33 @@ class User
      * @ORM\Column(type="boolean")
      */
     private $active;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Site", inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $site;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Trip", mappedBy="organiser", orphanRemoval=true)
+     */
+    private $trips;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Trip", inversedBy="registereds")
+     */
+    private $inscriptions;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $phoneNumber;
+
+    public function __construct()
+    {
+        $this->trips = new ArrayCollection();
+        $this->inscriptions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -153,6 +182,87 @@ class User
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    public function getSite(): ?Site
+    {
+        return $this->site;
+    }
+
+    public function setSite(?Site $site): self
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Trip[]
+     */
+    public function getTrips(): Collection
+    {
+        return $this->trips;
+    }
+
+    public function addTrip(Trip $trip): self
+    {
+        if (!$this->trips->contains($trip)) {
+            $this->trips[] = $trip;
+            $trip->setOrganiser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTrip(Trip $trip): self
+    {
+        if ($this->trips->contains($trip)) {
+            $this->trips->removeElement($trip);
+            // set the owning side to null (unless already changed)
+            if ($trip->getOrganiser() === $this) {
+                $trip->setOrganiser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Trip[]
+     */
+    public function getInscriptions(): Collection
+    {
+        return $this->inscriptions;
+    }
+
+    public function addInscription(Trip $inscription): self
+    {
+        if (!$this->inscriptions->contains($inscription)) {
+            $this->inscriptions[] = $inscription;
+        }
+
+        return $this;
+    }
+
+    public function removeInscription(Trip $inscription): self
+    {
+        if ($this->inscriptions->contains($inscription)) {
+            $this->inscriptions->removeElement($inscription);
+        }
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(?string $phoneNumber): self
+    {
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }
