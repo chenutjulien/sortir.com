@@ -5,11 +5,15 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraint as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="app_user")
+ * @UniqueEntity((fields={"username"})
+ * @UniqueEntity(fields={"mail"})
  */
 class User implements UserInterface
 {
@@ -28,11 +32,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $firstname;
 
@@ -43,21 +49,27 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max=255, maxMessage="{{ limit }} caractères maxi")
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $mail;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $password;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Assert\NotBlank()
      */
     private $administrator;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Assert\NotBlank()
      */
     private $active;
 
@@ -69,16 +81,19 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Trip", mappedBy="organiser", orphanRemoval=true)
+     * @Assert\NotBlank()
      */
     private $trips;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Trip", inversedBy="registereds")
+     * @Assert\NotBlank()
      */
     private $inscriptions;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank()
      */
     private $phoneNumber;
 
