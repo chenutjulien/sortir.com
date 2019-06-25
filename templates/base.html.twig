@@ -37,6 +37,15 @@
                             <li class="nav-item">
                                 <a class="nav-link invisible" href="#">Sites</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link invisible" href="#">Mon Profil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link invisible" href="#">Se déconnecter</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path("trip_trip") }}">Sorties</a>
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -45,7 +54,7 @@
 
         {% endblock %}
             <footer class="fixed-bottom">
-                @Sortir.com d {{ "now" | date("Y") }}
+                @Sortir.com {{ "now" | date("Y") }}
             </footer>
         </div>
         {% block javascripts %}
