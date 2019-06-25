@@ -4,3 +4,4 @@
 [2019-06-25 07:48:05] console.DEBUG: Command "doctrine:database:create" exited with code "1" {"command":"doctrine:database:create","code":1} []
 [2019-06-25 09:26:29] doctrine.DEBUG: SHOW FULL TABLES WHERE Table_type = 'BASE TABLE' [] []
 [2019-06-25 09:26:29] console.DEBUG: Command "doctrine:schema:update" exited with code "1" {"command":"doctrine:schema:update","code":1} []
+[2019-06-25 09:33:44] console.DEBUG: Command ""make:Entity"" exited with code "1" {"command":"\"make:Entity\"","code":1} []
