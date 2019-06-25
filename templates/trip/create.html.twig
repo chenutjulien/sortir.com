@@ -1,0 +1,9 @@
+{% extends 'base.html.twig'%}
+
+{% block main %}
+<h1> Proposer une nouvelle sortie:</h1>
+    {{  form_start(tripForm) }}
+    {{ form_widget(tripForm) }}
+    <button type="submit">Valider</button>
+    {{ form_end(tripForm) }}
+{% endblock %}
