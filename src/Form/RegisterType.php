@@ -3,8 +3,13 @@
 namespace App\Form;
 
 use App\Entity\User;
-use function PHPSTORM_META\type;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,31 +21,53 @@ class RegisterType extends AbstractType
         $builder
             ->add('username', TextType::class, [
                 'attr'=> [
-                    'placeholder'=>'Votre identifiant'
+                    'placeholder'=>'Votre identifiant',
+                    'required'=>true
                 ]
             ])
             ->add('name', TextType::class, [
                 'attr'=> [
-                    'placeholder'=>'Votre nom'
+                    'placeholder'=>'Votre nom',
+                    'required'=>true
                 ]
             ])
             ->add('firstname', TextType::class, [
                 'attr'=> [
-                    'placeholder'=>'Votre prénom'
+                    'placeholder'=>'Votre prénom',
+                    'required'=>true
                 ]
             ])
-            ->add('picture', TextType::class, [
+            ->add('picture', FileType::class, [
                 'attr'=> [
-                    'placeholder'=>'Votre jolie trombine'
+                    'placeholder'=>'Votre jolie trombine',
+                    'required'=>false
                 ]
             ])
-            ->add('mail')
-            ->add('password')
+            ->add('mail', EmailType::class, [
+                'attr'=> [
+                    'placeholder'=>'Votre adresse mail',
+                    'required'=>true
+                ]
+            ])
+            ->add('password', RepeatedType::class, [
+                'type'=> PasswordType::class,
+                'invalid_message'=>'Vous n\'avez pas saisi le même mot de passe',
+                'first_options'=>[
+                    'label'=>'Mot de passe'
+                ],
+                'second_options' => [
+                    'label'=>'Confirmation du mot de passe'
+                ]
+            ])
             ->add('administrator')
             ->add('active')
-            ->add('phoneNumber')
+            ->add('phoneNumber', TelType::class, [
+                'attr'=> [
+                    'placeholder'=>'Votre télephone',
+                    'required'=>true
+                ]
+            ])
             ->add('site')
-            ->add('inscriptions')
         ;
     }
 
