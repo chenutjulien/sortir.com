@@ -2,7 +2,6 @@
 .idea/*
 /var/cache/*
 /var/log/*
-\var\log\*
 /var/logs/*
 /var/sessions/*
 !var/cache/.gitkeep
