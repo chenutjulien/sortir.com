@@ -1,0 +1,2 @@
+[2019-06-25 11:05:55] request.INFO: Matched route "main_home". {"route":"main_home","route_parameters":{"_controller":"App\\Controller\\MainController::home","_route":"main_home"},"request_uri":"http://localhost/sortir/public/","method":"GET"} []
+[2019-06-25 11:05:56] request.INFO: Matched route "_wdt". {"route":"_wdt","route_parameters":{"_controller":"web_profiler.controller.profiler:toolbarAction","token":"689202","_route":"_wdt"},"request_uri":"http://localhost/sortir/public/_wdt/689202","method":"GET"} []

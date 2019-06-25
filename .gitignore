@@ -1,6 +1,7 @@
 .env
 .idea/*
 /var/cache/*
+/var/log/*
 /var/logs/*
 /var/sessions/*
 !var/cache/.gitkeep
