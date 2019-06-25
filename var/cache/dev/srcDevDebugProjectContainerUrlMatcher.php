@@ -107,6 +107,26 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
+        // main_home
+        if ('' === $trimmedPathinfo) {
+            $ret = array (  '_controller' => 'App\\Controller\\MainController::home',  '_route' => 'main_home',);
+            if ('/' === substr($pathinfo, -1)) {
+                // no-op
+            } elseif ('GET' !== $canonicalMethod) {
+                goto not_main_home;
+            } else {
+                return array_replace($ret, $this->redirect($rawPathinfo.'/', 'main_home'));
+            }
+
+            return $ret;
+        }
+        not_main_home:
+
+        // user_register
+        if ('/register' === $pathinfo) {
+            return array (  '_controller' => 'App\\Controller\\UserController::register',  '_route' => 'user_register',);
+        }
+
         if ('/' === $pathinfo && !$allow) {
             throw new Symfony\Component\Routing\Exception\NoConfigurationException();
         }

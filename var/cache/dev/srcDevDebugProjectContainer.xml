@@ -437,10 +437,19 @@
     <service id="EasyCorp\EasyLog\EasyLogHandler" class="EasyCorp\EasyLog\EasyLogHandler" public="false">
       <argument>C:\wamp64\www\sortir\var\log/dev.log</argument>
     </service>
+    <service id="App\Controller\MainController" class="App\Controller\MainController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+    </service>
+    <service id="App\Controller\UserController" class="App\Controller\UserController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+    </service>
     <service id="App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" public="false" autowire="true" autoconfigure="true">
       <tag name="doctrine.fixture.orm"/>
     </service>
-<<<<<<< HEAD
+    <service id="App\Repository\CityRepository" class="App\Repository\CityRepository" public="false" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
     <service id="App\Repository\SiteRepository" class="App\Repository\SiteRepository" public="false" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
@@ -449,10 +458,15 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\UserRepository" class="App\Repository\UserRepository" public="false" autowire="true" autoconfigure="true">
-=======
+    <service id="App\Repository\StateRepository" class="App\Repository\StateRepository" public="false" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
     <service id="App\Repository\TripRepository" class="App\Repository\TripRepository" public="false" autowire="true" autoconfigure="true">
->>>>>>> 9bd095e1df90aa651a808c47f397101e153af84f
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\UserRepository" class="App\Repository\UserRepository" public="false" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -1186,14 +1200,6 @@
       </call>
       <call method="addListener">
         <argument>kernel.request</argument>
-        <argument type="collection">
-          <argument type="service" id="debug.debug_handlers_listener"/>
-          <argument>configure</argument>
-        </argument>
-        <argument>2048</argument>
-      </call>
-      <call method="addListener">
-        <argument>console.command</argument>
         <argument type="collection">
           <argument type="service" id="debug.debug_handlers_listener"/>
           <argument>configure</argument>
@@ -2238,11 +2244,7 @@
       <factory class="Doctrine\ORM\EntityManager" method="create"/>
     </service>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory" public="false">
-<<<<<<< HEAD
-      <argument type="service" id="service_locator.jojle_m"/>
-=======
-      <argument type="service" id="service_locator.fakkgp4"/>
->>>>>>> 9bd095e1df90aa651a808c47f397101e153af84f
+      <argument type="service" id="service_locator.exr_zdi"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -2500,19 +2502,24 @@
         </argument>
       </call>
     </service>
+    <service id="instanceof.Symfony\Bundle\FrameworkBundle\Controller\Controller.0.App\Controller\MainController" class="App\Controller\MainController" public="false" autowire="true" abstract="true"/>
+    <service id="abstract.instanceof.App\Controller\MainController" class="App\Controller\MainController" public="false" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id="instanceof.Symfony\Bundle\FrameworkBundle\Controller\Controller.0.App\Controller\UserController" class="App\Controller\UserController" public="false" autowire="true" abstract="true"/>
+    <service id="abstract.instanceof.App\Controller\UserController" class="App\Controller\UserController" public="false" autowire="true" autoconfigure="true" abstract="true"/>
     <service id="instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" public="false" autowire="true" abstract="true"/>
     <service id="abstract.instanceof.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" public="false" autowire="true" autoconfigure="true" abstract="true"/>
-<<<<<<< HEAD
+    <service id="instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\CityRepository" class="App\Repository\CityRepository" public="false" autowire="true" abstract="true"/>
+    <service id="abstract.instanceof.App\Repository\CityRepository" class="App\Repository\CityRepository" public="false" autowire="true" autoconfigure="true" abstract="true"/>
     <service id="instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\SiteRepository" class="App\Repository\SiteRepository" public="false" autowire="true" abstract="true"/>
     <service id="abstract.instanceof.App\Repository\SiteRepository" class="App\Repository\SiteRepository" public="false" autowire="true" autoconfigure="true" abstract="true"/>
     <service id="instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\SpotRepository" class="App\Repository\SpotRepository" public="false" autowire="true" abstract="true"/>
     <service id="abstract.instanceof.App\Repository\SpotRepository" class="App\Repository\SpotRepository" public="false" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id="instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserRepository" class="App\Repository\UserRepository" public="false" autowire="true" abstract="true"/>
-    <service id="abstract.instanceof.App\Repository\UserRepository" class="App\Repository\UserRepository" public="false" autowire="true" autoconfigure="true" abstract="true"/>
-=======
+    <service id="instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\StateRepository" class="App\Repository\StateRepository" public="false" autowire="true" abstract="true"/>
+    <service id="abstract.instanceof.App\Repository\StateRepository" class="App\Repository\StateRepository" public="false" autowire="true" autoconfigure="true" abstract="true"/>
     <service id="instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\TripRepository" class="App\Repository\TripRepository" public="false" autowire="true" abstract="true"/>
     <service id="abstract.instanceof.App\Repository\TripRepository" class="App\Repository\TripRepository" public="false" autowire="true" autoconfigure="true" abstract="true"/>
->>>>>>> 9bd095e1df90aa651a808c47f397101e153af84f
+    <service id="instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserRepository" class="App\Repository\UserRepository" public="false" autowire="true" abstract="true"/>
+    <service id="abstract.instanceof.App\Repository\UserRepository" class="App\Repository\UserRepository" public="false" autowire="true" autoconfigure="true" abstract="true"/>
     <service id="maker.auto_command.make_auth" class="Symfony\Bundle\MakerBundle\Command\MakerCommand" public="false">
       <tag name="console.command" command="make:auth"/>
       <argument type="service" id="maker.maker.make_authenticator"/>
@@ -2761,19 +2768,15 @@
       </call>
     </service>
     <service id="monolog.handler.null_internal" class="Monolog\Handler\NullHandler"/>
-<<<<<<< HEAD
-    <service id="service_locator.jojle_m" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id="service_locator.exr_zdi" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Repository\CityRepository" type="service" id="App\Repository\CityRepository"/>
         <argument key="App\Repository\SiteRepository" type="service" id="App\Repository\SiteRepository"/>
         <argument key="App\Repository\SpotRepository" type="service" id="App\Repository\SpotRepository"/>
-        <argument key="App\Repository\UserRepository" type="service" id="App\Repository\UserRepository"/>
-=======
-    <service id="service_locator.fakkgp4" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
+        <argument key="App\Repository\StateRepository" type="service" id="App\Repository\StateRepository"/>
         <argument key="App\Repository\TripRepository" type="service" id="App\Repository\TripRepository"/>
->>>>>>> 9bd095e1df90aa651a808c47f397101e153af84f
+        <argument key="App\Repository\UserRepository" type="service" id="App\Repository\UserRepository"/>
       </argument>
     </service>
     <service id="service_locator.lluwcxp" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">

@@ -1,3 +1,8 @@
 .env
-.idea/
-var/
+.idea/*
+/var/cache/*
+/var/logs/*
+/var/sessions/*
+!var/cache/.gitkeep
+!var/logs/.gitkeep
+!var/sessions/.gitkeep
