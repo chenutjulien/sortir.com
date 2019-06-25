@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TripRepository")
  */
@@ -20,26 +21,33 @@ class Trip
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Date()
+     * @Assert\NotBlank()
      */
     private $startDateTime;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     *
      */
     private $duration;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
      */
     private $maxRegistration;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank()
      */
     private $informations;
 
@@ -93,12 +101,12 @@ class Trip
         return $this;
     }
 
-    public function getStartDateTime(): ?\DateTimeInterface
+    public function getStartDateTime(): ?DateTimeInterface
     {
         return $this->startDateTime;
     }
 
-    public function setStartDateTime(\DateTimeInterface $startDateTime): self
+    public function setStartDateTime(DateTimeInterface $startDateTime): self
     {
         $this->startDateTime = $startDateTime;
 
