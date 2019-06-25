@@ -59,6 +59,18 @@ class Trip
      */
     private $registereds;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\State", inversedBy="trips")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $state;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Spot", inversedBy="trips")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $spot;
+
     public function __construct()
     {
         $this->registereds = new ArrayCollection();
@@ -177,6 +189,30 @@ class Trip
             $this->registereds->removeElement($registered);
             $registered->removeInscription($this);
         }
+
+        return $this;
+    }
+
+    public function getState(): ?State
+    {
+        return $this->state;
+    }
+
+    public function setState(?State $state): self
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    public function getSpot(): ?Spot
+    {
+        return $this->spot;
+    }
+
+    public function setSpot(?Spot $spot): self
+    {
+        $this->spot = $spot;
 
         return $this;
     }
