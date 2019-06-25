@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="685e87ab-50b8-4ddb-b627-d26fe1036ee1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/var/cache/dev/ContainerNkxbm4e.legacy" beforeDir="false" />
@@ -291,6 +292,9 @@
       <change beforePath="$PROJECT_DIR$/var/cache/dev/srcDevDebugProjectContainer.xml.meta" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/srcDevDebugProjectContainer.xml.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/var/cache/dev/srcDevDebugProjectContainerCompiler.log" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/srcDevDebugProjectContainerCompiler.log" afterDir="false" />
     </list>
+=======
+    <list default="true" id="685e87ab-50b8-4ddb-b627-d26fe1036ee1" name="Default Changelist" comment="" />
+>>>>>>> 9bd095e1df90aa651a808c47f397101e153af84f
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -314,6 +318,7 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/bootstrap.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -328,6 +333,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="177">
               <caret line="28" column="33" lean-forward="true" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+>>>>>>> 9bd095e1df90aa651a808c47f397101e153af84f
             </state>
           </provider>
         </entry>
@@ -341,6 +353,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -415,9 +428,15 @@
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
     </include_path>
   </component>
+<<<<<<< HEAD
   <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="229" />
     <option name="y" value="33" />
+=======
+  <component name="ProjectFrameBounds">
+    <option name="x" value="179" />
+    <option name="y" value="5" />
+>>>>>>> 9bd095e1df90aa651a808c47f397101e153af84f
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
@@ -481,18 +500,30 @@
       <option name="presentableId" value="Default" />
       <updated>1561448997931</updated>
       <workItem from="1561448999041" duration="41000" />
+<<<<<<< HEAD
       <workItem from="1561449071712" duration="54000" />
       <workItem from="1561449363242" duration="10000" />
       <workItem from="1561449390987" duration="2021000" />
       <workItem from="1561453575767" duration="175000" />
+=======
+      <workItem from="1561449071712" duration="2461000" />
+>>>>>>> 9bd095e1df90aa651a808c47f397101e153af84f
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="2301000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="229" y="33" width="1400" height="1000" extended-state="0" />
+=======
+    <option name="totallyTimeSpent" value="2502000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="179" y="5" width="1400" height="1000" extended-state="0" />
+    <editor active="true" />
+>>>>>>> 9bd095e1df90aa651a808c47f397101e153af84f
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26492536" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -526,6 +557,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/config/bootstrap.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -537,6 +569,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
           <caret line="28" column="33" lean-forward="true" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
+=======
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+>>>>>>> 9bd095e1df90aa651a808c47f397101e153af84f
         </state>
       </provider>
     </entry>
