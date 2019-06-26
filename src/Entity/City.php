@@ -25,7 +25,7 @@ class City
 
     /**
      * @ORM\Column(type="integer")
-     * 
+     *
      */
     private $postalCode;
 
