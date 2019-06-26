@@ -26,7 +26,8 @@ class TripController extends Controller
     public function createTrip(EntityManagerInterface $em, Request $rq){
         $trip= new Trip();
         $tripForm= $this->createForm(TripType::class,$trip);
-        $tripForm=handleRequest($rq);
+        $tripForm->handleRequest($rq);
+
 
         if($tripForm->isSubmitted()&& $tripForm->isValid()){
             $em->persist($trip);

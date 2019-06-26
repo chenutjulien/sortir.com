@@ -29,19 +29,23 @@ class Trip
      * @ORM\Column(type="datetime")
      * @Assert\Date()
      * @Assert\NotBlank()
+     * @Assert\GreaterThan(value="now")
+     *
+     * )
      */
     private $startDateTime;
 
     /**
      * @ORM\Column(type="float")
      * @Assert\NotBlank()
-     *
+     * @Assert\Range(min = 0)
      */
     private $duration;
 
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
+     *
      */
     private $maxRegistration;
 
@@ -81,6 +85,7 @@ class Trip
 
     public function __construct()
     {
+        $this->startDateTime= new \DateTime('now');
         $this->registereds = new ArrayCollection();
     }
 
