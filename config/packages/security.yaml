@@ -23,6 +23,10 @@ security:
             logout:
                     path: user_logout
                     target: user_login
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime:
+                path:
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
