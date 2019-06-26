@@ -28,10 +28,22 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
             $this->addFlash('succes', 'Votre inscription est bien validée');
-            $this->redirectToRoute("user_register");
+            $this->redirectToRoute("user_login");
         }
         return $this->render('user/register.html.twig', [
             'formRegister'=>$registerForm->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/login", name="user_login")
+     */
+    public function login(AuthenticationUtils $authenticationUtils) {
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
+        return $this->render("user/login.html.twig", [
+            'error' => $error,
+            'lastUsername' => $lastUsername
         ]);
     }
 
