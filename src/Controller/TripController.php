@@ -30,11 +30,17 @@ class TripController extends Controller
 
 
         if($tripForm->isSubmitted()&& $tripForm->isValid()){
+            if($trip->getEndDateTime()<$trip->getStartDateTime()){
             $em->persist($trip);
             $em->flush();
             $this->addFlash("success","Votre sortie est bien enregistrée");
             return $this-> redirectToRoute("trip_details",['id'=> $trip->getId()]);
             //Besoin de creer ce chemin (vers le détails de la sortie)+ pas sur que cela fonctionne!!
+        }else{
+                $this->addFlash("danger","Attention! On ne peut pas mettre une date de fin avant que la sortie n'ait débutée");
+                return $this-> redirectToRoute("trip_create");
+
+            }
         }
         return $this->render("trip/create.html.twig", [
             "tripForm"=>$tripForm->createView()

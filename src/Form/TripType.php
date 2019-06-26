@@ -25,13 +25,12 @@ class TripType extends AbstractType
                 'attr'=>['placeholder'=>'Insérez le titre de votre évènement ici...'],
                 'required'=>true])
             ->add('startDateTime',DateTimeType::class, [
-                'label'=>'Heure et Date de départ',
+                'label'=>'Heure et date de départ',
                 'required'=>'true',
 
             ])
-            ->add('duration', IntegerType::class, [
-                'label'=>'Durée',
-                'attr'=>['placeholder'=>'En minutes'],
+           ->add('endDateTime', DateTimeType::class, [
+                'label'=>'Heure et date de fin',
                 'required'=>true,
             ])
             ->add('maxRegistration', IntegerType::class, [
