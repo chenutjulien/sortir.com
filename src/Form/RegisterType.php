@@ -67,7 +67,7 @@ class RegisterType extends AbstractType
                     'required'=>true
                 ]
             ])
-            ->add('site')
+//            ->add('site')
         ;
     }
 
