@@ -1,0 +1,22 @@
+{% extends 'base.html.twig'%}
+
+{% block main %}
+    <h1>Liste des sorties :</h1>
+    <div class="row d-flex">
+    {% for trip in trips %}
+        <div class="card col-4">
+{#    <div class="card" style="width: 18rem;">#}
+
+            <a href="#" class="btn btn-primary">
+            <form method="post" action="{{ path("trip_details", { 'id' : trip.id}) }}">
+            <h2 class="card-title">{{ trip.name }}</h2>
+            <p class="card-text">{{ trip.informations }}</p>
+            <p> Le {{ trip.startDateTime| date("d/m/Y à h:i" ) }}, jusqu'à {{ trip.endDateTime| date("h:i" ) }}</p>
+                    <input type="hidden" name="_method">
+                    <button type="submit" ></button>
+            </form>
+            </a>
+            </div>
+        </div>
+  {% endfor %}
+{% endblock %}

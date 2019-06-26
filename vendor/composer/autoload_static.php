@@ -80,6 +80,10 @@ class ComposerStaticInit44bc3a02a19643ff08b3a1f77c691961
         array (
             'Monolog\\' => 8,
         ),
+        'K' => 
+        array (
+            'Knp\\Bundle\\PaginatorBundle\\' => 27,
+        ),
         'E' => 
         array (
             'EasyCorp\\EasyLog\\' => 17,
@@ -314,6 +318,10 @@ class ComposerStaticInit44bc3a02a19643ff08b3a1f77c691961
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Knp\\Bundle\\PaginatorBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/knplabs/knp-paginator-bundle',
+        ),
         'EasyCorp\\EasyLog\\' => 
         array (
             0 => __DIR__ . '/..' . '/easycorp/easy-log-handler/src',
@@ -404,6 +412,13 @@ class ComposerStaticInit44bc3a02a19643ff08b3a1f77c691961
             'ProxyManager\\' => 
             array (
                 0 => __DIR__ . '/..' . '/ocramius/proxy-manager/src',
+            ),
+        ),
+        'K' => 
+        array (
+            'Knp\\Component' => 
+            array (
+                0 => __DIR__ . '/..' . '/knplabs/knp-components/src',
             ),
         ),
     );
