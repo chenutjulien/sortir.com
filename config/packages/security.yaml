@@ -8,12 +8,21 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\User
+                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: true
+            logout_on_user_change: true
+            provider: app_user_provider
+            form_login:
+                login_path: user_login
+                check_path: user_login
+            logout:
+                    path: user_logout
+                    target: user_login
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

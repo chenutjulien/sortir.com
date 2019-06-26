@@ -27,8 +27,8 @@ class UserController extends Controller
             $user->setPassword($hash);
             $em->persist($user);
             $em->flush();
-            $this->addFlash('succes', 'Votre inscription est bien validée');
-            $this->redirectToRoute("user_login");
+            $this->addFlash('succes', 'Inscription  validée');
+            $this->redirectToRoute("user_register");
         }
         return $this->render('user/register.html.twig', [
             'formRegister'=>$registerForm->createView()

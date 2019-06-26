@@ -14,7 +14,7 @@
     <body>
         <div class="container">
             <header>
-                <nav class="navbar navbar-expand-lg navbar-dark bg-succes">
+                <nav class="navbar navbar-expand-lg navba-light">
                     <a class="navbar-brand" href="{{ path("main_home") }}">
                         <img src="{{ asset("images/logo_sortir.png") }}" alt="Logo" width="20%" height="20%">
                         <label>Sortir.com</label>
@@ -25,7 +25,7 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
+                            <li class="nav-item text-dark">
                                 <a class="nav-link" href="{{ path("main_home") }}">Accueil</a>
                             </li>
                             <li>
@@ -49,6 +49,15 @@
                         </ul>
                     </div>
                 </nav>
+                <div id="errors">
+                    {% for label, messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ label }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
             </header>
         {% block main %}
 
