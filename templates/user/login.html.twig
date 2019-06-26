@@ -16,6 +16,7 @@
 {#        <h1>Bienvenue sur Sortir.com</h1>#}
 {#    {% endif %}#}
     <div class="container">
+        <br>
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey | trans(error.messageData, 'security') }}</div>
         {% endif %}
