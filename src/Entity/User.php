@@ -67,7 +67,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="boolean")
-     * @Assert\NotBlank()
      */
     private $active;
 
@@ -79,19 +78,16 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Trip", mappedBy="organiser", orphanRemoval=true)
-     * @Assert\NotBlank()
      */
     private $trips;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Trip", inversedBy="registereds")
-     * @Assert\NotBlank()
      */
     private $inscriptions;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank()
      */
     private $phoneNumber;
 
