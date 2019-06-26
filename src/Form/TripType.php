@@ -28,7 +28,7 @@ class TripType extends AbstractType
                 'label'=>'Heure et date de départ',
                 'widget' => 'single_text',
                 'html5' => false,
-                'attr' => ['class' => 'calendar'],
+                'attr' => ['class' => 'input-append'],
                 'required'=>'true',
 
 //                'attr'=>['class'=>'form-control datetimepicker-input']
