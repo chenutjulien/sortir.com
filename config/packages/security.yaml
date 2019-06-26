@@ -23,6 +23,11 @@ security:
             logout:
                     path: user_logout
                     target: user_login
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                path: /
+                token_provider: 'Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider'
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

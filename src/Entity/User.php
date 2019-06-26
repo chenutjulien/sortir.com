@@ -95,6 +95,8 @@ class User implements UserInterface
     {
         $this->trips = new ArrayCollection();
         $this->inscriptions = new ArrayCollection();
+        $this->setAdministrator(false);
+        $this->setActive(true);
     }
 
     public function getId(): ?int

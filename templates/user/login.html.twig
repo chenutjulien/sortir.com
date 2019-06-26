@@ -4,23 +4,24 @@
     {{ parent() }}
 {% endblock %}
 
-{% block stylesheet %}
-    {{ parent() }}
-    <link rel="stylesheet" href="css/style.css">
-{% endblock %}
+{#{% block stylesheet %}#}
+{#    {{ parent() }}#}
+{#    <link rel="stylesheet" href="css/style.css">#}
+{#{% endblock %}#}
 
 {% block main %}
-    <br>
-    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <h1>Bienvenue  {{ app.user.username }} sur Sortir.com</h1>
-        {% else %}
-        <H1>Bienvenue sur Sortir.com</H1>
-    {% endif %}
+{#    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}#}
+{#        <h1>Bienvenue  {{ app.user.username }} sur Sortir.com</h1>#}
+{#        {% else %}#}
+{#        <h1>Bienvenue sur Sortir.com</h1>#}
+{#    {% endif %}#}
     <div class="container">
         <form method="post">
             <input type="text" class="form-control" placeholder="Votre identifiant" name="_username" required value="{{ lastUsername }}"><br>
             <input type="password" class="form-control" placeholder="Votre mot de passe" name="_password" required><br>
             <button type="submit" class="btn btn-primary">Se connecter</button>
+            <input type="checkbox" id="remember_me" name="_remember_me" checked/>
+            <label for="remember_me">Se souvenir de moi</label>
         </form>
     </div>
 {% endblock %}
