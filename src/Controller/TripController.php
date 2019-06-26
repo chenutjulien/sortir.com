@@ -30,7 +30,7 @@ class TripController extends Controller
 
 
         if($tripForm->isSubmitted()&& $tripForm->isValid()){
-            if($trip->getEndDateTime()<$trip->getStartDateTime()){
+            if($trip->getEndDateTime()>$trip->getStartDateTime()){
             $em->persist($trip);
             $em->flush();
             $this->addFlash("success","Votre sortie est bien enregistrée");
