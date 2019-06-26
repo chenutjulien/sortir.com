@@ -16,6 +16,9 @@
 {#        <h1>Bienvenue sur Sortir.com</h1>#}
 {#    {% endif %}#}
     <div class="container">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey | trans(error.messageData, 'security') }}</div>
+        {% endif %}
         <form method="post">
             <input type="text" class="form-control" placeholder="Votre identifiant" name="_username" required value="{{ lastUsername }}"><br>
             <input type="password" class="form-control" placeholder="Votre mot de passe" name="_password" required><br>
