@@ -2305,7 +2305,6 @@
                     "**/Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2900,16 +2899,16 @@
         },
         {
             "name": "symfony/form",
-            "version": "v3.4.28",
+            "version": "v3.4.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/form.git",
-                "reference": "ce56406a0ac22a5b199236253c39f3b080b93d0e"
+                "reference": "141df08a2dc0aa5084c28163872d43c56e3a3335"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/form/zipball/ce56406a0ac22a5b199236253c39f3b080b93d0e",
-                "reference": "ce56406a0ac22a5b199236253c39f3b080b93d0e",
+                "url": "https://api.github.com/repos/symfony/form/zipball/141df08a2dc0aa5084c28163872d43c56e3a3335",
+                "reference": "141df08a2dc0aa5084c28163872d43c56e3a3335",
                 "shasum": ""
             },
             "require": {
@@ -2977,7 +2976,7 @@
             ],
             "description": "Symfony Form Component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-14T14:13:30+00:00"
+            "time": "2019-06-23T07:45:21+00:00"
         },
         {
             "name": "symfony/framework-bundle",
@@ -3268,7 +3267,6 @@
                     "/Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3335,7 +3333,6 @@
                     "/Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3593,7 +3590,6 @@
                     "/Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3731,7 +3727,6 @@
                     "bootstrap.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3882,7 +3877,6 @@
                     "/Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4098,7 +4092,6 @@
                     "/Http/Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4183,7 +4176,6 @@
                     "/Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4301,7 +4293,6 @@
                     "/Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4548,7 +4539,6 @@
                     "/Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],

@@ -8,29 +8,35 @@
 {#    {% if error %}#}
 {#        <div class="alert alert-danger">{{ error.messageKey | trans(error.messageData, 'security') }}</div>#}
 {#    {% endif %}#}
-    <form method="post">
-        <label>Votre pseudo</label>
-        <input type="text" class="form-control" placeholder="Votre identifiant" name="_username" required value=""><br>
-        <label>Votre prénom</label>
-        <input type="text" class="form-control" placeholder="Votre prénom" name="_firtname" required value=""><br>
-        <label>Votre nom</label>
-        <input type="text" class="form-control" placeholder="Votre nom" name="_name" required value=""><br>
-        <label>T'as pas un un 06 ?!</label>
-        <input type="text" class="form-control" placeholder="Votre téléphone" name="_phonenumber" required value=""><br>
-        <label>Votre courriel</label>
-        <input type="email" class="form-control" placeholder="Votre courriel" name="_mail" required value=""><br>
-        <label>Votre mot de passe</label>
-        <input type="password" class="form-control" placeholder="Votre mot de passe" name="password" required value=""><br>
-        <label>Confirmation du mot de passe</label>
-        <input type="password" class="form-control" placeholder="Confirmation du mot de passe" name="_password" required value=""><br>
-        <label>Ville de rattachement</label>
-        <input type="" class="form-control" placeholder="Ville de rattachement" name="_site" required value=""><br>
-        <label>Votre photo</label><br>
-        <input type="file"  placeholder="Votre photo" name="_picture" required value="">
-        <br><br>
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
-        <button type="submit" class="btn btn-primary">Valider</button>
+{#    <form method="post">#}
+{#        <label>Votre pseudo</label>#}
+{#        <input type="text" class="form-control" placeholder="Votre identifiant" name="_username" required value=""><br>#}
+{#        <label>Votre prénom</label>#}
+{#        <input type="text" class="form-control" placeholder="Votre prénom" name="_firtname" required value=""><br>#}
+{#        <label>Votre nom</label>#}
+{#        <input type="text" class="form-control" placeholder="Votre nom" name="_name" required value=""><br>#}
+{#        <label>T'as pas un un 06 ?!</label>#}
+{#        <input type="text" class="form-control" placeholder="Votre téléphone" name="_phonenumber" required value=""><br>#}
+{#        <label>Votre courriel</label>#}
+{#        <input type="email" class="form-control" placeholder="Votre courriel" name="_mail" required value=""><br>#}
+{#        <label>Votre mot de passe</label>#}
+{#        <input type="password" class="form-control" placeholder="Votre mot de passe" name="password" required value=""><br>#}
+{#        <label>Confirmation du mot de passe</label>#}
+{#        <input type="password" class="form-control" placeholder="Confirmation du mot de passe" name="_password" required value=""><br>#}
+{#        <label>Ville de rattachement</label>#}
+{#        <input type="" class="form-control" placeholder="Ville de rattachement" name="_site" required value=""><br>#}
+{#        <label>Votre photo</label><br>#}
+{#        <input type="file"  placeholder="Votre photo" name="_picture" required value="">#}
+{#        <br><br>#}
+{#        <button type="submit" class="btn btn-primary">Enregistrer</button>#}
+{#        <button type="submit" class="btn btn-primary">Valider</button>#}
 
-    </form>
+{#    </form>#}
 
+{#    <div>#}
+{#        {{ form_start(editForm) }}#}
+{#        {{ form_widget(editRegister) }}#}
+{#        <button type="submit" class="btn btn-primary">Enregistrer</button>#}
+{#        {{ form_end(editRegister) }}#}
+{#    </div>#}
 {% endblock %}

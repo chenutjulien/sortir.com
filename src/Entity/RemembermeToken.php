@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 class RemembermeToken
 {
     /**
-     * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @ORM\Table(name="lastUsed")
