@@ -30,19 +30,16 @@ class Trip
      * @ORM\Column(type="datetime")
      * @Assert\Date()
      * @Assert\NotBlank()
+     * @Assert\GreaterThan("today", message="La date de sortie ne doit pas être passée")
+     * )
      */
     private $startDateTime;
 
-    /**
-     * @ORM\Column(type="float")
-     * @Assert\NotBlank()
-     *
-     */
-    private $duration;
 
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
+     * @Assert\Range(min = 0, minMessage="Ca serait plus sympa avec des gens!")
      */
     private $maxRegistration;
 
@@ -80,8 +77,18 @@ class Trip
      */
     private $spot;
 
+    /**
+     * @ORM\Column(type="datetime")
+     * @Assert\Date()
+     * @Assert\NotBlank()
+     * @Assert\GreaterThan("today", message="La date de fin de sortie ne peut pas être passée")
+     */
+    private $endDateTime;
+
     public function __construct()
     {
+        $this->startDateTime= new \DateTime('now');
+        $this->endDateTime= new \DateTime('now');
         $this->registereds = new ArrayCollection();
     }
 
@@ -114,17 +121,6 @@ class Trip
         return $this;
     }
 
-    public function getDuration(): ?float
-    {
-        return $this->duration;
-    }
-
-    public function setDuration(float $duration): self
-    {
-        $this->duration = $duration;
-
-        return $this;
-    }
 
     public function getMaxRegistration(): ?int
     {
@@ -222,6 +218,18 @@ class Trip
     public function setSpot(?Spot $spot): self
     {
         $this->spot = $spot;
+
+        return $this;
+    }
+
+    public function getEndDateTime(): ?DateTimeInterface
+    {
+        return $this->endDateTime;
+    }
+
+    public function setEndDateTime(DateTimeInterface $endDateTime): self
+    {
+        $this->endDateTime = $endDateTime;
 
         return $this;
     }
