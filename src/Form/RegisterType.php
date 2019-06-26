@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -59,15 +60,21 @@ class RegisterType extends AbstractType
                     'label'=>'Confirmation du mot de passe'
                 ]
             ])
-            ->add('administrator')
-            ->add('active')
+            ->add('administrator', CheckboxType::class,
+                array('label'=>'Administrateur',
+                    'required'=>false))
+            ->add('active', CheckboxType::class,
+                array('label'=>'active',
+                    'required'=>false))
             ->add('phoneNumber', TelType::class, [
                 'attr'=> [
                     'placeholder'=>'Votre télephone',
                     'required'=>true
                 ]
             ])
-//            ->add('site')
+            ->add('site', CheckboxType::class,
+                array('label'=>'Chartres de Bretagne',
+                    'required'=>false))
         ;
     }
 
