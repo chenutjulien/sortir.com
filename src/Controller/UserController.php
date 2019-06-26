@@ -46,12 +46,11 @@ class UserController extends Controller
             'lastUsername' => $lastUsername
         ]);
     }
-
-
     /**
      * @Route("/logout", name="user_logout")
      */
     public function logout() {
         // On ne fait rien
     }
+
 }
