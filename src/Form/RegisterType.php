@@ -72,9 +72,9 @@ class RegisterType extends AbstractType
                     'required'=>true
                 ]
             ])
-            ->add('site', CheckboxType::class,
-                array('label'=>'Chartres de Bretagne',
-                    'required'=>false))
+//            ->add('site', CheckboxType::class,
+//                array('label'=>'Chartres de Bretagne',
+//                    'required'=>false))
         ;
     }
 
