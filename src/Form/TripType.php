@@ -26,7 +26,11 @@ class TripType extends AbstractType
                 'required'=>true])
             ->add('startDateTime',DateTimeType::class, [
                 'label'=>'Heure et date de départ',
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => ['class' => 'calendar'],
                 'required'=>'true',
+
 //                'attr'=>['class'=>'form-control datetimepicker-input']
             //-> CI-DESSUS POUR LE DATE PICKER
 
