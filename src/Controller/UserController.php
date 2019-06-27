@@ -56,9 +56,9 @@ class UserController extends Controller
 
     /* Fonction qui permettra de modifier le profil de l(utilisateur)*/
     /**
-     * @Route("/modifyProfil(id)", name="profil_profil")
+     * @Route("/modifyProfil/(id)", name="user_profil")
      */
-    public function modifyProfil(Request $request, EntityManager $em, $id)
+    public function modifyProfil(Request $request, EntityManagerInterface $em, $id)
     {
         $user = $em->getRepository(User::class)->find($id);
         if ($user==null) {
