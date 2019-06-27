@@ -17,6 +17,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends Controller
 {
+    //Fonction qui va servir à enregistrer un utilisateur
     /**
      * @Route("/register", name="user_register")
      */
@@ -36,19 +37,19 @@ class UserController extends Controller
             $em->persist($user); //garde en mémoire la variable de l'utilisateur
             $em->flush(); //Enregistre toutes les données depuis la derniere utilisation
             $this->addFlash('success', 'Inscription  validée'); //Message pour annoncer l'enregistrement
-            return $this->redirectToRoute("user_register");
+            return $this->redirectToRoute("user_register"); //Redirection si succès (ne pas oublier le return)
         }
         return $this->render('user/register.html.twig', [
             'formRegister'=>$registerForm->createView()
         ]);
     }
-
+    //Fonction qui va servir pour se connecter
     /**
      * @Route("/login", name="user_login")
      */
     public function login(AuthenticationUtils $authenticationUtils) {
-        $error = $authenticationUtils->getLastAuthenticationError();
-        $lastUsername = $authenticationUtils->getLastUsername();
+        $error = $authenticationUtils->getLastAuthenticationError(); //Utilisations des outils d'identification
+        $lastUsername = $authenticationUtils->getLastUsername(); //Verification si l'utilisateur est bien identifié
         return $this->render("user/login.html.twig", [
             'error' => $error,
             'lastUsername' => $lastUsername
@@ -61,10 +62,12 @@ class UserController extends Controller
         // On ne fait rien
     }
 
-    /* Fonction qui permettra de modifier le profil de l(utilisateur)*/
+    /* Fonction qui permettra de modifier le profil de l(utilisateur)
+        Similaire à la fonction enregistrer un utilisateur*/
     /**
      * @Route("/modifyProfil/{id}", name="user_profil")
      */
+
     public function modifyProfil(Request $request, EntityManagerInterface $em, $id, UserPasswordEncoderInterface $encoder)
     {
         $user = $em->getRepository(User::class)->find($id);
