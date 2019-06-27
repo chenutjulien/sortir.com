@@ -36,12 +36,12 @@ class ProfilType extends AbstractType
                     'required'=>true
                 ]
             ])
-            ->add('picture', FileType::class, [
-                'attr'=> [
-                    'placeholder'=>'Votre jolie trombine',
-                    'required'=>false
-                ]
-            ])
+//            ->add('picture', FileType::class, [
+//                'attr'=> [
+//                    'placeholder'=>'Votre jolie trombine',
+//                    'required'=>false
+//                ]
+//            ])
             ->add('mail', EmailType::class, [
                 'attr'=> [
                     'placeholder'=>'Votre adresse mail',

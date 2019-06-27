@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ProfilType;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -56,9 +57,9 @@ class UserController extends Controller
 
     /* Fonction qui permettra de modifier le profil de l(utilisateur)*/
     /**
-     * @Route("/modifyProfil(id)", name="profil_profil")
+     * @Route("/modifyProfil/{id}", name="user_profil")
      */
-    public function modifyProfil(Request $request, EntityManager $em, $id)
+    public function modifyProfil(Request $request, EntityManagerInterface $em, $id)
     {
         $user = $em->getRepository(User::class)->find($id);
         if ($user==null) {
@@ -77,7 +78,7 @@ class UserController extends Controller
             return $this->redirectToRoute("main_home");
         }
         return $this->render("user/profil.html.twig", [
-            'form'=>$userForm->createView()
+            'editRegister'=>$userForm->createView()
         ]);
     }
 
