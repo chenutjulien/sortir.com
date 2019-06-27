@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\City;
 use App\Entity\RemembermeToken;
 use App\Entity\Trip;
+use App\Form\CityType;
 use App\Form\TripType;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -29,6 +31,8 @@ class TripController extends Controller
         $trip= new Trip();
         $tripForm= $this->createForm(TripType::class,$trip);
         $tripForm->handleRequest($rq);
+        $city=new City();
+        $cityForm=$this->createForm(CityType::class, $city);
 
         if($tripForm->isSubmitted()&& $tripForm->isValid()){
             if($trip->getEndDateTime()>$trip->getStartDateTime()){
@@ -45,7 +49,8 @@ class TripController extends Controller
             }
         }
         return $this->render("trip/create.html.twig", [
-            "tripForm"=>$tripForm->createView()
+            "tripForm"=>$tripForm->createView(),
+            "cityForm"=>$cityForm->createView(),
         ]);
 }
 //Ci-dessous fonction pour afficher une sortie en fonction de son id
@@ -81,7 +86,7 @@ class TripController extends Controller
 
 //Ci-dessous fonction pour annuler une sortie
     /**
-     * @Route("/annulerSortie/{id}", name="trip_delete", methods={"DELETE"})
+     * @Route("/annulerSortie/{id}", name="trip_delete")
      */
 
     public function delete($id, EntityManagerInterface $em, Request $rq){

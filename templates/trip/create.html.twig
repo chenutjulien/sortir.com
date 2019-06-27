@@ -5,9 +5,21 @@
 {#    {% if error %}#}
 {#        <div class="text-center alert-danger">{{ error.messageKey | trans(error.messageData, 'security') }}</div>#}
 {#    {% endif %}#}
-    {{  form_start(tripForm) }}
-    {{ form_widget(tripForm) }}
+{#    {{  form_start(tripForm) }}#}
+{#    {{ form_widget(tripForm) }}#}
+{#    <button type="submit">Valider</button>#}
+{#    {{ form_end(tripForm) }}#}
+{{ form_start(tripForm) }}
+    {{ form_row(tripForm.name) }}
+    {{ form_row(tripForm.startDateTime) }}
+    {{ form_row(tripForm.endDateTime) }}
+    {{ form_row(tripForm.maxRegistration) }}
+    {{ form_row(tripForm.informations) }}
+    {{ form_row(tripForm.spot) }}
+    {{ form_row(cityForm.name) }}
+    {{ form_row(cityForm.postalCode) }}
     <button type="submit">Valider</button>
     {{ form_end(tripForm) }}
+
 {% endblock %}
 

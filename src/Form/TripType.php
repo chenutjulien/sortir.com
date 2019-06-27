@@ -47,11 +47,18 @@ class TripType extends AbstractType
                 'label'=>'Description',
                 'attr'=>['placeholder'=>"Détaillez l'activité proposée"]
             ])
-//            ->add('cancelReason')// Sera demandée si l'organisateur annule la sortie
+//            ->add('cancelReason', TextareaType::class, [
+//                'label'=>"Raison d'annulation",
+//                'attr'=>["Détaillez-nous les raisons d'annulation"]
+//            ])
+
+            // Sera demandée si l'organisateur annule la sortie
 //            ->add('organiser')//Nous n'utiliserons pas les variables à partir de là (=clefs)
 //            ->add('registereds')
 //            ->add('state')
-//            ->add('spot')
+            ->add('spot', TextareaType::class,[
+                'label'=>'Lieu'
+            ])
         ;
     }
 
