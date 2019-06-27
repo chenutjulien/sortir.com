@@ -74,7 +74,7 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash("success", "Profil moidifié");
+            $this->addFlash("success", "Bien joué mon pote ! Profil modifié");
             return $this->redirectToRoute("main_home");
         }
         return $this->render("user/profil.html.twig", [
