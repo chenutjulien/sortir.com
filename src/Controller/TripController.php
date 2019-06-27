@@ -23,22 +23,21 @@ class TripController extends Controller
 
 //Ci-dessous fonction pour afficher le formulaire à remplir pour proposer une sortie
 /**
- * @Route("/proposerSortie", name="trip_create", methods={"CREATE"})
+ * @Route("/proposerSortie", name="trip_create")
  */
-    public function createTrip(EntityManagerInterface $em, Request $rq, RemembermeToken $organiser){
+    public function createTrip(EntityManagerInterface $em, Request $rq){
         $trip= new Trip();
         $tripForm= $this->createForm(TripType::class,$trip);
         $tripForm->handleRequest($rq);
 
-
         if($tripForm->isSubmitted()&& $tripForm->isValid()){
             if($trip->getEndDateTime()>$trip->getStartDateTime()){
-                $trip->setOrganiser($organiser->getLastUsed());
+                $trip->setOrganiser($this->getUser());
             $em->persist($trip);
             $em->flush();
             $this->addFlash("success","Votre sortie est bien enregistrée");
-            return $this-> redirectToRoute("trip_details",['id'=> $trip->getId()], ['organiser'=>$organiser->getLastUsed()]);
-            //Besoin de creer ce chemin (vers le détails de la sortie)+ pas sur que cela fonctionne!!
+            return $this-> redirectToRoute("trip_details",['id'=> $trip->getId()]);
+
         }else{
                 $this->addFlash("danger","Attention! On ne peut pas mettre une date de fin avant que la sortie n'ait débutée");
                 return $this-> redirectToRoute("trip_create");
@@ -101,7 +100,7 @@ return $this->redirectToRoute("trip_liste");
 
 //Ci-dessous fonction pour modifier une sortie
     /**
-     * @Route("/modifierSortie/{id}", name="trip_update", methods={"UPDATE"})
+     * @Route("/modifierSortie/{id}", name="trip_update")
      */
 
     public function update($id, EntityManagerInterface $em, Request $rq){
@@ -110,14 +109,14 @@ return $this->redirectToRoute("trip_liste");
             throw $this->createNotFoundException("Cette sortie n'existe pas!");
         }
         $tripForm=$this->createForm(TripType::class,$trip);
-        $tripForm=handleRequest($rq);
+        $tripForm->handleRequest($rq);
         if($tripForm->isSubmitted() && $tripForm->isValid()){
             $em->persist($trip);
             $em->flush();
             $this->addFlash("success","Vos modifications ont bien été prises en compte");
             return $this->redirectToRoute("trip_details", ['id'=>$trip->getId()]);
         }
-        return $this-> render("trip/create.html.twig", ['tripForm'=> $tripForm.$this->createView()]);
+        return $this-> render("trip/update.html.twig", ['tripForm'=> $tripForm->createView()]);
     }
 
 }

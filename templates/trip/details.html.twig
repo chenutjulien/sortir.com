@@ -3,19 +3,19 @@
 {% block main %}
 <h1>{{ trip.name }}</h1>
 <p> Le {{ trip.startDateTime | date("d/m/Y à h:i" ) }} jusqu'à {{ trip.startDateTime | date("d/m/Y à h:i" ) }}</p>
-    <p> Nombre de personnes maximum : {{ trip.maxRegistration }} || organisateur(trice) :{{ trip.organiser }}</p>
+    <p> Nombre de personnes maximum : {{ trip.maxRegistration }} || organisateur(trice) :{{ trip.organiser.name }}</p>
 {#    <p>Fin des inscriptions le {% trip.startDateTime | date_modify("-3 hour")| date("d/m/Y à h:i" ) %}</p>#}
 
 {#    {% if is_granted('ROLE_ORGANISER') %}#}
 {#        Bouton annuler sortie#}
         <form method="post" action="{{ path("trip_delete", { 'id' : trip.id}) }}">
-            <input type="hidden" name="_method" value={"DELETE"}>
+            <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="_token" value="{{ csrf_token('delete'~trip.id) }}">
             <button type="submit" >Supprimer la sortie</button>
         </form>
 {#        Bouton Modifier Sortie#}
         <form method="post" action="{{ path("trip_update", { 'id' : trip.id}) }}">
-            <input type="hidden" name="_method" value={"UPDATE"}>
+            <input type="hidden" name="_method" value="UPDATE">
             <input type="hidden" name="_token" value="{{ csrf_token('update'~trip.id) }}">
             <button type="submit" >Modifier la sortie</button>
         </form>
