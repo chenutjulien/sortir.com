@@ -40,10 +40,10 @@ class User implements UserInterface
      */
     private $firstname;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $picture;
+//    /**
+//     * @ORM\Column(type="string", length=255, nullable=true)
+//     */
+//    private $picture;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -139,17 +139,17 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(?string $picture): self
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
+//    public function getPicture(): ?string
+//    {
+//        return $this->picture;
+//    }
+//
+//    public function setPicture(?string $picture): self
+//    {
+//        $this->picture = $picture;
+//
+//        return $this;
+//    }
 
     public function getMail(): ?string
     {

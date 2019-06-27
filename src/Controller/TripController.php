@@ -23,7 +23,7 @@ class TripController extends Controller
 
 //Ci-dessous fonction pour afficher le formulaire à remplir pour proposer une sortie
 /**
- * @Route("/proposerSortie", name="trip_create")
+ * @Route("/proposerSortie", name="trip_create", methods={"CREATE"})
  */
     public function createTrip(EntityManagerInterface $em, Request $rq, RemembermeToken $organiser){
         $trip= new Trip();
@@ -80,8 +80,44 @@ class TripController extends Controller
 
     }
 
+//Ci-dessous fonction pour annuler une sortie
+    /**
+     * @Route("/annulerSortie/{id}", name="trip_delete", methods={"DELETE"})
+     */
+
+    public function delete($id, EntityManagerInterface $em, Request $rq){
+$trip=$em->getRepository(Trip::class)->find($id);
+if($trip==null){
+    throw $this->createNotFoundException("Cette sortie n'existe pas!");
+}
+if ($this->isCsrfTokenValid('delete'.$trip->getId(), $rq->request->get('_token'))){
+    $em->remove($trip);
+    $em->flush();
+    $this->addFlash("success","Sortie annulée");
+}
+return $this->redirectToRoute("trip_liste");
+    }
 
 
+//Ci-dessous fonction pour modifier une sortie
+    /**
+     * @Route("/modifierSortie/{id}", name="trip_update", methods={"UPDATE"})
+     */
 
+    public function update($id, EntityManagerInterface $em, Request $rq){
+        $trip=$em->getRepository(Trip::class)->find($id);
+        if($trip==null){
+            throw $this->createNotFoundException("Cette sortie n'existe pas!");
+        }
+        $tripForm=$this->createForm(TripType::class,$trip);
+        $tripForm=handleRequest($rq);
+        if($tripForm->isSubmitted() && $tripForm->isValid()){
+            $em->persist($trip);
+            $em->flush();
+            $this->addFlash("success","Vos modifications ont bien été prises en compte");
+            return $this->redirectToRoute("trip_details", ['id'=>$trip->getId()]);
+        }
+        return $this-> render("trip/create.html.twig", ['tripForm'=> $tripForm.$this->createView()]);
+    }
 
 }

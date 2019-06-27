@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ProfilType;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -56,9 +57,9 @@ class UserController extends Controller
 
     /* Fonction qui permettra de modifier le profil de l(utilisateur)*/
     /**
-     * @Route("/modifyProfil/(id)", name="user_profil")
+     * @Route("/modifyProfil/{id}", name="user_profil")
      */
-    public function modifyProfil(Request $request, EntityManagerInterface $em, $id)
+    public function modifyProfil(Request $request, EntityManagerInterface $em, $id, UserPasswordEncoderInterface $encoder)
     {
         $user = $em->getRepository(User::class)->find($id);
         if ($user==null) {
@@ -69,15 +70,17 @@ class UserController extends Controller
         $userForm ->handleRequest($request);
         if ($userForm ->isValid() && $userForm->isSubmitted())
         {
+            $hash=$encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($hash);
             $user=$userForm->getData();
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash("success", "Profil moidifié");
+            $this->addFlash("success", "Bien joué mon pote ! Profil modifié");
             return $this->redirectToRoute("main_home");
         }
         return $this->render("user/profil.html.twig", [
-            'form'=>$userForm->createView()
+            'editRegister'=>$userForm->createView()
         ]);
     }
 
