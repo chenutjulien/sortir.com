@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Trip;
 
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -47,6 +48,27 @@ class TripType extends AbstractType
                 'label'=>'Description',
                 'attr'=>['placeholder'=>"Détaillez l'activité proposée"]
             ])
+            ->add('name', EntityType::class, [
+                'class'=>'App\Entity\Spot',
+                'choice_label'=>'name',
+                'label'=>'Lieu'
+            ])
+            ->add('street', EntityType::class, [
+                'class'=>'App\Entity\Spot',
+                'choice_label'=>'street',
+                'label'=>'Rue'
+            ])
+            ->add('latitude', EntityType::class, [
+                'class'=>'App\Entity\Spot',
+                'choice_label'=>'latitude',
+                'label'=>'Latitude'
+            ])
+            ->add('longitude', EntityType::class, [
+                'class'=>'App\Entity\Spot',
+                'choice_label'=>'longitude',
+                'label'=>'Longitude'
+            ])
+
 //            ->add('cancelReason', TextareaType::class, [
 //                'label'=>"Raison d'annulation",
 //                'attr'=>["Détaillez-nous les raisons d'annulation"]
@@ -56,9 +78,9 @@ class TripType extends AbstractType
 //            ->add('organiser')//Nous n'utiliserons pas les variables à partir de là (=clefs)
 //            ->add('registereds')
 //            ->add('state')
-            ->add('spot', TextareaType::class,[
-                'label'=>'Lieu'
-            ])
+//            ->add('spot', TextareaType::class,[
+//                'label'=>'Lieu'
+//            ])
         ;
     }
 
