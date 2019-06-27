@@ -28,10 +28,15 @@ class UserController extends Controller
         if ($registerForm->isSubmitted() && $registerForm->isValid()){ //Si formulaire est soumis et valide
             $hash=$encoder->encodePassword($user, $user->getPassword()); //Salage du code
             $user->setPassword($hash); //Salage du code lié à l'utilisateur
+            if ( $user->getAdministrator() === true) {
+                $user->setRoles(['ROLE_ADMIN']);
+            } else {
+                $user->setRoles(['ROLE_USER']);
+            }
             $em->persist($user); //garde en mémoire la variable de l'utilisateur
             $em->flush(); //Enregistre toutes les données depuis la derniere utilisation
             $this->addFlash('success', 'Inscription  validée'); //Message pour annoncer l'enregistrement
-            $this->redirectToRoute("user_register");
+            return $this->redirectToRoute("user_register");
         }
         return $this->render('user/register.html.twig', [
             'formRegister'=>$registerForm->createView()
@@ -75,6 +80,11 @@ class UserController extends Controller
             $hash=$encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
             $user=$userForm->getData();
+            if ( $user->getAdministrator() === true) {
+                $user->setRoles(['ROLE_ADMIN']);
+            } else {
+                $user->setRoles(['ROLE_USER']);
+            }
             $em->persist($user);
             try {
             $em->flush();
