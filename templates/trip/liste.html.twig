@@ -4,13 +4,11 @@
     <h1>Liste des sorties :</h1>
     <div class="row d-flex justify-content-around">
     {% for trip in trips %}
-
-
             <form method="get" action="{{ path("trip_details", { "id" : trip.id}) }}">
                 <input type="hidden" name="_method">
                 <button type="submit hidden" >
             <h2 class="card-title">{{ trip.name }}</h2>
-                    <h3>Dans {{ trip.startDateTime|time_diff }}</h3>
+{#                    <h3>Dans {{ trip.startDateTime|time_diff }}</h3>#}
             <p class="card-text">{{ trip.informations }}</p>
             <p> Le {{ trip.startDateTime| date("d/m/Y à h:i" ) }}, jusqu'à {{ trip.endDateTime| date("h:i" ) }}</p>
                 </button>
@@ -21,7 +19,7 @@
     </div>
     <div class="row d-flex justify-content-around">
         <form method="get" action="{{ path("trip_create")}}">
-            <input type="hidden" name="_method">
+            <input type="hidden" name="_method" value="CREATE">
             <button type="submit hidden" >Proposer une sortie
             </button>
         </form>
