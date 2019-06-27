@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegisterType;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -55,24 +56,29 @@ class UserController extends Controller
 
     /* Fonction qui permettra de modifier le profil de l(utilisateur)*/
     /**
-     * @Route("/modifyProfil", name="profil_profil")
+     * @Route("/modifyProfil(id)", name="profil_profil")
      */
-    public function modifyProfil(Request $request, User $user)
+    public function modifyProfil(Request $request, EntityManager $em, $id)
     {
-        $editForm = $this->createForm('AppBundle\Form\UserType', $user);
-        $editForm->handleRequest($request);
+        $user = $em->getRepository(User::class)->find($id);
+        if ($user==null) {
+            throw  $this->createNotFoundException("Utilisateur inconnu");
+        }
+        $userForm = $this->createForm(ProfilType::class, $user);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+        $userForm ->handleRequest($request);
+        if ($userForm ->isValid() && $userForm->isSubmitted())
+        {
+            $user=$userForm->getData();
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('profil_profil');
+            $this->addFlash("success", "Profil moidifié");
+            return $this->redirectToRoute("main_home");
         }
-        return $this->render('profil/profil.html.twig', array(
-            'id' => $user,
-            'editForm' => $editForm->createView()
-        ));
+        return $this->render("user/profil.html.twig", [
+            'form'=>$userForm->createView()
+        ]);
     }
 
 }
