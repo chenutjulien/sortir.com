@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\ProfilType;
 use App\Form\RegisterType;
+use Doctrine\DBAL\Driver\PDOException;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -70,11 +71,17 @@ class UserController extends Controller
         $userForm ->handleRequest($request);
         if ($userForm ->isValid() && $userForm->isSubmitted())
         {
+
             $hash=$encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
             $user=$userForm->getData();
             $em->persist($user);
+            try {
             $em->flush();
+            } catch( DBALException  $e) {
+                $this->get('session')->getFlashBag()->add('danger', $e);
+                return $this->redirect($this->generateUrl('user_profil'));
+            }
 
             $this->addFlash("success", "Bien joué mon pote ! Profil modifié");
             return $this->redirectToRoute("main_home");
