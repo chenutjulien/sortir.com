@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\RemembermeToken;
 use App\Entity\Trip;
 use App\Form\TripType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,7 +25,7 @@ class TripController extends Controller
 /**
  * @Route("/proposerSortie", name="trip_create")
  */
-    public function createTrip(EntityManagerInterface $em, Request $rq){
+    public function createTrip(EntityManagerInterface $em, Request $rq, RemembermeToken $organiser){
         $trip= new Trip();
         $tripForm= $this->createForm(TripType::class,$trip);
         $tripForm->handleRequest($rq);
@@ -32,10 +33,11 @@ class TripController extends Controller
 
         if($tripForm->isSubmitted()&& $tripForm->isValid()){
             if($trip->getEndDateTime()>$trip->getStartDateTime()){
+                $trip->setOrganiser($organiser->getLastUsed());
             $em->persist($trip);
             $em->flush();
             $this->addFlash("success","Votre sortie est bien enregistrée");
-            return $this-> redirectToRoute("trip_details",['id'=> $trip->getId()]);
+            return $this-> redirectToRoute("trip_details",['id'=> $trip->getId()], ['organiser'=>$organiser->getLastUsed()]);
             //Besoin de creer ce chemin (vers le détails de la sortie)+ pas sur que cela fonctionne!!
         }else{
                 $this->addFlash("danger","Attention! On ne peut pas mettre une date de fin avant que la sortie n'ait débutée");
