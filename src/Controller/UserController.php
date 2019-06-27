@@ -53,4 +53,26 @@ class UserController extends Controller
         // On ne fait rien
     }
 
+    /* Fonction qui permettra de modifier le profil de l(utilisateur)*/
+    /**
+     * @Route("/modifyProfil", name="profil_profil")
+     */
+    public function modifyProfil(Request $request, User $user)
+    {
+        $editForm = $this->createForm('AppBundle\Form\UserType', $user);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('profil_profil');
+        }
+        return $this->render('profil/profil.html.twig', array(
+            'id' => $user,
+            'editForm' => $editForm->createView()
+        ));
+    }
+
 }
