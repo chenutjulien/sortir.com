@@ -22,15 +22,15 @@ class UserController extends Controller
      */
     public function register(EntityManagerInterface $em, Request $request,UserPasswordEncoderInterface $encoder)
     {
-        $user = new User();
-        $registerForm = $this->createForm(RegisterType::class, $user);
-        $registerForm->handleRequest($request);
-        if ($registerForm->isSubmitted() && $registerForm->isValid()){
-            $hash=$encoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($hash);
-            $em->persist($user);
-            $em->flush();
-            $this->addFlash('success', 'Inscription  validée');
+        $user = new User(); //creation d'un nouvel utilisateur
+        $registerForm = $this->createForm(RegisterType::class, $user); //Gestion du formulaire et de sa création
+        $registerForm->handleRequest($request); //Envoi de la requete
+        if ($registerForm->isSubmitted() && $registerForm->isValid()){ //Si formulaire est soumis et valide
+            $hash=$encoder->encodePassword($user, $user->getPassword()); //Salage du code
+            $user->setPassword($hash); //Salage du code lié à l'utilisateur
+            $em->persist($user); //garde en mémoire la variable de l'utilisateur
+            $em->flush(); //Enregistre toutes les données depuis la derniere utilisation
+            $this->addFlash('success', 'Inscription  validée'); //Message pour annoncer l'enregistrement
             $this->redirectToRoute("user_register");
         }
         return $this->render('user/register.html.twig', [
