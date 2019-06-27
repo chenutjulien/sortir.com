@@ -59,7 +59,7 @@ class UserController extends Controller
     /**
      * @Route("/modifyProfil/{id}", name="user_profil")
      */
-    public function modifyProfil(Request $request, EntityManagerInterface $em, $id)
+    public function modifyProfil(Request $request, EntityManagerInterface $em, $id, UserPasswordEncoderInterface $encoder)
     {
         $user = $em->getRepository(User::class)->find($id);
         if ($user==null) {
@@ -70,6 +70,8 @@ class UserController extends Controller
         $userForm ->handleRequest($request);
         if ($userForm ->isValid() && $userForm->isSubmitted())
         {
+            $hash=$encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($hash);
             $user=$userForm->getData();
             $em->persist($user);
             $em->flush();
