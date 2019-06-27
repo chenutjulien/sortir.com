@@ -33,10 +33,10 @@
 
 {#    </form>#}
 
-{#    <div>#}
-{#        {{ form_start(editForm) }}#}
-{#        {{ form_widget(editRegister) }}#}
-{#        <button type="submit" class="btn btn-primary">Enregistrer</button>#}
-{#        {{ form_end(editRegister) }}#}
-{#    </div>#}
+    <div>
+        {{ form_start(editForm) }}
+        {{ form_widget(editForm) }}
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        {{ form_end(editForm) }}
+    </div>
 {% endblock %}
