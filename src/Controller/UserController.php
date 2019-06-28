@@ -84,6 +84,7 @@ class UserController extends Controller
             $user->setPassword($hash); //Salage du code lié à l'utilisateur
             $user=$userForm->getData(); //Envoi des données
             if ( $user->getAdministrator() === true) { // Gestion du role, si coché, l'utilisateur sera admin
+
                 $user->setRoles(['ROLE_ADMIN']);
             } else {
                 $user->setRoles(['ROLE_USER']); //sinon, l'utilisateur sera pas admin
