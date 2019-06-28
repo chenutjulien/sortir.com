@@ -3,33 +3,35 @@
 {% block title %}Site index{% endblock %}
 
 {% block main %}
-    <h1>Site index</h1>
-
+    <br>
+    <h3>Liste des villes</h3>
+<div class="container">
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
+{#                <th>Id</th>#}
+                <th>Nom de la ville</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for site in sites %}
             <tr>
-                <td>{{ site.id }}</td>
+{#                <td>{{ site.id }}</td>#}
                 <td>{{ site.name }}</td>
                 <td>
-                    <a href="{{ path('site_show', {'id': site.id}) }}">show</a>
-                    <a href="{{ path('site_edit', {'id': site.id}) }}">edit</a>
+                    <a href="{{ path('site_show', {'id': site.id}) }}">Voir</a>
+                    <a href="{{ path('site_edit', {'id': site.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Pas de ville disponibles</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('site_new') }}">Create new</a>
+    <a href="{{ path('site_new') }}">Créer une nouvelle ville(comme à Sim City !!)</a>
+</div>
 {% endblock %}
