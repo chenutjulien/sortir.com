@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un site{% endblock %}
+
+{% block main %}
+    <br>
+    <h3>Modifier un sith ;-)</h3>
+    <div class="container">
+
+    {{ include('site/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <a href="{{ path('site_index') }}">Retour à la liste</a>
+
+    {{ include('site/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

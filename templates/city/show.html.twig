@@ -1,30 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}City{% endblock %}
+{% block main %}
+    <h1>Liste des villes</h1>
 
-{% block body %}
-    <h1>City</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ city.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ city.name }}</td>
-            </tr>
-            <tr>
-                <th>PostalCode</th>
-                <td>{{ city.postalCode }}</td>
-            </tr>
-        </tbody>
-    </table>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Ville</th>
+        <th scope="col">Code Postal</th>
+        <th scope="col">Actions</th>
 
-    <a href="{{ path('city_index') }}">back to list</a>
+    </tr>
+    </thead>
+    {% for city in cities %}
+        <tr>
+            <td>{{ city.name }}</td>
+            <td>{{ city.postalCode }}</td>
+            <td><a href="{{ path('city_edit',{'id':city.id}) }}">Modifier</a> -
+                <a href="{{ path('city_delete',{'id':city.id}) }}">Supprimer</a> </td>
+        </tr>
+    {%  endfor %}
 
-    <a href="{{ path('city_edit', {'id': city.id}) }}">edit</a>
+    </tbody>
+</table>
+        <form method="get" action="{{ path("city_new")}}">
+            <input type="hidden" name="_method">
+            <button type="submit hidden" >Ajouter une ville
+            </button>
+        </form>
 
-    {{ include('city/_delete_form.html.twig') }}
+
+
+
+</div>
+
 {% endblock %}

@@ -4,9 +4,9 @@
     {{ parent() }}
 {% endblock %}
 {% block main %}
-    <h1>Enregistre ton super profil et deviens un supero-héros !!</h1>
+    <h3>Enregistre ton super profil et deviens un supero-héros !!</h3>
 
-    <div>
+    <div class="container">
         {{ form_start(editRegister) }}
         {{ form_widget(editRegister) }}
         <button type="submit" class="btn btn-primary">Enregistrer</button>

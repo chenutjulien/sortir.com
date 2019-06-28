@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
+use App\Entity\City;
 use App\Entity\Trip;
-
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -21,10 +23,15 @@ class TripType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+
             ->add('name',TextType::class, [
                 'label'=>'Nom de la sortie',
                 'attr'=>['placeholder'=>'Insérez le titre de votre évènement ici...'],
-                'required'=>true])
+                'required'=>true
+            ])
+
+
+
             ->add('startDateTime',DateTimeType::class, [
                 'label'=>'Heure et date de départ',
                 'widget' => 'single_text',
@@ -48,40 +55,26 @@ class TripType extends AbstractType
                 'label'=>'Description',
                 'attr'=>['placeholder'=>"Détaillez l'activité proposée"]
             ])
-            ->add('name', EntityType::class, [
-                'class'=>'App\Entity\Spot',
-                'choice_label'=>'name',
-                'label'=>'Lieu'
-            ])
-            ->add('street', EntityType::class, [
-                'class'=>'App\Entity\Spot',
-                'choice_label'=>'street',
-                'label'=>'Rue'
-            ])
-            ->add('latitude', EntityType::class, [
-                'class'=>'App\Entity\Spot',
-                'choice_label'=>'latitude',
-                'label'=>'Latitude'
-            ])
-            ->add('longitude', EntityType::class, [
-                'class'=>'App\Entity\Spot',
-                'choice_label'=>'longitude',
-                'label'=>'Longitude'
-            ])
 
-//            ->add('cancelReason', TextareaType::class, [
-//                'label'=>"Raison d'annulation",
-//                'attr'=>["Détaillez-nous les raisons d'annulation"]
-//            ])
+            ->add('id', EntityType::class, [
+                'class' => 'App\Entity\Spot',
+                'choice_label' => 'name',
+                'placeholder' => 'Choisir un lieu',
+                'label' => 'Lieu :'
+            ])
+            ;
 
-            // Sera demandée si l'organisateur annule la sortie
-//            ->add('organiser')//Nous n'utiliserons pas les variables à partir de là (=clefs)
-//            ->add('registereds')
-//            ->add('state')
-//            ->add('spot', TextareaType::class,[
-//                'label'=>'Lieu'
-//            ])
-        ;
+
+//             $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+//                 ->add('name', EntityType::class, [
+//                     'class' => 'App\Entity\City',
+//                     'choice_label' => 'name',
+//                     'placeholder' => 'Choisir une ville'
+//                 ]);
+//             });
+
+
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

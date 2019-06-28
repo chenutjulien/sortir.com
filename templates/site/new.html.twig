@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Site{% endblock %}
+
+{% block main %}
+    <br>
+    <h3>Créer ton nouveau site (comme Dark Sidious)</h3>
+    <div class="container">
+
+    {{ include('site/_form.html.twig') }}
+
+    <a href="{{ path('site_index') }}">Retour à la liste des sites</a>
+    </div>
+{% endblock %}
