@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\City;
 use App\Entity\Trip;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -26,7 +27,11 @@ class TripType extends AbstractType
             ->add('name',TextType::class, [
                 'label'=>'Nom de la sortie',
                 'attr'=>['placeholder'=>'Insérez le titre de votre évènement ici...'],
-                'required'=>true])
+                'required'=>true
+            ])
+
+
+
             ->add('startDateTime',DateTimeType::class, [
                 'label'=>'Heure et date de départ',
                 'widget' => 'single_text',
@@ -49,7 +54,15 @@ class TripType extends AbstractType
             ->add('informations', TextareaType::class, [
                 'label'=>'Description',
                 'attr'=>['placeholder'=>"Détaillez l'activité proposée"]
-            ]);
+            ])
+
+            ->add('name', EntityType::class, [
+                'class' => 'App\Entity\Spot',
+                'choice_label' => 'name',
+                'placeholder' => 'Choisir une lieu',
+                'label' => 'Lieu :'
+            ])
+            ;
 
 
 //             $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
