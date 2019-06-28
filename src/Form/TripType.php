@@ -56,10 +56,10 @@ class TripType extends AbstractType
                 'attr'=>['placeholder'=>"Détaillez l'activité proposée"]
             ])
 
-            ->add('name', EntityType::class, [
+            ->add('id', EntityType::class, [
                 'class' => 'App\Entity\Spot',
                 'choice_label' => 'name',
-                'placeholder' => 'Choisir une lieu',
+                'placeholder' => 'Choisir un lieu',
                 'label' => 'Lieu :'
             ])
             ;

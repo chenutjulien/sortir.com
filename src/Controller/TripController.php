@@ -31,10 +31,9 @@ class TripController extends Controller
         $trip= new Trip();
         $tripForm= $this->createForm(TripType::class,$trip);
         $tripForm->handleRequest($rq);
-        $city=new City();
-        $cityForm=$this->createForm(CityType::class, $city);
 
         if($tripForm->isSubmitted()&& $tripForm->isValid()){
+
             if($trip->getEndDateTime()>$trip->getStartDateTime()){
                 $trip->setOrganiser($this->getUser());
             $em->persist($trip);
@@ -50,7 +49,6 @@ class TripController extends Controller
         }
         return $this->render("trip/create.html.twig", [
             "tripForm"=>$tripForm->createView(),
-            "cityForm"=>$cityForm->createView(),
         ]);
 }
 //Ci-dessous fonction pour afficher une sortie en fonction de son id
