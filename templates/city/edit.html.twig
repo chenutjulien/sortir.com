@@ -3,11 +3,20 @@
 {% block title %}Edit City{% endblock %}
 
 {% block body %}
-    <h1>Edit City</h1>
+    <h1>Modifier une ville</h1>
+    {{ form_start(form) }}
+    <table class="table table-striped">
+        <tr>
+            <td>{{ form_row(form.name)}}</td>
+            <td>{{ form_row(form.postalCode)}}</td>
+            <td><button type="submit">Valider</button>
+        </tr>
+    </table>
+    {{ form_end(form) }}
 
-    {{ include('city/_form.html.twig', {'button_label': 'Update'}) }}
+{#    {{ include('city/_form.html.twig', {'button_label': 'Update'}) }}#}
 
-    <a href="{{ path('city_index') }}">back to list</a>
+{#    <a href="{{ path('city_index') }}">back to list</a>#}
 
-    {{ include('city/_delete_form.html.twig') }}
+{#    {{ include('city/_delete_form.html.twig') }}#}
 {% endblock %}
