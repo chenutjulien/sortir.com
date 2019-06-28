@@ -13,6 +13,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
+
+
+/**
+ * @Route("/city")
+ */
 class CityController extends Controller
 {
     /**
@@ -103,22 +108,15 @@ if($city==null){
 
         return $this->redirectToRoute('city_show');
 
-
-
-//        public function delete($id, EntityManagerInterface $em, Request $rq){
-//        $trip=$em->getRepository(Trip::class)->find($id);
-//        if($trip==null){
-//            throw $this->createNotFoundException("Cette sortie n'existe pas!");
-//        }
-//        if ($this->isCsrfTokenValid('delete'.$trip->getId(), $rq->request->get('_token'))){
-//            $em->remove($trip);
-//            $em->flush();
-//            $this->addFlash("success","Sortie annulée");
-//        }
-//        return $this->redirectToRoute("trip_liste");
-//    }
-
-
+    }
+// Fonction pour rechercher les villes en fonction des lettres entrées par l'organisateur
+        /**
+         * @Route("/rechercheVille", name="city_search")
+         */
+        public function search(string $word, EntityManagerInterface $em){
+            $cities=$em->getRepository(City::class)->findAll();
 
     }
+
+
 }

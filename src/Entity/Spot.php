@@ -39,12 +39,12 @@ class Spot
     private $longitude;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Trip", mappedBy="spot", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Trip", mappedBy="spot", orphanRemoval=true, cascade={"remove"})
      */
     private $trips;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\City")
+     * @ORM\ManyToOne(targetEntity="App\Entity\City",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $city;
