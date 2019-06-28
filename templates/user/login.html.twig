@@ -4,17 +4,14 @@
     {{ parent() }}
 {% endblock %}
 
-{#{% block stylesheet %}#}
-{#    {{ parent() }}#}
-{#    <link rel="stylesheet" href="css/style.css">#}
-{#{% endblock %}#}
+
 
 {% block main %}
-{#    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}#}
-{#        <h1>Bienvenue  {{ app.user.username }} sur Sortir.com</h1>#}
-{#        {% else %}#}
-{#        <h1>Bienvenue sur Sortir.com</h1>#}
-{#    {% endif %}#}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <h4>Bienvenue  {{ app.user.username }} sur Sortir.com</h4>
+        {% else %}
+        <h1>Bienvenue sur Sortir.com</h1>
+    {% endif %}
     <div class="container">
         <br>
         {% if error %}
