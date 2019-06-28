@@ -70,34 +70,34 @@ class UserController extends Controller
 
     public function modifyProfil(Request $request, EntityManagerInterface $em, $id, UserPasswordEncoderInterface $encoder)
     {
-        $user = $em->getRepository(User::class)->find($id);
+        $user = $em->getRepository(User::class)->find($id); //Gestion de l'utilisateur inscrit
         if ($user==null) {
             throw  $this->createNotFoundException("Utilisateur inconnu");
         }
-        $userForm = $this->createForm(ProfilType::class, $user);
+        $userForm = $this->createForm(ProfilType::class, $user); //Formulaire associé à l'utilisateur
 
-        $userForm ->handleRequest($request);
-        if ($userForm ->isValid() && $userForm->isSubmitted())
+        $userForm ->handleRequest($request); //Envoi de la requette
+        if ($userForm ->isValid() && $userForm->isSubmitted()) //Si formulaire est soumis et valide
         {
 
-            $hash=$encoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($hash);
-            $user=$userForm->getData();
-            if ( $user->getAdministrator() === true) {
+            $hash=$encoder->encodePassword($user, $user->getPassword()); //Salage du code
+            $user->setPassword($hash); //Salage du code lié à l'utilisateur
+            $user=$userForm->getData(); //Envoi des données
+            if ( $user->getAdministrator() === true) { // Gestion du role, si coché, l'utilisateur sera admin
                 $user->setRoles(['ROLE_ADMIN']);
             } else {
-                $user->setRoles(['ROLE_USER']);
+                $user->setRoles(['ROLE_USER']); //sinon, l'utilisateur sera pas admin
             }
-            $em->persist($user);
+            $em->persist($user); //garde en mémoire la variable de l'utilisateur
             try {
-            $em->flush();
+            $em->flush(); //Enregistre toutes les données depuis la derniere utilisation
             } catch( DBALException  $e) {
-                $this->get('session')->getFlashBag()->add('danger', $e);
-                return $this->redirect($this->generateUrl('user_profil'));
+                $this->get('session')->getFlashBag()->add('danger', $e);  //message d'erreur
+                return $this->redirect($this->generateUrl('user_profil')); //redirection si echec
             }
 
-            $this->addFlash("success", "Bien joué mon pote ! Profil modifié");
-            return $this->redirectToRoute("main_home");
+            $this->addFlash("success", "Bien joué mon pote ! Profil modifié"); //Message pour annoncer l'enregistrement
+            return $this->redirectToRoute("main_home"); //Redirection si succès 
         }
         return $this->render("user/profil.html.twig", [
             'editRegister'=>$userForm->createView()
