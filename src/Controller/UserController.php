@@ -98,7 +98,7 @@ class UserController extends Controller
             }
 
             $this->addFlash("success", "Bien joué mon pote ! Profil modifié"); //Message pour annoncer l'enregistrement
-            return $this->redirectToRoute("main_home"); //Redirection si succès 
+            return $this->redirectToRoute("main_home"); //Redirection si succès
         }
         return $this->render("user/profil.html.twig", [
             'editRegister'=>$userForm->createView()
