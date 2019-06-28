@@ -16,7 +16,6 @@ class SpotType extends AbstractType
             ->add('street')
             ->add('latitude')
             ->add('longitude')
-            ->add('city')
         ;
     }
 

@@ -1,17 +1,46 @@
-{% extends 'base.html.twig'%}
+{% extends 'base.html.twig' %}
 
 {% block main %}
-<h1> Proposer une nouvelle sortie:</h1>
-{#    {% if error %}#}
-{#        <div class="text-center alert-danger">{{ error.messageKey | trans(error.messageData, 'security') }}</div>#}
-{#    {% endif %}#}
-    {{  form_start(tripForm) }}
-    {{ form_widget(tripForm) }}
-    <button type="submit">Valider</button>
-    {{ form_end(tripForm) }}
-
-{#    <button type="submit">Valider</button>#}
-{#    {{ form_end(tripForm) }}#}
+    <h1> Proposer une nouvelle sortie:</h1>
+    {#    {% if error %}#}
+    {#        <div class="text-center alert-danger">{{ error.messageKey | trans(error.messageData, 'security') }}</div>#}
+    {#    {% endif %}#}
+    <div class="row">
+        <div class="col-sm">
+            {{ form_start(tripForm) }}
+            {{ form_widget(tripForm) }}
+            <button type="submit">Valider</button>
+            {{ form_end(tripForm) }}
+        </div>
+{#        <div class="col-sm form-group">#}
+{#            <label for="cityOrg">Ville organisatrice : </label>#}
+{#            <input class="form-control" type="text" name="cityOrg" id="cityOrg" readonly/><br>#}
+{#            <label for="city">Ville : </label>#}
+{#            <select class="form-control" id="city">#}
+{#                <option>Ville 1</option>#}
+{#                <option>Ville 2</option>#}
+{#            </select>#}
+{#            <div id="lieuSelect">#}
+{#                <label for="city">Lieu : </label>#}
+{#                <select class="form-control" id="city">#}
+{#                    <option>Lieu 1</option>#}
+{#                    <option>Lieu 2</option>#}
+{#                </select><a href="#">+</a>#}
+{#            </div>#}
+{#            <div id="rueAjout" class="hidden">#}
+{#                <label for="rue">Rue : </label>#}
+{#                <input class="form-control" type="text" name="rue" id="rueAjout" readonly/><br>#}
+{#                <label for="codePostal">Code postal : </label>#}
+{#                <input class="form-control" type="text" name="latitude" id="latitude" readonly/><br>#}
+{#                <label for="latitude">Latitude : </label>#}
+{#                <input class="form-control" type="text" name="rue" id="longitude" readonly/><br>#}
+{#                <label for="longitude">Longitude : </label>#}
+{#                <input class="form-control" type="text" name="longitude" id="longitude" readonly/><br>#}
+{#            </div>#}
+{#        </div>#}
+    </div>
+    {#    <button type="submit">Valider</button>#}
+    {#    {{ form_end(tripForm) }}#}
 
 {% endblock %}
 
