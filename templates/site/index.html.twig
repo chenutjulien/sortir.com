@@ -4,13 +4,13 @@
 
 {% block main %}
     <br>
-    <h3>Liste des villes</h3>
+    <h3>Liste des sites</h3>
 <div class="container">
     <table class="table">
         <thead>
             <tr>
 {#                <th>Id</th>#}
-                <th>Nom de la ville</th>
+                <th>Nom du site</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -26,12 +26,12 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">Pas de ville disponibles</td>
+                <td colspan="3">Pas de site disponibles</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('site_new') }}">Créer une nouvelle ville(comme à Sim City !!)</a>
+    <a href="{{ path('site_new') }}">Créer un nouveau site</a>
 </div>
 {% endblock %}
