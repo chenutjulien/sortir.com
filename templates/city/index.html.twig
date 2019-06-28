@@ -3,15 +3,15 @@
 {% block title %}City index{% endblock %}
 
 {% block main %}
-    <h1>City index</h1>
-
+    <h3>City index</h3>
+<div class="container">
     <table class="table">
         <thead>
             <tr>
 {#                <th>Id</th>#}
-                <th>Name</th>
-                <th>PostalCode</th>
-                <th>actions</th>
+                <th>Nom</th>
+                <th>Code Postal</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,17 +21,18 @@
                 <td>{{ city.name }}</td>
                 <td>{{ city.postalCode }}</td>
                 <td>
-                    <a href="{{ path('city_show', {'id': city.id}) }}">show</a>
-                    <a href="{{ path('city_edit', {'id': city.id}) }}">edit</a>
+                    <a href="{{ path('city_show', {'id': city.id}) }}">Voir</a> /
+                    <a href="{{ path('city_edit', {'id': city.id}) }}">editer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Pas de villes enregistrés</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('city_create') }}">Create new</a>
+    <a href="{{ path('city_create') }}">Créer sa ville (comme dans Sim City)</a>
+</div>
 {% endblock %}
