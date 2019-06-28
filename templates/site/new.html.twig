@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Site{% endblock %}
+
+{% block main %}
+    <br>
+    <h3>Créer ta nouvelle ville (qui a dit dit Sim City ?)</h3>
+    <div class="container">
+
+    {{ include('site/_form.html.twig') }}
+
+    <a href="{{ path('site_index') }}">Retour à la liste des villes</a>
+    </div>
+{% endblock %}

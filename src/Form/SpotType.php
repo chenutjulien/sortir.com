@@ -39,6 +39,8 @@ class SpotType extends AbstractType
                     'required'=>'true'
                 ]
             ])
+
+
 //            ->add('city', EntityType::class, [
 //                'class'=>'App\Entity\City',
 //                'choice_label'=>'name',

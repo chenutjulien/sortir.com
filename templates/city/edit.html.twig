@@ -2,6 +2,7 @@
 
 {% block title %}Edit City{% endblock %}
 
+
 {% block body %}
     <h1>Modifier une ville</h1>
     {{ form_start(form) }}
@@ -13,6 +14,9 @@
         </tr>
     </table>
     {{ form_end(form) }}
+
+{% block main %}
+    <h1>Edit City</h1>
 
 {#    {{ include('city/_form.html.twig', {'button_label': 'Update'}) }}#}
 
