@@ -1,6 +1,19 @@
-/*body {*/
-/*    background-color: #565656;*/
-/*}*/
-.formu {
-    width: 250px;
+body {
+    background-image:  url("images/fond_nature.jpg");
+    background-size: cover;
+    background-attachment: scroll;
+}
+.container {
+    background-color:#4AD98D ;
+    min-height: 100vh;
+    border-radius: 25px;
+}
+h4, h3{
+    color: black;
+}
+.bordure {
+    border-radius: 25px;
+}
+.coco {
+    background-color: #4AD98D;
 }
