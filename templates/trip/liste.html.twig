@@ -1,8 +1,11 @@
 {% extends 'base.html.twig'%}
 
 {% block main %}
-    <h1>Liste des sorties :</h1>
+    <br>
+    <div class="container">
+    <h4>Liste des sorties :</h4>
     <div class="row d-flex justify-content-around">
+
     {% for trip in trips %}
             <form method="get" action="{{ path("trip_details", { "id" : trip.id}) }}">
                 <input type="hidden" name="_method">
@@ -23,5 +26,6 @@
             <button type="submit hidden" >Proposer une sortie
             </button>
         </form>
+    </div>
     </div>
 {% endblock %}

@@ -7,13 +7,13 @@
 
 
 {% block main %}
-    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <h4>Bienvenue  {{ app.user.username }} sur Sortir.com</h4>
-        {% else %}
-        <h1>Bienvenue sur Sortir.com</h1>
-    {% endif %}
+<br>
     <div class="container">
-        <br>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <h4>Bienvenue  {{ app.user.username }} sur Sortir.com</h4>
+        {% else %}
+            <h1>Bienvenue sur Sortir.com</h1>
+        {% endif %}
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey | trans(error.messageData, 'security') }}</div>
         {% endif %}

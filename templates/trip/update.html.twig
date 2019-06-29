@@ -1,9 +1,12 @@
 {% extends 'base.html.twig'%}
 
 {% block main %}
+    <br>
+    <div class="container">
     <h1> Modifier ma sortie:</h1>
     {{  form_start(tripForm) }}
     {{ form_widget(tripForm) }}
     <button type="submit">Valider</button>
     {{ form_end(tripForm) }}
+    </div>
 {% endblock %}

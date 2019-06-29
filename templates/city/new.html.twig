@@ -3,8 +3,8 @@
 
 {% block main %}
     <br>
+    <div class="container">
     <h3>Gérer les villes</h3>
-    {{ form_start(form) }}
 <table class=" container table table-striped">
     <tr>
         <td>{{ form_row(form.name)}}</td>
@@ -13,4 +13,5 @@
     </tr>
 </table>
     {{ form_end(form) }}
+    </div>
 {% endblock %}

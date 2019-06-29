@@ -1,7 +1,9 @@
 {% extends 'base.html.twig'%}
 
 {% block main %}
-<h1>{{ trip.name }}</h1>
+    <br>
+    <div class="container">
+<h3>{{ trip.name }}</h3>
 <p> Le {{ trip.startDateTime | date("d/m/Y à h:i" ) }} jusqu'à {{ trip.startDateTime | date("d/m/Y à h:i" ) }}</p>
     <p> Nombre de personnes maximum : {{ trip.maxRegistration }} || organisateur(trice) :{{ trip.organiser.name }}</p>
 {#    <p>Fin des inscriptions le {% trip.startDateTime | date_modify("-3 hour")| date("d/m/Y à h:i" ) %}</p>#}
@@ -20,4 +22,5 @@
             <button type="submit" >Modifier la sortie</button>
         </form>
 {#    {% endif %}#}
+    </div>
 {% endblock %}

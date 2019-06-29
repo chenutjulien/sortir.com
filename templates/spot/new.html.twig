@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Spot{% endblock %}
+{% block title %}Nouveau lieu{% endblock %}
 
 {% block main %}
-    <h1>Create new Spot</h1>
+    <br>
+    <div class="container">
+    <h1>Créer un nouveau lieu</h1>
 
     {{ include('spot/_form.html.twig') }}
 
-    <a href="{{ path('spot_index') }}">back to list</a>
+    <a href="{{ path('spot_index') }}">Retour à la liste</a>
+    </div>
 {% endblock %}

@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Spot{% endblock %}
+{% block title %}Editer un lieu{% endblock %}
 
 {% block main %}
-    <h1>Edit Spot</h1>
+    <br>
+    <div class="container">
+    <h1>Editer un lieu</h1>
 
     {{ include('spot/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('spot_index') }}">back to list</a>
+    <a href="{{ path('spot_index') }}">Retour à la liste</a>
 
     {{ include('spot/_delete_form.html.twig') }}
+    </div>
 {% endblock %}
