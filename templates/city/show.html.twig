@@ -2,39 +2,54 @@
 
 {% block main %}
     <br>
-    <div>
+    <div class="container">
     <h1>Liste des villes</h1>
 
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Ville</th>
+                <th>Code Postal</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <td>{{ city.name  }}</td>
+            <td>{{ city.postalcode }}</td>
+            <td><a href="{{ path('city_index') }}">Retour à la liste</a> /
+                <a href="{{ path('city_edit', {'id': city.id}) }}">Modifier</a></td>
+            </tbody>
 
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th scope="col">Ville</th>
-        <th scope="col">Code Postal</th>
-        <th scope="col">Actions</th>
+        </table>
+{#<table class="table table-striped">#}
+{#    <thead>#}
+{#    <tr>#}
+{#        <th scope="col">Ville</th>#}
+{#        <th scope="col">Code Postal</th>#}
+{#        <th scope="col">Actions</th>#}
 
-    </tr>
-    </thead>
-    {% for city in cities %}
-        <tr>
-            <td>{{ city.name }}</td>
-            <td>{{ city.postalCode }}</td>
-            <td><a href="{{ path('city_edit',{'id':city.id}) }}">Modifier</a> -
-                <a href="{{ path('city_delete',{'id':city.id}) }}">Supprimer</a> </td>
-        </tr>
-    {%  endfor %}
+{#    </tr>#}
+{#    </thead>#}
+{#    {% for city in cities %}#}
+{#        <tr>#}
+{#            <td>{{ city.name }}</td>#}
+{#            <td>{{ city.postalCode }}</td>#}
+{#            <td><a href="{{ path('city_edit',{'id':city.id}) }}">Modifier</a> -#}
+{#                <a href="{{ path('city_delete',{'id':city.id}) }}">Supprimer</a> </td>#}
+{#        </tr>#}
+{#    {%  endfor %}#}
 
-    </tbody>
-</table>
-        <form method="get" action="{{ path("city_new")}}">
-            <input type="hidden" name="_method">
-            <button type="submit hidden" >Ajouter une ville
-            </button>
-        </form>
-
-
+{#    </tbody>#}
+{#</table>#}
+{#        <form method="get" action="{{ path("city_new")}}">#}
+{#            <input type="hidden" name="_method">#}
+{#            <button type="submit hidden" >Ajouter une ville#}
+{#            </button>#}
+{#        </form>#}
 
 
+
+        {{ include('city/_delete_form.html.twig') }}
 </div>
 
 {% endblock %}

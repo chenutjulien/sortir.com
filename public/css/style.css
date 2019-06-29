@@ -9,6 +9,7 @@ body {
     background-color: #AFAC99;
     min-height: 100vh;
     border-radius: 25px;
+    color:#494737!important;
 }
 h4, h3{
     color: black;
@@ -18,7 +19,6 @@ h4, h3{
     color: #AFAC99!important;
 }
 .coco {
-    background-color: #FFFB00;
     background-image:  url("images/montreal.jpg");
     color: #AFAC99!important;
 }

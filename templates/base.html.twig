@@ -32,15 +32,6 @@
                     <li class="nav-item navbar-right">
                         <a class="nav-link" href="{{ path("main_home") }}">Se connecter</a>
                     </li>
-{#                    <li>#}
-{#                        <a class="nav-link" href="{{ path("user_register") }}">Enregistrer un utilisateur</a>#}
-{#                    </li>#}
-                    {#                            <li class="nav-item">#}
-                    {#                                <a class="nav-link invisible" href="#">Villes</a>#}
-                    {#                            </li>#}
-                    {#                            <li class="nav-item">#}
-                    {#                                <a class="nav-link invisible" href="#">Sites</a>#}
-                    {#                            </li>#}
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <li class="nav-item navbar-right">
                             <a class="nav-link" href="{{ path("user_profil", {"id": app.user.id}) }}">Mon Profil</a>
@@ -51,13 +42,18 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path("trip_liste") }}">Sorties</a>
                         </li>
+                        <li class="nav-item navbar-right">
+                            <a class="nav-link" href="{{ path("site_new") }}">Créer un site</a>
+                        </li>
                         {% if is_granted('ROLE_ADMIN') %}
                             <li class="nav-item navbar-right">
                                 <a class="nav-link" href="{{ path("user_register") }}">Créer utilisateur</a>
                             </li>
+
                             <li class="nav-item navbar-right">
-                                <a class="nav-link" href="{{ path("site_new") }}">Créer un site</a>
+                                <a class="nav-link" href="{{ path("city_index") }}">Créer une ville</a>
                             </li>
+
                         {% endif %}
                         <li class="nav-item navbar-right">
                             <a class="nav-link" href="{{ path("user_logout") }}">{{ app.user.username }},

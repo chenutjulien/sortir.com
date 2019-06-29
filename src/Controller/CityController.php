@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\City;
-use App\Form\City1Type;
+use App\Entity\Site;
 use App\Form\CityType;
+use App\Form\SiteType;
 use App\Repository\CityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -52,45 +53,76 @@ class CityController extends Controller
         ]);
     }
 
+//    /**
+//     * @Route("/montreVilles", name="city_show")
+//     */
+//    public function printList(Request $rq)
+//    {
+//        $cityRepo=$this->getDoctrine()->getRepository(City::class);
+//        $cities=$cityRepo->findAll();
+//
+//        return $this->render('city/show.html.twig', [
+//            'cities' => $cities,
+//        ]);
+//    }
     /**
-     * @Route("/montreVilles", name="city_show")
+     * @Route("/{id}", name="city_show", methods={"GET"})
      */
-    public function printList(Request $rq)
+    public function show(City $city): Response
     {
-        $cityRepo=$this->getDoctrine()->getRepository(City::class);
-        $cities=$cityRepo->findAll();
-
         return $this->render('city/show.html.twig', [
-            'cities' => $cities,
+            'city' => $city,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="city_edit")
+     * @Route("/{id}/edit", name="city_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, $id, EntityManagerInterface $em)
+    public function edit(Request $request, City $city): Response
     {
-
-        $city = $em->getRepository(City::class)->find($id);
         $form = $this->createForm(CityType::class, $city);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($city);
-            $em->flush();
-            $this->addFlash("success","Votre ville a bien été enregistrée");
+            $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('city_show', [
-                'id' => $city->getId()]);
-
+            return $this->redirectToRoute('city_index', [
+                'id' => $city->getId(),
+            ]);
         }
 
-        return $this->render('city/new.html.twig', [
+        return $this->render('city/edit.html.twig', [
             'city' => $city,
             'form' => $form->createView(),
-            ]);
-
+        ]);
     }
+
+//    /**
+//     * @Route("/{id}/edit", name="city_edit")
+//     */
+//    public function edit(Request $request, $id, EntityManagerInterface $em)
+//    {
+//
+//        $city = $em->getRepository(City::class)->find($id);
+//        $form = $this->createForm(CityType::class, $city);
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $em->persist($city);
+//            $em->flush();
+//            $this->addFlash("success","Votre ville a bien été enregistrée");
+//
+//            return $this->redirectToRoute('city_show', [
+//                'id' => $city->getId()]);
+//
+//        }
+//
+//        return $this->render('city/new.html.twig', [
+//            'city' => $city,
+//            'form' => $form->createView(),
+//            ]);
+//
+//    }
 
     /**
      * @Route("/{id}", name="city_delete")

@@ -3,11 +3,14 @@
 {% block title %}Editer la ville{% endblock %}
 
 {% block main %}
+    <br>
+    <div class="container">
     <h3>Editer la ville</h3>
 
-    {{ include('city/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('city/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
     <a href="{{ path('city_index') }}">Retour à la liste</a>
 
     {{ include('city/_delete_form.html.twig') }}
+    </div>
 {% endblock %}
