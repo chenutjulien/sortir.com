@@ -1,10 +1,12 @@
 body {
-    background-image:  url("images/fond_nature.jpg");
+    /*background-image:  url("images/montreal.jpg");*/
+    background-color: #494737;
     background-size: cover;
     background-attachment: scroll;
+    color: #AFAC99!important;
 }
 .container {
-    background-color:#4AD98D ;
+    background-color: #AFAC99;
     min-height: 100vh;
     border-radius: 25px;
 }
@@ -13,7 +15,27 @@ h4, h3{
 }
 .bordure {
     border-radius: 25px;
+    color: #AFAC99!important;
 }
 .coco {
-    background-color: #4AD98D;
+    background-color: #FFFB00;
+    background-image:  url("images/montreal.jpg");
+    color: #AFAC99!important;
+}
+.photo {
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+.cadre {
+    border:2px solid black;
+    -moz-border-radius:10% / 50%;
+    -webkit-border-radius:10% / 50%;
+    border-radius:10% / 50%;
+}
+.zozo {
+    color: #AFAC99!important;
+}
+.navbar-nav li a{
+    color:#AFAC99 !important;
 }
