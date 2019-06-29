@@ -1,26 +1,27 @@
 body {
-    /*background-image:  url("images/montreal.jpg");*/
-    background-color: #494737;
+    background-image:  url("images/montreal.jpg");
+    /*background-color: #494737;*/
     background-size: cover;
     background-attachment: scroll;
     color: #AFAC99!important;
 }
 .container {
-    background-color: #AFAC99;
+    background-color: #D3D3D3;
     min-height: 100vh;
     border-radius: 25px;
     color:#494737!important;
 }
 h4, h3{
     color: black;
+    font-style: italic;
 }
 .bordure {
     border-radius: 25px;
     color: #AFAC99!important;
 }
 .coco {
-    background-image:  url("images/montreal.jpg");
-    color: #AFAC99!important;
+    /*background-image:  url("images/montreal.jpg");*/
+    color: #D3D3D3!important;
 }
 .photo {
     display: block;
@@ -38,4 +39,7 @@ h4, h3{
 }
 .navbar-nav li a{
     color:#AFAC99 !important;
+}
+a {
+    color: black;
 }
