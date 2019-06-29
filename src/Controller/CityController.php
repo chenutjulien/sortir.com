@@ -30,21 +30,21 @@ class CityController extends Controller
             'cities' => $cityRepository->findAll(),
         ]);
     }
-
     /**
-     * @Route("/nouvelleVille", name="city_create")
+     * @Route("/new", name="city_new", methods={"GET","POST"})
      */
-    public function create(Request $request, EntityManagerInterface $em)
+    public function new(Request $request): Response
     {
         $city = new City();
         $form = $this->createForm(CityType::class, $city);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($city);
-            $em->flush();
-            $this->addFlash("success","Votre ville a bien été enregistrée");
-            return $this->redirectToRoute('city_show');
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($city);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('city_index');
         }
 
         return $this->render('city/new.html.twig', [
@@ -52,6 +52,28 @@ class CityController extends Controller
             'form' => $form->createView(),
         ]);
     }
+
+//    /**
+//     * @Route("/nouvelleVille", name="city_create")
+//     */
+//    public function create(Request $request, EntityManagerInterface $em)
+//    {
+//        $city = new City();
+//        $form = $this->createForm(CityType::class, $city);
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $em->persist($city);
+//            $em->flush();
+//            $this->addFlash("success","Votre ville a bien été enregistrée");
+//            return $this->redirectToRoute('city_show');
+//        }
+//
+//        return $this->render('city/new.html.twig', [
+//            'city' => $city,
+//            'form' => $form->createView(),
+//        ]);
+//    }
 
 //    /**
 //     * @Route("/montreVilles", name="city_show")
@@ -123,24 +145,37 @@ class CityController extends Controller
 //            ]);
 //
 //    }
-
     /**
-     * @Route("/{id}", name="city_delete")
+     * @Route("/{id}", name="city_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, $id, EntityManagerInterface $em)
+    public function delete(Request $request, City $city): Response
     {
-        $city=$em->getRepository(City::class)->find($id);
-if($city==null){
-    throw $this-> createNotFoundException("Ville inconnue");
-}
+        if ($this->isCsrfTokenValid('delete'.$city->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($city);
+            $entityManager->flush();
+        }
 
-            $em->remove($city);
-            $em->flush();
-            $this->addFlash("success","Votre ville a bien été supprimée");
-
-        return $this->redirectToRoute('city_show');
-
+        return $this->redirectToRoute('city_index');
     }
+
+//    /**
+//     * @Route("/{id}", name="city_delete")
+//     */
+//    public function delete(Request $request, $id, EntityManagerInterface $em)
+//    {
+//        $city=$em->getRepository(City::class)->find($id);
+//if($city==null){
+//    throw $this-> createNotFoundException("Ville inconnue");
+//}
+//
+//            $em->remove($city);
+//            $em->flush();
+//            $this->addFlash("success","Votre ville a bien été supprimée");
+//
+//        return $this->redirectToRoute('city_show');
+//
+//    }
 // Fonction pour rechercher les villes en fonction des lettres entrées par l'organisateur
         /**
          * @Route("/rechercheVille", name="city_search")
