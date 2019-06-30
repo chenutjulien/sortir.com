@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle sortie{% endblock %}
+
+{% block main %}
+    <br>
+    <div class="container">
+    <h3>Créer sa nouvelle sortie (interdite aux mineurs)</h3>
+
+    {{ include('trip/_form.html.twig') }}
+
+    <a href="{{ path('trip_index') }}">Retour à la liste</a>
+    </div>
+{% endblock %}

@@ -6,7 +6,7 @@
 <h3>{{ trip.name }}</h3>
 <p> Le {{ trip.startDateTime | date("d/m/Y à h:i" ) }} jusqu'à {{ trip.startDateTime | date("d/m/Y à h:i" ) }}</p>
     <p> Nombre de personnes maximum : {{ trip.maxRegistration }} || organisateur(trice) :{{ trip.organiser.name }}</p>
-{#    <p>Fin des inscriptions le {% trip.startDateTime | date_modify("-3 hour")| date("d/m/Y à h:i" ) %}</p>#}
+{#    <p>Fin des inscriptions le {% tripback.startDateTime | date_modify("-3 hour")| date("d/m/Y à h:i" ) %}</p>#}
 
 {#    {% if is_granted('ROLE_ORGANISER') %}#}
 {#        Bouton annuler sortie#}

@@ -1,21 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TripController!{% endblock %}
+{% block title %}Liste des sorties{% endblock %}
 
-{% block body %}
+{% block main %}
+<br>
+<div class="container">
+    <h3>Liste des sorties</h3>
 
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <table class="table">
+        <thead>
+            <tr>
+{#                <th>Id</th>#}
+                <th>Name</th>
+                <th>Date de début</th>
+                <th>Nombre d'inscrit</th>
+                <th>Informations</th>
+{#                <th>CancelReason</th>#}
+                <th>Date de fin</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for trip in trips %}
+            <tr>
+{#                <td>{{ trip.id }}</td>#}
+                <td>{{ trip.name }}</td>
+                <td>{{ trip.startDateTime ? trip.startDateTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ trip.maxRegistration }}</td>
+                <td>{{ trip.informations }}</td>
+{#                <td>{{ trip.cancelReason }}</td>#}
+                <td>{{ trip.endDateTime ? trip.endDateTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('trip_show', {'id': trip.id}) }}">Voir</a> /
+                    <a href="{{ path('trip_edit', {'id': trip.id}) }}">Editer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Pas de sortie enregistrée.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/sortir/src/Controller/TripController.php'|file_link(0) }}">src/Controller/TripController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/sortir/templates/trip/index.html.twig'|file_link(0) }}">templates/trip/index.html.twig</a></code></li>
-    </ul>
+    <a href="{{ path('trip_new') }}">Créer une nouvelle sortie</a>
 </div>
 {% endblock %}

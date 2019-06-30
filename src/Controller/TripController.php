@@ -2,124 +2,95 @@
 
 namespace App\Controller;
 
-use App\Entity\City;
-use App\Entity\RemembermeToken;
 use App\Entity\Trip;
-use App\Form\CityType;
 use App\Form\TripType;
-use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\PaginatorInterface;
+use App\Repository\TripRepositoryback;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/trip")
+ */
 class TripController extends Controller
 {
     /**
-     * @Route("/listTrip", name="trip_trip")
+     * @Route("/", name="trip_index", methods={"GET"})
      */
-    public function listTrip()
+    public function index(TripRepositoryback $tripRepositoryback): Response
     {
-        return $this->render('trip/trip.html.twig');
-    }
-
-//Ci-dessous fonction pour afficher le formulaire à remplir pour proposer une sortie
-/**
- * @Route("/proposerSortie", name="trip_create")
- */
-    public function createTrip(EntityManagerInterface $em, Request $rq){
-        $trip= new Trip();
-        $tripForm= $this->createForm(TripType::class,$trip);
-        $tripForm->handleRequest($rq);
-
-        if($tripForm->isSubmitted()&& $tripForm->isValid()){
-
-            if($trip->getEndDateTime()>$trip->getStartDateTime()){
-                $trip->setOrganiser($this->getUser());
-            $em->persist($trip);
-            $em->flush();
-            $this->addFlash("success","Votre sortie est bien enregistrée");
-            return $this-> redirectToRoute("trip_details",['id'=> $trip->getId()]);
-
-        }else{
-                $this->addFlash("danger","Attention! On ne peut pas mettre une date de fin avant que la sortie n'ait débutée");
-                return $this-> redirectToRoute("trip_create");
-
-            }
-        }
-        return $this->render("trip/create.html.twig", [
-            "tripForm"=>$tripForm->createView(),
+        return $this->render('trip/index.html.twig', [
+            'trips' => $tripRepositoryback->findAll(),
         ]);
-}
-//Ci-dessous fonction pour afficher une sortie en fonction de son id
-    /**
-     * @Route("/sortieDetail/{id}", name="trip_details")// Peut-être besoin d'afficher plus
-     */
-
-    public function printDetails($id){
-    $tripRepo= $this->getDoctrine()->getRepository(Trip::class);
-    $trip = $tripRepo->find($id);
-    if($trip == null){
-        throw $this->createNotFoundException("Cette sortie n'existe plus");
-    }
-    return $this->render("trip/details.html.twig",[
-        "trip"=>$trip]);
-
-    }
-//Ci-dessous fonction pour afficher la liste des sorties
-    /**
-     * @Route("/sortieListe/", name="trip_liste")// Peut-être besoin d'afficher plus
-     */
-
-    public function printList(Request $rq, PaginatorInterface $pg){
-        $tripRepo= $this->getDoctrine()->getRepository(Trip::class);
-        $trips=$tripRepo->findAll();
-       // $trips=$pg->paginate($queryTrips, $rq->query->getInt('page'),6);
-        return $this->render("trip/liste.html.twig",
-            ['trips'=>$trips,
-                ]
-            );
-
     }
 
-//Ci-dessous fonction pour annuler une sortie
     /**
-     * @Route("/annulerSortie/{id}", name="trip_delete")
+     * @Route("/new", name="trip_new", methods={"GET","POST"})
      */
+    public function new(Request $request): Response
+    {
+        $trip = new Trip();
+        $form = $this->createForm(TripType::class, $trip);
+        $form->handleRequest($request);
 
-    public function delete($id, EntityManagerInterface $em, Request $rq){
-$trip=$em->getRepository(Trip::class)->find($id);
-if($trip==null){
-    throw $this->createNotFoundException("Cette sortie n'existe pas!");
-}
-if ($this->isCsrfTokenValid('delete'.$trip->getId(), $rq->request->get('_token'))){
-    $em->remove($trip);
-    $em->flush();
-    $this->addFlash("success","Sortie annulée");
-}
-return $this->redirectToRoute("trip_liste");
-    }
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($trip);
+            $entityManager->flush();
 
-
-//Ci-dessous fonction pour modifier une sortie
-    /**
-     * @Route("/modifierSortie/{id}", name="trip_update")
-     */
-
-    public function update($id, EntityManagerInterface $em, Request $rq){
-        $trip=$em->getRepository(Trip::class)->find($id);
-        if($trip==null){
-            throw $this->createNotFoundException("Cette sortie n'existe pas!");
+            return $this->redirectToRoute('trip_index');
         }
-        $tripForm=$this->createForm(TripType::class,$trip);
-        $tripForm->handleRequest($rq);
-        if($tripForm->isSubmitted() && $tripForm->isValid()){
-            $em->persist($trip);
-            $em->flush();
-            $this->addFlash("success","Vos modifications ont bien été prises en compte");
-            return $this->redirectToRoute("trip_details", ['id'=>$trip->getId()]);
-        }
-        return $this-> render("trip/update.html.twig", ['tripForm'=> $tripForm->createView()]);
+
+        return $this->render('trip/new.html.twig', [
+            'trip' => $trip,
+            'form' => $form->createView(),
+        ]);
     }
 
+    /**
+     * @Route("/{id}", name="trip_show", methods={"GET"})
+     */
+    public function show(Trip $trip): Response
+    {
+        return $this->render('trip/show.html.twig', [
+            'trip' => $trip,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="trip_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Trip $trip): Response
+    {
+        $form = $this->createForm(TripType::class, $trip);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('trip_index', [
+                'id' => $trip->getId(),
+            ]);
+        }
+
+        return $this->render('trip/edit.html.twig', [
+            'trip' => $trip,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="trip_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Trip $trip): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$trip->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($trip);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('trip_index');
+    }
 }

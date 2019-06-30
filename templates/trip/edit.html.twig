@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier sortie{% endblock %}
+
+{% block main %}
+<br>
+<div class="container">
+    <h3>Modifier sortie</h3>
+    {{ include('trip/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <a href="{{ path('trip_index') }}">Retour à la liste</a>
+
+    {{ include('trip/_delete_form.html.twig') }}
+</div>
+{% endblock %}
