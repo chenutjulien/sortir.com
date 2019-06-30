@@ -4,8 +4,6 @@
     {{ parent() }}
 {% endblock %}
 
-
-
 {% block main %}
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <h4>Bienvenue  {{ app.user.username }} sur Sortir.com</h4>
