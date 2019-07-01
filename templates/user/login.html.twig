@@ -8,7 +8,7 @@
 
 {% block main %}
 <br>
-    <div class="container">
+    <div class="container-fluid bgdiv">
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <h4>Bienvenue  {{ app.user.username }} sur Sortir.com</h4>
         {% else %}
