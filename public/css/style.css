@@ -1,9 +1,10 @@
 body {
     /*background-image:  url("images/montreal.jpg");*/
     /*background-color: #494737;*/
-    background-size: cover;
-    background-attachment: scroll;
-    color: #AFAC99!important;
+    /*background-size: cover;*/
+    /*background-attachment: scroll;*/
+    color: black!important;
+    background-image: linear-gradient(to right, #8ab5e5, #8cbde8, #90c5eb, #96cded, #9dd5ef, #a7daf0, #b1dff1, #bbe4f2, #c9e8f2, #d6ecf3, #e3eff3, #f0f3f4);
 }
 .container {
     background-color: #D3D3D3;
@@ -17,11 +18,12 @@ h4, h3{
 }
 .bordure {
     border-radius: 25px;
-    color: #AFAC99!important;
+    color: blue!important;
+    background-image:  url("images/singapour.jpg");
 }
 .coco {
     /*background-image:  url("images/montreal.jpg");*/
-    color: #D3D3D3!important;
+    color: blue!important;
 }
 .photo {
     display: block;
@@ -35,25 +37,25 @@ h4, h3{
     border-radius:10% / 50%;
 }
 .zozo {
-    color: #AFAC99!important;
+    color: blue!important;
 }
 .navbar-nav li a{
-    color:#AFAC99 !important;
+    color: blue!important;
 }
 a {
     color: black;
 }
 .dropdown-menu{
-    background-color: darkslategrey;
-    color: #AFAC99;
+    /*background:rgba(255,255,255,0.5);*/
+    background-color: #5eb5e0;
+    color: blue!important;
 }
 .dropdown-item {
-    color: #AFAC99;
+    color: blue!important;
 }
 .bgdiv {
     /*background-color: #D3D3D3;*/
-    background-image: linear-gradient(to left, #f0d6e5, #e4d0e2, #d7cade, #cac5d8, #bebfd2, #b6b9d9, #adb4df, #a3afe6, #a9a5f8, #bc95ff, #d980ff, #fb5ffb);
-    color: #AFAC99;
+    background-color: transparent;
     height: 100vh;
     border-radius: 25px;
 }
