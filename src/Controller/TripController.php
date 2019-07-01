@@ -8,6 +8,7 @@ use App\Form\TripType;
 use App\Repository\TripRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Proxies\__CG__\App\Entity\State;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -152,12 +153,15 @@ class TripController extends Controller
     /**
      * @Route("/{id}", name="trip_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Trip $trip): Response
+    public function delete(Request $request, Trip $trip, EntityManagerInterface $em): Response
     {
         if ($this->isCsrfTokenValid('delete'.$trip->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($trip);
-            $entityManager->flush();
+            $state=$this->getDoctrine()->getRepository(\App\Entity\State::class)->find(5);
+            $trip->setState($state);
+            $em->persist($trip);
+            $em->flush();
+            
         }
 
         return $this->redirectToRoute('trip_index');
