@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/trip")
  */
-class TripController extends Controller
+class TripControllerBack extends Controller
 {
     /**
      * @Route("/", name="trip_index", methods={"GET"})
@@ -31,7 +31,7 @@ class TripController extends Controller
     public function new(Request $request): Response
     {
         $trip = new Trip();
-        $form = $this->createForm(TripType::class, $trip);
+        $form = $this->createForm(TripTypeBack2::class, $trip);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
