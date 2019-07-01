@@ -49,25 +49,36 @@ class TripRepository extends ServiceEntityRepository
     }
     */
 
+
     public function findTripBySite(User $user)
     {
-
-
-        // on crée un objet QueryBuilder pour retourner les sorties concernant le site
-        $qb = $this->createQueryBuilder('t');
-        $qb->addSelect('u');
-        $qb->addSelect('s');
-        $qb->join('t.organiser', 'u');
-        $qb->join('u.site', 's');
-        if ($user->getAdministrator() !== true) {
-        $qb->andWhere('t.site = :val' );
-        setParameter('val', $user->getSite());
+        if ( $user->getAdministrator() ) {
+            return $this->createQueryBuilder('t')
+                ->join('t.organiser','u')
+                ->join('u.site','s')
+                ->orderBy('t.id', 'ASC')
+                ->setMaxResults(10)
+                ->getQuery()
+                ->getResult()
+                ;
+        } else {
+            return $this->createQueryBuilder('t')
+                ->join('t.organiser','u')
+                ->join('u.site','s')
+                ->andWhere('s = :val')
+                ->setParameter('val', $user->getSite())
+                ->orderBy('t.id', 'ASC')
+                ->setMaxResults(10)
+                ->getQuery()
+                ->getResult()
+                ;
         }
-        $qb->orderBy('t.name', 'asc');
-        $query = $qb->getQuery();
-        return $query;
 
     }
+
+
+
+
 
     public function getNumberOfTrips() {
         $qb = $this->createQueryBuilder('t');
