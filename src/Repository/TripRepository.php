@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Trip;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -12,7 +13,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Trip[]    findAll()
  * @method Trip[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TripRepositoryback extends ServiceEntityRepository
+class TripRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
@@ -47,4 +48,33 @@ class TripRepositoryback extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findTripBySite(User $user)
+    {
+
+
+        // on crée un objet QueryBuilder pour retourner les sorties concernant le site
+        $qb = $this->createQueryBuilder('t');
+        $qb->addSelect('u');
+        $qb->addSelect('s');
+        $qb->join('t.organiser', 'u');
+        $qb->join('u.site', 's');
+        if ($user->getAdministrator() !== true) {
+        $qb->andWhere('t.site = :val' );
+        setParameter('val', $user->getSite());
+        }
+        $qb->orderBy('t.name', 'asc');
+        $query = $qb->getQuery();
+        return $query;
+
+    }
+
+    public function getNumberOfTrips() {
+        $qb = $this->createQueryBuilder('t');
+        $qb->select('count(t)');
+        $query = $qb->getQuery();
+        return $query->getSingleScalarResult();
+    }
+
+
 }

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Spot;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -38,6 +39,13 @@ class SpotType extends AbstractType
                     'label'=> 'Latitude',
                     'required'=>'true'
                 ]
+            ])
+            ->add('City', EntityType::class, [
+                'class' => 'App\Entity\City',
+                'choice_label' => 'name',
+                'placeholder' => 'Choisir une ville',
+                'required' => true,
+                'label' => 'Ville :'
             ])
 
 

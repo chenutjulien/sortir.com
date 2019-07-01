@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Trip;
 use App\Form\TripType;
-use App\Repository\TripRepositoryback;
+use App\Repository\TripRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,11 +19,25 @@ class TripController extends Controller
     /**
      * @Route("/", name="trip_index", methods={"GET"})
      */
-    public function index(TripRepositoryback $tripRepositoryback): Response
+    public function index(PaginatorInterface $paginator, TripRepository $tripRepository, Request $request): Response
     {
+
+//        $tripRepo = $this->getDoctrine()->getRepository(Trip::class);
+//
+//        $queryTrip=$tripRepo->findTripBySite($this->getUser());
+//        $numbTrip=$tripRepo->getNumberOfTrips();
+//
+//        $trip = $paginator->paginate($queryTrip, $request->query->getInt('page'),5);
+//        return $this->render('trip/index.html.twig', [
+//            'trips' => $trip,
+//            'nbreSorties' => $numbTrip
+//        ]);
+
         return $this->render('trip/index.html.twig', [
-            'trips' => $tripRepositoryback->findAll(),
+            'trips' => $tripRepository->findAll()
         ]);
+
+
     }
 
     /**
