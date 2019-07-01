@@ -55,8 +55,10 @@ class TripController extends Controller
      */
     public function show(Trip $trip): Response
     {
+        $user=$this->getUser();
         return $this->render('trip/show.html.twig', [
             'trip' => $trip,
+            'user'=>$user,
         ]);
     }
 
