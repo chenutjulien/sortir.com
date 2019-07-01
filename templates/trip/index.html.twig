@@ -12,6 +12,7 @@
             <tr>
 {#                <th>Id</th>#}
                 <th>Name</th>
+                <th>Ville</th>
                 <th>Date de début</th>
                 <th>Date de fin</th>
                 <th>Maximum d'inscrits</th>
@@ -25,8 +26,9 @@
             <tr>
 {#                <td>{{ trip.id }}</td>#}
                 <td>{{ trip.name }}</td>
-                <td>{{ trip.startDateTime ? trip.startDateTime|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ trip.endDateTime ? trip.endDateTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ trip.spot.city.name }}</td>
+                <td>{{ trip.startDateTime ? trip.startDateTime|date('d-m-Y H:i') : '' }}</td>
+                <td>{{ trip.endDateTime ? trip.endDateTime|date('d-m-Y H:i') : '' }}</td>
                 <td>{{ trip.maxRegistration }}</td>
                 <td>{{ trip.informations }}</td>
                 <td>{{ trip.organiser.username }}</td>
