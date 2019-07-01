@@ -51,6 +51,7 @@ class TripController extends Controller
         $trip = new Trip();
         $user=$this->getUser();
         $trip->setOrganiser($user);
+
         $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
 
