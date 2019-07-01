@@ -5,9 +5,7 @@ namespace App\Entity;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -92,7 +90,6 @@ class Trip
         $this->startDateTime= new \DateTime('now');
         $this->endDateTime= new \DateTime('now');
         $this->registereds = new ArrayCollection();
-
     }
 
     public function getId(): ?int

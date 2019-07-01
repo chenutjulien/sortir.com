@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -67,9 +68,14 @@ class RegisterType extends AbstractType
                 array('label'=>'active',
                     'required'=>false))
             ->add('phoneNumber')
-//            ->add('site', CheckboxType::class,
-//                array('label'=>'Chartres de Bretagne',
-//                    'required'=>false))
+            ->add('Site', EntityType::class,[
+                    'class' => 'App\Entity\Site',
+                    'choice_label' => 'name',
+                    'placeholder' => 'Veuillez choisir un site',
+                    'required' => true,
+                    'expanded' => true,
+                    'label' => 'Site :'
+                ])
         ;
     }
 

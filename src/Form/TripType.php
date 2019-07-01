@@ -60,9 +60,10 @@ class TripType extends AbstractType
                 'class' => 'App\Entity\State',
                 'choice_label' => 'name',
                 'data' => 'Créée',
-                'label' => 'Status :'
+                'label' => 'Statut :'
             ])
-            
+
+
         ;
     }
 

@@ -13,11 +13,11 @@
 {#                <th>Id</th>#}
                 <th>Name</th>
                 <th>Date de début</th>
-                <th>Nombre d'inscrit</th>
-                <th>Informations</th>
-{#                <th>CancelReason</th>#}
                 <th>Date de fin</th>
-                <th>Actions</th>
+                <th>Nombre d'inscrits</th>
+                <th>Informations</th>
+                <th>Organisateur</th>
+                <th>Statut</th>
             </tr>
         </thead>
         <tbody>
@@ -26,10 +26,12 @@
 {#                <td>{{ trip.id }}</td>#}
                 <td>{{ trip.name }}</td>
                 <td>{{ trip.startDateTime ? trip.startDateTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ trip.endDateTime ? trip.endDateTime|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ trip.maxRegistration }}</td>
                 <td>{{ trip.informations }}</td>
-{#                <td>{{ trip.cancelReason }}</td>#}
-                <td>{{ trip.endDateTime ? trip.endDateTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ trip.organiser.username }}</td>
+                <td>{{ trip.state.name }}</td>
+
                 <td>
                     <a href="{{ path('trip_show', {'id': trip.id}) }}">Voir</a> /
                     <a href="{{ path('trip_edit', {'id': trip.id}) }}">Editer</a>
