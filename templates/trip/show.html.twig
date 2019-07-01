@@ -6,7 +6,7 @@
     <br>
 
 {#Informations Sortie#}
-        <div class="card" style="width: 100rem;">
+        <div class="container-fluid card">
             <div class="card-body">
                 <h3 class="card-title">Détail de la sortie - Proposée par {{ trip.organiser.username }}</h3>
                 <h4 class="card-subtitle mb-2 text-muted">{{ trip.name }} du {{ trip.startDateTime ? trip.startDateTime|date('Y-m-d H:i:s') : ''}}
