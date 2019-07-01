@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Trip;
-use App\Form\TripTypeBack2;
+use App\Form\TripType;
 use App\Repository\TripRepositoryback;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,7 +63,7 @@ class TripController extends Controller
      */
     public function edit(Request $request, Trip $trip): Response
     {
-        $form = $this->createForm(TripTypeBack2::class, $trip);
+        $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

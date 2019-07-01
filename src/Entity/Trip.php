@@ -92,8 +92,6 @@ class Trip
         $this->startDateTime= new \DateTime('now');
         $this->endDateTime= new \DateTime('now');
         $this->registereds = new ArrayCollection();
-//        $this->
-//        $this->setOrganiser($user);
 
     }
 
