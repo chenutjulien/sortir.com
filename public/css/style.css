@@ -1,5 +1,5 @@
 body {
-    background-image:  url("images/montreal.jpg");
+    /*background-image:  url("images/montreal.jpg");*/
     /*background-color: #494737;*/
     background-size: cover;
     background-attachment: scroll;
@@ -49,4 +49,14 @@ a {
 }
 .dropdown-item {
     color: #AFAC99;
+}
+.bgdiv {
+    /*background-color: #D3D3D3;*/
+    background-image: linear-gradient(to left, #f0d6e5, #e4d0e2, #d7cade, #cac5d8, #bebfd2, #b6b9d9, #adb4df, #a3afe6, #a9a5f8, #bc95ff, #d980ff, #fb5ffb);
+    color: #AFAC99;
+    height: 100vh;
+    border-radius: 25px;
+}
+.montreal {
+    background-image:  url("images/montreal.jpg");
 }
