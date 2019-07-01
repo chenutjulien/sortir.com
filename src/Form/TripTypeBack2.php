@@ -22,6 +22,9 @@ class TripTypeBack2 extends AbstractType
                 'attr'=>['placeholder'=>'Insérez le titre de votre évènement ici...'],
                 'required'=>true
             ])
+
+
+
             ->add('startDateTime',DateTimeType::class, [
                 'label'=>'Heure et date de départ',
                 'widget' => 'single_text',
@@ -33,6 +36,10 @@ class TripTypeBack2 extends AbstractType
                 //-> CI-DESSUS POUR LE DATE PICKER
 
             ])
+            ->add('endDateTime', DateTimeType::class, [
+                'label'=>'Heure et date de fin',
+                'required'=>true,
+            ])
             ->add('maxRegistration', IntegerType::class, [
                 'label'=>'Nombre de personnes maximum',
                 'required'=>'true'
@@ -41,21 +48,20 @@ class TripTypeBack2 extends AbstractType
                 'label'=>'Description',
                 'attr'=>['placeholder'=>"Détaillez l'activité proposée"]
             ])
-//            ->add('cancelReason')
-            ->add('endDateTime', DateTimeType::class, [
-                'label'=>'Heure et date de fin',
-                'required'=>true,
+
+            ->add('Spot', EntityType::class, [
+                'class' => 'App\Entity\Spot',
+                'choice_label' => 'name',
+                'placeholder' => 'Choisir un lieu',
+                'label' => 'Lieu :'
             ])
-//            ->add('organiser')
-//            ->add('registereds')
-//            ->add('state')
-//            ->add('spot')
-//            ->add('id', EntityType::class, [
-//                'class' => 'App\Entity\Spot',
-//                'choice_label' => 'name',
-//                'placeholder' => 'Choisir un lieu',
-//                'label' => 'Lieu :'
-//            ])
+
+            ->add('State', EntityType::class, [
+                'class' => 'App\Entity\State',
+                'choice_label' => 'name',
+                'data' => 'Créée',
+                'label' => 'Status :'
+            ])
         ;
     }
 
