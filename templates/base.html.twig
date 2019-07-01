@@ -47,7 +47,7 @@
                         </li>
                         {% if is_granted('ROLE_ADMIN') %}
                             <div class="dropdown">
-                                <a class="nav-item navbar-right"  id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link zozo"  id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Action de l'administrateur
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -84,8 +84,10 @@
             {% endfor %}
         </div>
     </header>
+    <br><br>
 
     {% block main %}
+
 
 
     {% endblock %}
