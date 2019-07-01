@@ -76,16 +76,14 @@ class TripRepository extends ServiceEntityRepository
 
     }
 
-
-
-
-
     public function getNumberOfTrips() {
         $qb = $this->createQueryBuilder('t');
         $qb->select('count(t)');
         $query = $qb->getQuery();
         return $query->getSingleScalarResult();
     }
+
+
 
 
 }

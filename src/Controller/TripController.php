@@ -51,6 +51,7 @@ class TripController extends Controller
         $trip = new Trip();
         $user=$this->getUser();
         $trip->setOrganiser($user);
+
         $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
 
@@ -75,6 +76,7 @@ class TripController extends Controller
     {
         $user= new User();
         $user=$this->getUser();
+        $registereds= $trip->getRegistereds();
         if($user== null) {
             $this->addFlash("danger", "L'utilisateur est vide");
 
@@ -82,7 +84,8 @@ class TripController extends Controller
         }else{
         return $this->render('trip/show.html.twig', [
             'trip' => $trip,
-            'user'=>$user,       ]);
+            'user'=>$user,
+            'registereds'=>$registereds]);
         }
     }
 
@@ -104,6 +107,23 @@ class TripController extends Controller
             ]);
 
     }
+
+
+    /**
+     * @Route("/desistement/{id}", name="trip_pullOut")
+     */
+    public function pullOut($id, EntityManagerInterface $em, Request $rq){
+        $user=$this->getUser();
+        $trip=$em->getRepository(Trip::class)->find($id);
+        $trip->removeRegistered($user);
+        $em->flush();
+        $this->addFlash("success","Vous n'êtes plus inscrit(e)s à cette sortie");
+        return $this->redirectToRoute('trip_show',[
+            'id'=>$trip->getId(),
+        ]);
+    }
+
+
 
 //Mettre le redirectoroute avec un addflash
 
