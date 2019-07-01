@@ -38,6 +38,9 @@ class TripType extends AbstractType
             ])
             ->add('endDateTime', DateTimeType::class, [
                 'label'=>'Heure et date de fin',
+                'widget'=>'choice',
+                'format'=> 'd-M-y HH:mm:ss',
+                'model_timezone'=> 'Europe/Paris',
                 'required'=>true,
             ])
             ->add('maxRegistration', IntegerType::class, [
