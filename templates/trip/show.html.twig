@@ -5,7 +5,7 @@
 {% block main %}
     <br>
 
-
+{#Informations Sortie#}
         <div class="card" style="width: 100rem;">
             <div class="card-body">
                 <h3 class="card-title">Détail de la sortie - Proposée par {{ trip.organiser.username }}</h3>
@@ -13,18 +13,47 @@
                 au {{ trip.endDateTime ? trip.endDateTime|date('Y-m-d H:i:s') : '' }}</h4>
                 <p class="card-text">{{ trip.informations }}</p>
                 <p class="card-text">{{ trip.maxRegistration }}</p>
+
+
+{#                Liste des inscrits#}
+                <table class="table">
+                    <h4>Inscrit(e)s à la sortie</h4>
+                    <thead>
+                    <tr>
+                        <th>Pseudo</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <td>
+                    {% for register in registereds %}
+                    <ul>
+                        <li> {{ register.username }}</li>
+                    </ul>
+                    {% endfor %}
+                    </td>
+                    </tbody>
+                </table>
+
+{#                Fonctions supprimer/modifer pour organisateur et inscription/désistement pour l'utilisateur#}
                 <a href="{{ path('trip_index') }}" class="card-link">Retour à la liste</a>
                 {% if trip.organiser.id == user.id %}
                 <a href="{{ path('trip_edit', {'id': trip.id}) }}" class="card-link">Modifier</a>
                     {{ include('trip/_delete_form.html.twig') }}
-                {% else %}
+            {% else %}
                     {% if trip.startDateTime|date('m/d/Y') > "now"|date('m/d/Y') %}
                 <form action="{{ path("trip_register", {'id': trip.id}) }}" >
                     <input type="hidden" name="_method">
                     <input type="hidden" name="_token" value="{{ csrf_token('register'~trip.id) }}">
                     <button type="submit">S'inscrire</button>
                 </form>
+                        {% if registereds.contains(user)%}
 
+                        <form action="{{ path("trip_pullOut", {'id': trip.id}) }}" >
+                            <input type="hidden" name="_method">
+                            <input type="hidden" name="_token" value="{{ csrf_token('pullOut'~trip.id) }}">
+                            <button type="submit">Se désister</button>
+                        </form>
+                        {% endif %}
                     {% endif %}
                 {% endif %}
             </div>
