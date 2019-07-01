@@ -40,29 +40,29 @@
                             <a class="nav-link" href="{{ path("trip_new") }}">Créer une sortie</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path("trip_index") }}">Sorties</a>
+                            <a class="nav-link" href="{{ path("trip_index") }}">Liste des sorties</a>
                         </li>
                         <li class="nav-item navbar-right">
-                            <a class="nav-link" href="{{ path("site_new") }}">Créer un site</a>
+                            <a class="nav-link" href="{{ path("site_index") }}">Liste des sites</a>
                         </li>
                         {% if is_granted('ROLE_ADMIN') %}
                             <div class="dropdown">
-                                <a class="nav-item navbar-right" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-item navbar-right"  id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Action de l'administrateur
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <a class="dropdown-item" type="button" href="{{ path("user_register") }}" >Créer un utilisateur</a>
-                                    <a class="dropdown-item" type="button" href="{{ path("site_new") }}">Créer un site</a>
-                                    <a class="dropdown-item" type="button" href="{{ path("city_new") }}">Créer une ville</a>
+                                    <a class="dropdown-item"  href="{{ path("user_register") }}" >Créer un utilisateur</a>
+                                    <a class="dropdown-item"  href="{{ path("site_new") }}">Créer un site</a>
+                                    <a class="dropdown-item"  href="{{ path("city_new") }}">Créer une ville</a>
                                 </div>
                             </div>
-                            <li class="nav-item navbar-right">
-                                <a class="nav-link" href="{{ path("user_register") }}">Créer utilisateur</a>
-                            </li>
+{#                            <li class="nav-item navbar-right">#}
+{#                                <a class="nav-link" href="{{ path("user_register") }}">Créer utilisateur</a>#}
+{#                            </li>#}
 
-                            <li class="nav-item navbar-right">
-                                <a class="nav-link" href="{{ path("city_new") }}">Créer une ville</a>
-                            </li>
+{#                            <li class="nav-item navbar-right">#}
+{#                                <a class="nav-link" href="{{ path("city_new") }}">Créer une ville</a>#}
+{#                            </li>#}
 
                         {% endif %}
                         <li class="nav-item navbar-right">

@@ -43,6 +43,10 @@ h4, h3{
 a {
     color: black;
 }
-.btn {
+.dropdown-menu{
     background-color: #1c1920;
+    color: #AFAC99;
+}
+.dropdown-item {
+    color: #AFAC99;
 }
