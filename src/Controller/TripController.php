@@ -33,8 +33,9 @@ class TripController extends Controller
 //            'nbreSorties' => $numbTrip
 //        ]);
 
+
         return $this->render('trip/index.html.twig', [
-            'trips' => $tripRepository->findAll()
+            'trips' => $tripRepository->findTripBySite($this->getUser())
         ]);
 
 
