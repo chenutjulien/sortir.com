@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Trip;
+use App\Entity\User;
 use App\Form\TripType;
 use App\Repository\TripRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,8 +35,9 @@ class TripController extends Controller
 //            'nbreSorties' => $numbTrip
 //        ]);
 
+
         return $this->render('trip/index.html.twig', [
-            'trips' => $tripRepository->findAll()
+            'trips' => $tripRepository->findTripBySite($this->getUser())
         ]);
 
 
@@ -70,12 +73,39 @@ class TripController extends Controller
      */
     public function show(Trip $trip): Response
     {
+        $user= new User();
         $user=$this->getUser();
+        if($user== null) {
+            $this->addFlash("danger", "L'utilisateur est vide");
+
+            return $this ->redirectToRoute('trip_index');
+        }else{
         return $this->render('trip/show.html.twig', [
             'trip' => $trip,
-            'user'=>$user,
-        ]);
+            'user'=>$user,       ]);
+        }
     }
+
+
+    /**
+     * @Route("/inscription/{id}", name="trip_register")
+     */
+    public function register($id, EntityManagerInterface $em, Request  $rq)
+
+    {
+        $user=$this->getUser();
+        $trip=$em->getRepository(Trip::class)->find($id);
+            $trip->addRegistered($user);
+            $em->persist($trip);
+            $em->flush();
+            $this->addFlash("success","Vous êtes bien inscrit(e) à cette sortie");
+            return $this->redirectToRoute('trip_show', [
+                'id'=>$trip->getId(),
+            ]);
+
+    }
+
+//Mettre le redirectoroute avec un addflash
 
     /**
      * @Route("/{id}/edit", name="trip_edit", methods={"GET","POST"})
