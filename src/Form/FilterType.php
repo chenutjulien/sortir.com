@@ -23,7 +23,7 @@ class FilterType extends AbstractType
                 'required' => true,
                 'label' => 'Site :'
             ])
-            ->add('Search', SearchType::class, [
+            ->add('search', SearchType::class, [
                 'label' => 'Le nom de la sortie contient : ',
                 'required' => false
             ])

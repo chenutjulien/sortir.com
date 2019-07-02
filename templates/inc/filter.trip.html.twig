@@ -1,4 +1,21 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-<button class="btn">{{ button_label|default('Rechercher') }}</button>
-{{ form_end(form) }}
+
+<div class="row">
+
+    <div class="col">
+        {{ form_start(form) }}
+        {{ form_row(form.Site) }}
+        {{ form_row(form.search) }}
+        {{ form_row(form.debDate) }}
+        {{ form_row(form.endDateTime) }}
+    </div>
+    <div class="col my-auto">
+
+        {{ form_row(form.organiser) }}
+        {{ form_row(form.registered) }}
+        {{ form_row(form.unregistered) }}
+        {{ form_row(form.pastTrip) }}
+        <button class="btn btn-dark">{{ button_label|default('Rechercher') }}</button>
+        {{ form_end(form) }}
+    </div>
+
+</div>
