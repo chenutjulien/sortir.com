@@ -77,8 +77,18 @@ class TripRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('t')
             ->join('t.organiser', 'u')
-            ->join('u.site', 's')
-            ->orderBy('t.id', 'ASC');
+            ->join('u.site', 's');
+
+
+        if ($filter->getRegistered()===true){
+            $qb->andWhere(':person IN t.registereds')
+                ->setParameter('person', $user);
+        }
+
+        if ($filter->getPastTrip()===true){
+            $qb->andWhere('t.endDateTime < :auj')
+                ->setParameter('auj', new \DateTime('now'));
+        }
 
         if ($filter->getSite()!==null){
             $qb->andWhere('s = :val')
@@ -90,23 +100,12 @@ class TripRepository extends ServiceEntityRepository
                 ->setParameter('org', $user);
         }
 
-        if ($filter->getRegistered()===true){
-            $qb->andWhere(':person in t.registereds')
-                ->setParameter('personn', $user);
-        }
-
-        if ($filter->getPastTrip()===true){
-            $qb->andWhere('t.endDateTime < :auj')
-                ->setParameter('auj', new \DateTime('now'));
-        }
-
-
-
         $qb->andWhere('t.startDateTime > :sdt')
             ->setParameter('sdt', $filter->getDebDate());
 
         $qb->andWhere('t.endDateTime < :edt')
-            ->setParameter('edt', $filter->getEndDateTime());
+            ->setParameter('edt', $filter->getEndDateTime())
+            ->orderBy('t.id', 'ASC');
 
 
 
