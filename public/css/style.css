@@ -65,6 +65,9 @@ a {
 .card {
     border: black 2px solid;
     background-color: transparent;
-
     border-radius: 25px;
+}
+.profil {
+    font-weight: bold;
+    color: black;
 }
