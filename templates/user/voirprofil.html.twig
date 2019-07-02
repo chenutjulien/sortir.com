@@ -6,6 +6,17 @@
 
 {% block main %}
 
+    <div class="container bgdiv">
+        <div class="row">
+            <div class="col-md-6 offset-md-3"><h3>Profil de {{ app.user.username }}</h3></div>
+            <div class="col-md-6 offset-md-3 mt-2"><label>Prénom : </label> <span class="profil">{{ user.firstname }}</span></div>
+            <div class="col-md-6 offset-md-3 mt-2"><label>Nom : </label> <span class="profil">{{ user.name }}</span></div>
+            <div class="col-md-6 offset-md-3 mt-2"><label>Téléphone : </label> <span class="profil">{{ user.phoneNumber }}</span></div>
+            <div class="col-md-6 offset-md-3 mt-2"><label>Email : </label> <span class="profil">{{ user.mail }}</span></div>
+            <div class="col-md-6 offset-md-3 mt-2"><label>Ville de rattachement : </label><span class="profil">{{ site.name }}</span></div>
+        </div>
+    </div>
+
 <div class="container-fluid bgdiv">
     <h3>Profil de {{ user.username }}</h3>
 </div>
