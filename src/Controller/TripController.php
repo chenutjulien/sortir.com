@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @Route("/trip")
@@ -29,7 +30,9 @@ class TripController extends Controller
         $filter= new Filter();
         $auj=new \DateTime('now');
         $filter->setDebDate($auj);
-        $filter->setEndDateTime($auj);
+        $fin=new \DateTime('now');
+        date_add($fin, date_interval_create_from_date_string('60 days'));
+        $filter->setEndDateTime($fin);
         $form = $this->createForm(FilterType::class, $filter);
         $form->handleRequest($request);
 
