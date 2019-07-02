@@ -11,6 +11,7 @@
         <thead>
             <tr>
 {#                <th>Id</th>#}
+                <th>Site</th>
                 <th>Name</th>
                 <th>Ville</th>
                 <th>Date de début</th>
@@ -24,7 +25,7 @@
         <tbody>
         {% for trip in trips %}
             <tr>
-{#                <td>{{ trip.id }}</td>#}
+                <td>{{ trip.organiser.site.name }}</td>
                 <td>{{ trip.name }}</td>
                 <td>{{ trip.spot.city.name }}</td>
                 <td>{{ trip.startDateTime ? trip.startDateTime|date('d-m-Y H:i') : '' }}</td>
@@ -49,6 +50,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('trip_new') }}">Créer une nouvelle sortie</a>
+    <a class="btn btn-primary" href="{{ path('trip_new') }}">Créer une nouvelle sortie</a>
 </div>
 {% endblock %}

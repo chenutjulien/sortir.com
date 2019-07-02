@@ -28,12 +28,14 @@
                 <td>
                     {% for register in registereds %}
                         <ul>
-                            <li><a href="{{ path("user_voirprofil") }}">{{ register.username }}</a></li>
+                            <li><a href="{{ path("user_voirprofil", {'id': register.id}) }}">{{ register.username }}</a></li>
                         </ul>
                     {% endfor %}
                 </td>
                 </tbody>
             </table>
+
+
 
             {#                Fonctions supprimer/modifer pour organisateur et inscription/désistement pour l'utilisateur#}
             <a href="{{ path('trip_index') }}" class="card-link">Retour à la liste</a>

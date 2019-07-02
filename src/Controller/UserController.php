@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Trip;
 use App\Entity\User;
 use App\Form\ProfilType;
 use App\Form\RegisterType;
@@ -117,11 +118,20 @@ class UserController extends Controller
         ]);
     }
 
+
+
     /**
-     * @Route("/voirprofil", name="user_voirprofil")
+     * @Route("/voirprofil/{id}", name="user_voirprofil")
      */
-    public function voirprofil () {
-        return $this->render("user/voirprofil.html.twig");
+    public function voirprofil (Request $request, EntityManagerInterface $em, $id) {
+        $user=$em->getRepository(User::class)->find($id);
+        if ( $user === null ) {
+            $this->addFlash("danger", "Participant inexistant");
+            return $this->redirectToRoute("trip_index");
+        }
+        return $this->render("user/voirprofil.html.twig", [
+            'user'=> $user
+        ]);
     }
 
 }
