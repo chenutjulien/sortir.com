@@ -26,7 +26,7 @@ class ProfilType extends AbstractType
     ])
             ->add('name',TextType::class, [
                 'attr'=> [
-                    'placeholder'=>'Votre (petit)nom',
+                    'placeholder'=>'Votre nom',
                     'required'=>true
                 ]
             ])

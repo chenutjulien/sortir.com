@@ -6,10 +6,20 @@
 <br>
 <div class="container-fluid bgdiv">
     <h3>Modifier sortie</h3>
+
     {{ include('trip/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+    <a href="{{ path('trip_publish',{'id': trip.id}) }}">Publier</a>
+
+    <form method="post" action="{{ path('trip_delete', {'id': trip.id}) }}">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trip.id) }}">
+        <label for="cancelReason">Raison d'annulation :</label>
+        <input type="text" size="100" minlength="10" name="cancelReason" required>
+        <button type="submit" class="btn"></button>
+        {{ include('trip/_delete_form.html.twig') }}
+    </form>
 
     <a href="{{ path('trip_index') }}">Retour à la liste</a>
 
-    {{ include('trip/_delete_form.html.twig') }}
 </div>
 {% endblock %}

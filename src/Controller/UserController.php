@@ -27,6 +27,10 @@ class UserController extends Controller
         $registerForm = $this->createForm(RegisterType::class, $user); //Gestion du formulaire et de sa création
         $registerForm->handleRequest($request); //Envoi de la requete
         if ($registerForm->isSubmitted() && $registerForm->isValid()){ //Si formulaire est soumis et valide
+            /*
+             *    if ($registerForm->isSubmitted() && $registerForm->isValid() && $this->isNotEquals->$user.username)
+//                $this->addFlash('danger', 'Pseudo deja utilisé');
+             */
             $hash=$encoder->encodePassword($user, $user->getPassword()); //Salage du code
             $user->setPassword($hash); //Salage du code lié à l'utilisateur
             if ( $user->getAdministrator() === true) {
