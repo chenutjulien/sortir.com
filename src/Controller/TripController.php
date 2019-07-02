@@ -24,8 +24,26 @@ class TripController extends Controller
     /**
      * @Route("/", name="trip_index", methods={"GET","POST"})
      */
-    public function index(PaginatorInterface $paginator, TripRepository $tripRepository, Request $request): Response
+    public function index(PaginatorInterface $paginator, TripRepository $tripRepository, Request $request, EntityManagerInterface $em): Response
     {
+
+
+        $now= new \DateTime('now');
+        $trips=$em->getRepository(Trip::class)->findAll();
+        foreach ($trips as $trip) {
+            if ($trip->getEndDateTime() < $now) {
+                $state = $this->getDoctrine()->getRepository(\App\Entity\State::class)->find(4);
+                $trip->setState($state);
+                $em->persist($trip);
+                $em->flush();
+            } elseif ($trip->getStartDateTime() < $now) {
+                $state = $this->getDoctrine()->getRepository(\App\Entity\State::class)->find(3);
+                $trip->setState($state);
+                $em->persist($trip);
+                $em->flush();
+            }
+        }
+
 
         $filter= new Filter();
         $auj=new \DateTime('now');
