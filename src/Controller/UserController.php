@@ -27,6 +27,11 @@ class UserController extends Controller
         $registerForm = $this->createForm(RegisterType::class, $user); //Gestion du formulaire et de sa création
         $registerForm->handleRequest($request); //Envoi de la requete
         if ($registerForm->isSubmitted() && $registerForm->isValid()){ //Si formulaire est soumis et valide
+            if ( $em->getRepository(User::class)->findOneByUser($user) !== null ) {
+                $this->addFlash('danger', 'Pseudo et/ou mail deja utilisé');
+                return $this->redirectToRoute("user_register");
+            }
+
             /*
              *    if ($registerForm->isSubmitted() && $registerForm->isValid() && $this->isNotEquals->$user.username)
 //                $this->addFlash('danger', 'Pseudo deja utilisé');
