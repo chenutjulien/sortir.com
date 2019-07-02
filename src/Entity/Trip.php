@@ -39,7 +39,7 @@ class Trip
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
-     * @Assert\Range(min = 0, minMessage="Ca serait plus sympa avec des gens!")
+     * @Assert\Range(min = 0, minMessage="Vous devez inviter des personnes à votre évènement")
      */
     private $maxRegistration;
 
