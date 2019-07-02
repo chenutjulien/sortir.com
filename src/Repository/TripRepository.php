@@ -81,7 +81,7 @@ class TripRepository extends ServiceEntityRepository
 
 
         if ($filter->getRegistered()===true){
-            $qb->andWhere(':person IN t.registereds')
+            $qb->andWhere(':person MEMBER OF t.registereds')
                 ->setParameter('person', $user);
         }
 
