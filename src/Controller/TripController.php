@@ -22,7 +22,7 @@ class TripController extends Controller
     /**
      * @Route("/", name="trip_index", methods={"GET"})
      */
-    public function index(PaginatorInterface $paginator, TripRepository $tripRepository, Request $request): Response
+    public function index(PaginatorInterface $paginator, TripRepository $tripRepository, Request $request, EntityManagerInterface $em): Response
     {
 
 //        $tripRepo = $this->getDoctrine()->getRepository(Trip::class);
@@ -36,7 +36,23 @@ class TripController extends Controller
 //            'nbreSorties' => $numbTrip
 //        ]);
 
+        $entityManager = $this->getDoctrine()->getManager();
+        $now= new \DateTime('now');
+$trips=$em->getRepository(Trip::class)->findAll();
+        foreach ($trips as $trip){
+        if($trip->getEndDateTime()<$now){
+        $state=$this->getDoctrine()->getRepository(\App\Entity\State::class)->find(4);
+            $trip->setState($state);
+            $em->persist($trip);
+            $em->flush();
+    } elseif ($trip->getStartDateTime()<$now){
+            $state=$this->getDoctrine()->getRepository(\App\Entity\State::class)->find(3);
+            $trip->setState($state);
+            $em->persist($trip);
+            $em->flush();
+        }
 
+        }
         return $this->render('trip/index.html.twig', [
             'trips' => $tripRepository->findTripBySite($this->getUser())
         ]);
@@ -151,7 +167,7 @@ class TripController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="trip_delete", methods={"DELETE"})
+     * @Route("/{id}", name="trip_delete", methods={"DELETE","POST"})
      */
     public function delete(Request $request, Trip $trip, EntityManagerInterface $em): Response
     {
@@ -159,6 +175,15 @@ class TripController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $state=$this->getDoctrine()->getRepository(\App\Entity\State::class)->find(5);
             $trip->setState($state);
+            if (isset($_POST['cancelReason'])){
+                $cancelReason = $_POST['cancelReason'];
+                $trip->setCancelReason($cancelReason);
+            }else{
+                $this->addFlash("danger","La raison d'annulation est nulle");
+            }
+            $cancelReason = $_POST['cancelReason'];
+            $trip->setCancelReason($cancelReason);
+
             $em->persist($trip);
             $em->flush();
             
@@ -166,4 +191,21 @@ class TripController extends Controller
 
         return $this->redirectToRoute('trip_index');
     }
+
+
+/**
+ * @Route("/publier/{id}", name="trip_publish", methods={"GET","POST"})
+ */
+public function publish($id, EntityManagerInterface $em, Request $rq)
+{
+    $trip = $em->getRepository(Trip::class)->find($id);
+    $state = $this->getDoctrine()->getRepository(\App\Entity\State::class)->find(2);
+    $trip->setState($state);
+    $em->persist($trip);
+    $em->flush();
+    $this->addFlash("success", "Votre sortie vient d'être publiée");
+    return $this->redirectToRoute('trip_index', [
+        'id' => $trip->getId(),
+    ]);
+}
 }

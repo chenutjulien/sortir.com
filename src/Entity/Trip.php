@@ -200,6 +200,10 @@ class Trip
 
     public function getState(): ?State
     {
+//        $now= new \DateTime('now');
+//        if($this->endDateTime<$now){
+//
+//        }
         return $this->state;
     }
 

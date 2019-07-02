@@ -5,60 +5,74 @@
 {% block main %}
     <br>
 
-{#Informations Sortie#}
-        <div class="container-fluid card">
-            <div class="card-body">
-                <h3 class="card-title">Détail de la sortie - Proposée par {{ trip.organiser.username }}</h3>
-                <h4 class="card-subtitle mb-2 text-muted">{{ trip.name }} du {{ trip.startDateTime ? trip.startDateTime|date('Y-m-d H:i:s') : ''}}
+    {#Informations Sortie#}
+    <div class="container-fluid card">
+        <div class="card-body">
+            <h3 class="card-title">Détail de la sortie - Proposée par {{ trip.organiser.username }}</h3>
+            <h4 class="card-subtitle mb-2 text-muted">{{ trip.name }}
+                du {{ trip.startDateTime ? trip.startDateTime|date('Y-m-d H:i:s') : '' }}
                 au {{ trip.endDateTime ? trip.endDateTime|date('Y-m-d H:i:s') : '' }}</h4>
-                <p class="card-text">{{ trip.informations }}</p>
-                <p class="card-text">{{ trip.maxRegistration }}</p>
+            <p class="card-text">{{ trip.informations }}</p>
+            <p class="card-text">{{ trip.maxRegistration }}</p>
 
 
-{#                Liste des inscrits#}
-                <table class="table">
-                    <h4>Inscrit(e)s à la sortie</h4>
-                    <thead>
-                    <tr>
-                        <th>Pseudo</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <td>
+            {#                Liste des inscrits#}
+            <table class="table">
+                <h4>Inscrit(e)s à la sortie</h4>
+                <thead>
+                <tr>
+                    <th>Pseudo</th>
+                </tr>
+                </thead>
+                <tbody>
+                <td>
                     {% for register in registereds %}
-                    <ul>
-                        <li> {{ register.username }}</li>
-                    </ul>
+                        <ul>
+                            <li> {{ register.username }}</li>
+                        </ul>
                     {% endfor %}
-                    </td>
-                    </tbody>
-                </table>
+                </td>
+                </tbody>
+            </table>
 
-{#                Fonctions supprimer/modifer pour organisateur et inscription/désistement pour l'utilisateur#}
-                <a href="{{ path('trip_index') }}" class="card-link">Retour à la liste</a>
-                {% if trip.organiser.id == user.id %}
-                <a href="{{ path('trip_edit', {'id': trip.id}) }}" class="card-link">Modifier</a>
-                    {{ include('trip/_delete_form.html.twig') }}
+            {#                Fonctions supprimer/modifer pour organisateur et inscription/désistement pour l'utilisateur#}
+            <a href="{{ path('trip_index') }}" class="card-link">Retour à la liste</a>
+            {% if trip.organiser.id == user.id %}
+                {% if not trip.state=="5" %}
+                    <a href="{{ path('trip_edit', {'id': trip.id}) }}" class="card-link">Editer</a>
+
+                {% else %}
+                    <p>--> Cette sortie est annulée, excuse de l'organisateur:</p>
+                    <p>{{ trip.cancelReason }}</p>
+                {% endif %}
             {% else %}
-                    {% if trip.startDateTime|date('m/d/Y') > "now"|date('m/d/Y') %}
+                {% if registereds|length <= trip.maxRegistration %}
+                    <p>Plus de place disponible</p>
+                {% endif %}
+                {% if trip.state=="5" %}
+                    <p>--> Cette sortie est annulée, excuse de l'organisateur:</p>
+                    <p>{{ trip.cancelReason }}</p>
+                {% endif %}
+                {% if trip.startDateTime|date('m/d/Y') > "now"|date('m/d/Y') %}
+                    <p>Inscriptions closes </p>
+                {% else %}
+                    {% if registereds.contains(user) %}
 
-                        {% if registereds.contains(user)%}
-
-                        <form action="{{ path("trip_pullOut", {'id': trip.id}) }}" >
+                        <form action="{{ path("trip_pullOut", {'id': trip.id}) }}">
                             <input type="hidden" name="_method">
                             <input type="hidden" name="_token" value="{{ csrf_token('pullOut'~trip.id) }}">
                             <button type="submit">Se désister</button>
                         </form>
-                            {% else %}
-                                <form action="{{ path("trip_register", {'id': trip.id}) }}" >
-                                    <input type="hidden" name="_method">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('register'~trip.id) }}">
-                                    <button type="submit">S'inscrire</button>
-                                </form>
-                        {% endif %}
+                    {% else %}
+                        <form action="{{ path("trip_register", {'id': trip.id}) }}">
+                            <input type="hidden" name="_method">
+                            <input type="hidden" name="_token" value="{{ csrf_token('register'~trip.id) }}">
+                            <button type="submit">S'inscrire</button>
+                        </form>
                     {% endif %}
                 {% endif %}
-            </div>
+            {% endif %}
         </div>
+    </div>
 
 {% endblock %}
