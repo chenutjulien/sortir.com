@@ -112,4 +112,11 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/voirProfil", name="user_userprofil")
+     */
+    public function voirProfil () {
+        return $this->render("user/userprofil.html.twig");
+    }
+
 }
