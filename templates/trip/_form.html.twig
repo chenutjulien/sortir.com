@@ -1,13 +1,13 @@
 <div class="row">
 
-    <div class="col my-auto">
+    <div class="col-md my-auto">
         {{ form_start(form) }}
         {{ form_row(form.name) }}
         {{ form_row(form.startDateTime) }}
         {{ form_row(form.endDateTime) }}
         {{ form_row(form.maxRegistration) }}
     </div>
-    <div class="col my-auto">
+    <div class="col-md my-auto">
         {{ form_row(form.informations) }}
         {{ form_row(form.Spot) }}
         <a href="{{ path('spot_new') }}" target="_blank"><img src="{{ asset('images/plus.png')}}"></a>
