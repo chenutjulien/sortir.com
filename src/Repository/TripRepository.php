@@ -107,29 +107,14 @@ class TripRepository extends ServiceEntityRepository
             ->setParameter('edt', $filter->getEndDateTime())
             ->orderBy('t.id', 'ASC');
 
-
-
-
         if ( ! empty($filter->getSearch())){
             $qb->andWhere('t.name like :search')
                 ->setParameter('search', '%'.$filter->getSearch().'%');
         }
 
 
-
-
-
-
-
-
         return $qb->getQuery()->getResult();
 
-//        return $this->createQueryBuilder('t')
-//            ->join('t.organiser', 'u')
-//            ->join('u.site', 's')
-//            ->orderBy('t.id', 'ASC')
-//            ->getQuery()
-//            ->getResult();
 
     }
 
