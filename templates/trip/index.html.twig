@@ -24,6 +24,7 @@
         </thead>
         <tbody>
         {% for trip in trips %}
+
             <tr>
                 <td>{{ trip.organiser.site.name }}</td>
                 <td>{{ trip.name }}</td>
@@ -46,6 +47,7 @@
             <tr>
                 <td colspan="8">Pas de sortie enregistrée.</td>
             </tr>
+
         {% endfor %}
         </tbody>
     </table>

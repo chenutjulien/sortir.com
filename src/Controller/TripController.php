@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Form\FilterType;
 use App\Form\TripType;
 use App\Repository\TripRepository;
+use DateInterval;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -30,8 +31,13 @@ class TripController extends Controller
 
         $now= new \DateTime('now');
         $trips=$em->getRepository(Trip::class)->findAll();
+$fp=fopen('CSV/archive.csv','w');
+
         foreach ($trips as $trip) {
-            if ($trip->getEndDateTime() < $now) {
+            $diff1month = new DateInterval('P1M');
+            $dateArchived=$trip->getEndDateTime()->add($diff1month);
+            if ($dateArchived >= $now) {
+                if($trip->getEndDateTime() < $now){
                 $state = $this->getDoctrine()->getRepository(\App\Entity\State::class)->find(4);
                 $trip->setState($state);
                 $em->persist($trip);
@@ -42,8 +48,11 @@ class TripController extends Controller
                 $em->persist($trip);
                 $em->flush();
             }
+        }else{
+                fputcsv($fp,$trips,"\t");
+            }
         }
-
+fclose($fp);
 
         $filter= new Filter();
         $auj=new \DateTime('now');
@@ -224,4 +233,5 @@ class TripController extends Controller
             'id' => $trip->getId(),
         ]);
     }
+
 }
