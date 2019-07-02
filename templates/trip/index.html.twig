@@ -11,6 +11,7 @@
         <thead>
             <tr>
 {#                <th>Id</th>#}
+                <th>Site</th>
                 <th>Name</th>
                 <th>Ville</th>
                 <th>Date de début</th>
@@ -25,7 +26,7 @@
         {% for trip in trips %}
 
             <tr>
-{#                <td>{{ trip.id }}</td>#}
+                <td>{{ trip.organiser.site.name }}</td>
                 <td>{{ trip.name }}</td>
                 <td>{{ trip.spot.city.name }}</td>
                 <td>{{ trip.startDateTime ? trip.startDateTime|date('d-m-Y H:i') : '' }}</td>
@@ -36,8 +37,10 @@
                 <td>{{ trip.state.name }}</td>
 
                 <td>
-                    <a class="btn btn-info" href="{{ path('trip_show', {'id': trip.id}) }}">Voir</a> /
-                    <a class="btn btn-warning" href="{{ path('trip_edit', {'id': trip.id}) }}">Editer</a>
+                    <a class="btn btn-info" href="{{ path('trip_show', {'id': trip.id}) }}">Voir</a>
+                    {% if trip.organiser.id == app.user.id %}
+                        /<a class="btn btn-warning" href="{{ path('trip_edit', {'id': trip.id}) }}">Editer</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -49,6 +52,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('trip_new') }}">Créer une nouvelle sortie</a>
+    <a class="btn btn-primary" href="{{ path('trip_new') }}">Créer une nouvelle sortie</a>
 </div>
 {% endblock %}

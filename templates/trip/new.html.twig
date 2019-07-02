@@ -5,10 +5,12 @@
 {% block main %}
     <br>
     <div class="container-fluid bgdiv">
-    <h3>Créer sa nouvelle sortie </h3>
+        <h3>Créer sa nouvelle sortie </h3>
 
-    {{ include('trip/_form.html.twig') }}
+        {{ include('trip/_form.html.twig') }}
+        <br>
+        <a class="btn btn-info" href="{{ path('trip_index') }}">Retour à la liste</a>
 
-    <a class="btn btn-info" href="{{ path('trip_index') }}">Retour à la liste</a>
+
     </div>
 {% endblock %}

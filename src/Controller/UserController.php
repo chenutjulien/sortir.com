@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Trip;
 use App\Entity\User;
 use App\Form\ProfilType;
 use App\Form\RegisterType;
@@ -27,6 +28,11 @@ class UserController extends Controller
         $registerForm = $this->createForm(RegisterType::class, $user); //Gestion du formulaire et de sa création
         $registerForm->handleRequest($request); //Envoi de la requete
         if ($registerForm->isSubmitted() && $registerForm->isValid()){ //Si formulaire est soumis et valide
+            if ( $em->getRepository(User::class)->findOneByUser($user) !== null ) {
+                $this->addFlash('danger', 'Pseudo et/ou mail deja utilisé');
+                return $this->redirectToRoute("user_register");
+            }
+
             /*
              *    if ($registerForm->isSubmitted() && $registerForm->isValid() && $this->isNotEquals->$user.username)
 //                $this->addFlash('danger', 'Pseudo deja utilisé');
@@ -112,11 +118,20 @@ class UserController extends Controller
         ]);
     }
 
+
+
     /**
-     * @Route("/voirprofil", name="user_voirprofil")
+     * @Route("/voirprofil/{id}", name="user_voirprofil")
      */
-    public function voirprofil () {
-        return $this->render("user/voirprofil.html.twig");
+    public function voirprofil (Request $request, EntityManagerInterface $em, $id) {
+        $user=$em->getRepository(User::class)->find($id);
+        if ( $user === null ) {
+            $this->addFlash("danger", "Participant inexistant");
+            return $this->redirectToRoute("trip_index");
+        }
+        return $this->render("user/voirprofil.html.twig", [
+            'user'=> $user
+        ]);
     }
 
 }
