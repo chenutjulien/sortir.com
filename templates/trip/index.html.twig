@@ -3,8 +3,9 @@
 {% block title %}Liste des sorties{% endblock %}
 
 {% block main %}
-<br>
 <div class="container-fluid bgdiv">
+    <div class="text-right"><h5>{{ app.user.firstname }} {{ app.user.name }} </h5></div>
+    <div class="text-right"><h6>{{ "now"|date("d/m/Y") }} </h6></div>
     <h3>Liste des sorties </h3>
     {{ include('inc/filter.trip.html.twig') }}
     <table class="table">
@@ -12,12 +13,12 @@
             <tr>
 {#                <th>Id</th>#}
                 <th>Site</th>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Ville</th>
                 <th>Date de début</th>
                 <th>Date de fin</th>
-                <th>Maximum d'inscrits</th>
-                <th>Informations</th>
+                <th>Nbre de places</th>
+{#                <th>Informations</th>#}
                 <th>Organisateur</th>
                 <th>Statut</th>
             </tr>
@@ -32,7 +33,7 @@
                 <td>{{ trip.startDateTime ? trip.startDateTime|date('d-m-Y H:i') : '' }}</td>
                 <td>{{ trip.endDateTime ? trip.endDateTime|date('d-m-Y H:i') : '' }}</td>
                 <td>{{ trip.maxRegistration }}</td>
-                <td>{{ trip.informations }}</td>
+{#                <td>{{ trip.informations }}</td>#}
                 <td>{{ trip.organiser.username }}</td>
                 <td>{{ trip.state.name }}</td>
 

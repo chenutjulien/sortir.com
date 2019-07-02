@@ -7,8 +7,9 @@
         <h4>Veuillez remplir les champs ci-dessous pour finaliser votre inscription.</h4>
         {{ form_start(formRegister) }}
         {{ form_widget(formRegister) }}
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <button type="submit" class="btn btn-success">Enregistrer</button>
         {{ form_end(formRegister) }}
     </div>
+    <a class="btn btn-primary" href="{{ path('login') }}">Retour</a>
 
 {% endblock %}

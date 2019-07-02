@@ -24,19 +24,22 @@ class RegisterType extends AbstractType
             ->add('username', TextType::class, [
                 'attr'=> [
                     'placeholder'=>'Votre identifiant',
-                    'required'=>true
+                    'required'=>true,
+                    'label' => 'Pseudo'
                 ]
             ])
             ->add('name', TextType::class, [
                 'attr'=> [
                     'placeholder'=>'Votre nom',
-                    'required'=>true
+                    'required'=>true,
+                    'label' => 'Nom'
                 ]
             ])
             ->add('firstname', TextType::class, [
                 'attr'=> [
                     'placeholder'=>'Votre prénom',
-                    'required'=>true
+                    'required'=>true,
+                    'label'=> 'Prénom'
                 ]
             ])
 //            ->add('picture', FileType::class, [
@@ -48,7 +51,8 @@ class RegisterType extends AbstractType
             ->add('mail', EmailType::class, [
                 'attr'=> [
                     'placeholder'=>'Votre adresse mail',
-                    'required'=>true
+                    'required'=>true,
+                    'label'=>'Email'
                 ]
             ])
             ->add('password', RepeatedType::class, [

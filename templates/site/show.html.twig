@@ -5,7 +5,7 @@
 {% block main %}
     <br>
 <div class="container-fluid bgdiv">
-    h3>Detail du site</h3>
+    <h3>Detail du site</h3>
     <table class="table">
         <thead>
             <tr>
@@ -15,8 +15,8 @@
         </thead>
         <tbody>
             <td>{{ site.name }}</td>
-            <td><a href="{{ path('site_index') }}">Retour à la liste</a> /
-                <a href="{{ path('site_edit', {'id': site.id}) }}">Modifier</a></td>
+            <td><a class="btn btn-primary" href="{{ path('site_index') }}">Retour à la liste</a> /
+                <a class="btn btn-success" href="{{ path('site_edit', {'id': site.id}) }}">Modifier</a></td>
         </tbody>
 
     </table>
