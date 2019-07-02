@@ -28,7 +28,7 @@
                 <td>
                     {% for register in registereds %}
                         <ul>
-                            <li> {{ register.username }}</li>
+                            <li><a href="{{ path("user_voirprofil") }}">{{ register.username }}</a></li>
                         </ul>
                     {% endfor %}
                 </td>

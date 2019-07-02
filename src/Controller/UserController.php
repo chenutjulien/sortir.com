@@ -113,10 +113,10 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/voirProfil", name="user_userprofil")
+     * @Route("/voirprofil", name="user_voirprofil")
      */
-    public function voirProfil () {
-        return $this->render("user/userprofil.html.twig");
+    public function voirprofil () {
+        return $this->render("user/voirprofil.html.twig");
     }
 
 }

@@ -35,8 +35,8 @@
                 <td>{{ trip.state.name }}</td>
 
                 <td>
-                    <a href="{{ path('trip_show', {'id': trip.id}) }}">Voir</a> /
-                    <a href="{{ path('trip_edit', {'id': trip.id}) }}">Editer</a>
+                    <a class="btn btn-info" href="{{ path('trip_show', {'id': trip.id}) }}">Voir</a> /
+                    <a class="btn btn-warning" href="{{ path('trip_edit', {'id': trip.id}) }}">Editer</a>
                 </td>
             </tr>
         {% else %}
