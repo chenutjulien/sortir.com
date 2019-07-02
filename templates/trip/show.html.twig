@@ -72,7 +72,7 @@
                     {% else %}
 
                         {#Si l'utilisateur est déjà inscrit à la sortie-> on lui propose de se désister#}
-                        {% if trip.state.id==2 and registereds|length < trip.maxRegistration %}
+                        {% if trip.state.id==2  %}
                             {% if registereds.contains(user) %}
 
                                 <form action="{{ path("trip_pullOut", {'id': trip.id}) }}">
@@ -81,8 +81,8 @@
                                     <button type="submit">Se désister</button>
                                 </form>
                                 {# Si l'utilisateur n'est pas inscrit-> on lui propose de s'inscrire#}
-                            {% else %}
-                                
+                            {% elseif registereds|length < trip.maxRegistration %}
+
                                 <form action="{{ path("trip_register", {'id': trip.id}) }}">
                                     <input type="hidden" name="_method">
                                     <input type="hidden" name="_token" value="{{ csrf_token('register'~trip.id) }}">
