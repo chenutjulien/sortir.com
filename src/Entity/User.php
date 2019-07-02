@@ -56,6 +56,8 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
+     * @Assert\Length(min=6, minMessage="Votre mot de passe doit comporter {{ limit }} caractères")
+     *
      */
     private $password;
 
@@ -87,7 +89,8 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\EqualTo("10", message="Un numéro de téléphone se sompose de 10 chiffres. Ne rajoutez pas 0033!")
+     * @Assert\Length(max=10, maxMessage="Votre numéro doit comporter {{ limit }} chiffres")
+     * @Assert\Length(min=10, minMessage="Votre numéro doit comporter {{ limit }} chiffres")
      */
     private $phoneNumber;
 
