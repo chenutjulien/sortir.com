@@ -87,11 +87,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\EqualTo("10", message="Un numéro de téléphone se sompose de 10 chiffres. Ne rajoutez pas 0033!")
      */
     private $phoneNumber;
 
     /**
      * @ORM\Column(type="array", nullable=true)
+     *
      */
     private $roles = [];
 
