@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Filter;
 use App\Entity\Trip;
 use App\Entity\User;
+use App\Form\FilterType;
 use App\Form\TripType;
 use App\Repository\TripRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use Proxies\__CG__\App\Entity\State;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,26 +21,36 @@ use Symfony\Component\Routing\Annotation\Route;
 class TripController extends Controller
 {
     /**
-     * @Route("/", name="trip_index", methods={"GET"})
+     * @Route("/", name="trip_index", methods={"GET","POST"})
      */
     public function index(PaginatorInterface $paginator, TripRepository $tripRepository, Request $request): Response
     {
 
-//        $tripRepo = $this->getDoctrine()->getRepository(Trip::class);
-//
-//        $queryTrip=$tripRepo->findTripBySite($this->getUser());
-//        $numbTrip=$tripRepo->getNumberOfTrips();
-//
-//        $trip = $paginator->paginate($queryTrip, $request->query->getInt('page'),5);
-//        return $this->render('trip/index.html.twig', [
-//            'trips' => $trip,
-//            'nbreSorties' => $numbTrip
-//        ]);
+        $filter= new Filter();
+        $auj=new \DateTime('now');
+        $filter->setDebDate($auj);
+        $filter->setEndDateTime($auj);
+        $form = $this->createForm(FilterType::class, $filter);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+            return $this->render('trip/index.html.twig', [
+                'form' => $form->createView(),
+                'trips' => $tripRepository->filterTrip($filter, $this->getUser())
+            ]);
+        }
 
         return $this->render('trip/index.html.twig', [
-            'trips' => $tripRepository->findTripBySite($this->getUser())
+            'form' => $form->createView(),
+            'trips' => $tripRepository->filterTrip($filter, $this->getUser())
         ]);
+
+
+//        return $this->render('trip/index.html.twig', [
+//            'trips' => $tripRepository->findTripBySite($this->getUser())
+//        ]);
 
 
     }

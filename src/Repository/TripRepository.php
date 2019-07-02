@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Filter;
 use App\Entity\Trip;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -52,38 +53,94 @@ class TripRepository extends ServiceEntityRepository
 
     public function findTripBySite(User $user)
     {
-        if ( $user->getAdministrator() ) {
+        if ($user->getAdministrator()) {
             return $this->createQueryBuilder('t')
-                ->join('t.organiser','u')
-                ->join('u.site','s')
+                ->join('t.organiser', 'u')
+                ->join('u.site', 's')
                 ->orderBy('t.id', 'ASC')
-                ->setMaxResults(10)
                 ->getQuery()
-                ->getResult()
-                ;
+                ->getResult();
         } else {
             return $this->createQueryBuilder('t')
-                ->join('t.organiser','u')
-                ->join('u.site','s')
+                ->join('t.organiser', 'u')
+                ->join('u.site', 's')
                 ->andWhere('s = :val')
                 ->setParameter('val', $user->getSite())
                 ->orderBy('t.id', 'ASC')
-                ->setMaxResults(10)
                 ->getQuery()
-                ->getResult()
-                ;
+                ->getResult();
         }
 
     }
 
-    public function getNumberOfTrips() {
+    public function filterTrip(Filter $filter, User $user)
+    {
+        $qb = $this->createQueryBuilder('t')
+            ->join('t.organiser', 'u')
+            ->join('u.site', 's')
+            ->orderBy('t.id', 'ASC');
+
+        if ($filter->getSite()!==null){
+            $qb->andWhere('s = :val')
+                ->setParameter('val', $filter->getSite());
+        }
+
+        if ($filter->getOrganiser()===true){
+            $qb->andWhere('t.organiser = :org')
+                ->setParameter('org', $user);
+        }
+
+        if ($filter->getRegistered()===true){
+            $qb->andWhere(':person in t.registereds')
+                ->setParameter('personn', $user);
+        }
+
+        if ($filter->getPastTrip()===true){
+            $qb->andWhere('t.endDateTime < :auj')
+                ->setParameter('auj', new \DateTime('now'));
+        }
+
+
+
+        $qb->andWhere('t.startDateTime > :sdt')
+            ->setParameter('sdt', $filter->getDebDate());
+
+        $qb->andWhere('t.endDateTime < :edt')
+            ->setParameter('edt', $filter->getEndDateTime());
+
+
+
+
+        if ( ! empty($filter->getSearch())){
+            $qb->andWhere('t.name like :search')
+                ->setParameter('search', '%'.$filter->getSearch().'%');
+        }
+
+
+
+
+
+
+
+
+        return $qb->getQuery()->getResult();
+
+//        return $this->createQueryBuilder('t')
+//            ->join('t.organiser', 'u')
+//            ->join('u.site', 's')
+//            ->orderBy('t.id', 'ASC')
+//            ->getQuery()
+//            ->getResult();
+
+    }
+
+    public function getNumberOfTrips()
+    {
         $qb = $this->createQueryBuilder('t');
         $qb->select('count(t)');
         $query = $qb->getQuery();
         return $query->getSingleScalarResult();
     }
-
-
 
 
 }

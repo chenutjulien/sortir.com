@@ -2,58 +2,34 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\FilterRepository")
- */
 class Filter
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+
     private $Site;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+
     private $Search;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+
     private $debDate;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+
     private $endDateTime;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
+
     private $organiser;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
+
     private $registered;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
+
     private $unregistered;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
+
     private $pastTrip;
 
     public function getId(): ?int
@@ -61,12 +37,12 @@ class Filter
         return $this->id;
     }
 
-    public function getSite(): ?string
+    public function getSite(): ?Site
     {
         return $this->Site;
     }
 
-    public function setSite(?string $Site): self
+    public function setSite(?Site $Site): self
     {
         $this->Site = $Site;
 
