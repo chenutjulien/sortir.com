@@ -9,14 +9,14 @@
     <div class="container-fluid card">
         <div class="card-body">
             <h3 class="card-title">Détail de la sortie - Proposée par {{ trip.organiser.username }}</h3>
-            <h4 class="card-subtitle mb-2 text-muted">{{ trip.name }}
+            <h4 class="card-subtitle mb-2 text-muted">{{ trip.name }} à {{ trip.spot.city.name }} / {{ trip.spot.name }}
                 du {{ trip.startDateTime ? trip.startDateTime|date('Y-m-d H:i:s') : '' }}
                 au {{ trip.endDateTime ? trip.endDateTime|date('Y-m-d H:i:s') : '' }}</h4>
             <p class="card-text">{{ trip.informations }}</p>
-            <p class="card-text">{{ trip.maxRegistration }}</p>
-
+            <p class="card-text">{{ registereds.count }}/{{ trip.maxRegistration }}</p>
 
             {#                Liste des inscrits#}
+            {% if registereds.count > 0 %}
             <table class="table">
                 <h4>Inscrit(e)s à la sortie</h4>
                 <thead>
@@ -28,16 +28,21 @@
                 <td>
                     {% for register in registereds %}
                         <ul>
-                            <li><a class="btn btn-secondary" href="{{ path("user_voirprofil", {'id': register.id}) }}">{{ register.username }}</a></li>
+                            <li><a class="btn btn-secondary"
+                                   href="{{ path("user_voirprofil", {'id': register.id}) }}">{{ register.username }}</a>
+                            </li>
                         </ul>
                     {% endfor %}
                 </td>
                 </tbody>
             </table>
-
+            {% else %}
+            <h8>Personne n'est encore inscrit</h8><br>
+            {% endif %}
 
 
             {#                Fonctions supprimer/modifer pour organisateur et inscription/désistement pour l'utilisateur#}
+            <hr/>
             <a class="btn btn-primary" href="{{ path('trip_index') }}" class="card-link">Retour à la liste</a><br>
             {#Si l'utilisateur est l'organisateur#}
             {% if trip.organiser.id == user.id %}
@@ -60,42 +65,41 @@
 
                     <p>Plus de place disponible</p>
                 {% endif %}
-                    {#Si l'état de la sortie est annulée#}
-                    {% if trip.state.id==5 %}
+                {#Si l'état de la sortie est annulée#}
+                {% if trip.state.id==5 %}
 
-                        <p>--> Cette sortie est annulée, excuse de l'organisateur:</p>
-                        <p>{{ trip.cancelReason }}</p>
-                    {% endif %}
-                    {#Si la sortie a déjà commencée#}
-                    {% if trip.startDateTime|date('m/d/Y') < "now"|date('m/d/Y') %}
+                    <p>--> Cette sortie est annulée, excuse de l'organisateur:</p>
+                    <p>{{ trip.cancelReason }}</p>
+                {% endif %}
+                {#Si la sortie a déjà commencée#}
+                {% if trip.startDateTime|date('m/d/Y') < "now"|date('m/d/Y') %}
 
-                        <p>Inscriptions closes </p>
-                        {#Si la sortie n'a pas commencée#}
-                    {% else %}
+                    <p>Inscriptions closes </p>
+                    {#Si la sortie n'a pas commencée#}
+                {% else %}
 
-                        {#Si l'utilisateur est déjà inscrit à la sortie-> on lui propose de se désister#}
-                        {% if trip.state.id==2  %}
-                            {% if registereds.contains(user) %}
+                    {#Si l'utilisateur est déjà inscrit à la sortie-> on lui propose de se désister#}
+                    {% if trip.state.id==2 %}
+                        {% if registereds.contains(user) %}
 
-                                <form action="{{ path("trip_pullOut", {'id': trip.id}) }}">
-                                    <input type="hidden" name="_method">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('pullOut'~trip.id) }}">
-                                    <br>
-                                    <button class="btn btn-danger" type="submit">Se désister</button>
-                                </form>
-                                {# Si l'utilisateur n'est pas inscrit-> on lui propose de s'inscrire#}
-                            {% elseif registereds|length < trip.maxRegistration %}
+                            <form action="{{ path("trip_pullOut", {'id': trip.id}) }}">
+                                <input type="hidden" name="_method">
+                                <input type="hidden" name="_token" value="{{ csrf_token('pullOut'~trip.id) }}">
+                                <br>
+                                <button class="btn btn-danger" type="submit">Se désister</button>
+                            </form>
+                            {# Si l'utilisateur n'est pas inscrit-> on lui propose de s'inscrire#}
+                        {% elseif registereds|length < trip.maxRegistration %}
 
-                                <form action="{{ path("trip_register", {'id': trip.id}) }}">
-                                    <input type="hidden" name="_method">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('register'~trip.id) }}"><br>
-
-                                    <button class="btn btn-success" type="submit">S'inscrire</button>
-                                </form>
-                            {% endif %}
+                            <form action="{{ path("trip_register", {'id': trip.id}) }}">
+                                <input type="hidden" name="_method">
+                                <input type="hidden" name="_token" value="{{ csrf_token('register'~trip.id) }}"><br>
+                                <button class="btn btn-success" type="submit">S'inscrire</button>
+                            </form>
                         {% endif %}
                     {% endif %}
                 {% endif %}
+            {% endif %}
         </div>
     </div>
 

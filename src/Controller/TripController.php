@@ -210,9 +210,23 @@ class TripController extends Controller
             ]);
         }
 
+        $spot = new Spot();
+        $formspot = $this->createForm(SpotType::class, $spot);
+        $formspot->handleRequest($request);
+
+        if ($formspot->isSubmitted() && $formspot->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($spot);
+            $entityManager->flush();
+            return $this->redirectToRoute('trip_new',[
+                'spot' => $spot->getId()
+            ]);
+        }
+
         return $this->render('trip/edit.html.twig', [
             'trip' => $trip,
             'form' => $form->createView(),
+            'formspot' => $formspot->createView()
         ]);
     }
 

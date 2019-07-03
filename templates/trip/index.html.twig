@@ -17,7 +17,7 @@
                 <th>Ville</th>
                 <th>Date de début</th>
                 <th>Date de fin</th>
-                <th>Nbre de places</th>
+                <th>Inscrits</th>
 {#                <th>Informations</th>#}
                 <th>Organisateur</th>
                 <th>Statut</th>
@@ -32,7 +32,7 @@
                 <td>{{ trip.spot.city.name }}</td>
                 <td>{{ trip.startDateTime ? trip.startDateTime|date('d-m-Y H:i') : '' }}</td>
                 <td>{{ trip.endDateTime ? trip.endDateTime|date('d-m-Y H:i') : '' }}</td>
-                <td>{{ trip.maxRegistration }}</td>
+                <td>{{ trip.registereds.count }}/{{ trip.maxRegistration }}</td>
 {#                <td>{{ trip.informations }}</td>#}
                 <td><a href="{{ path('user_voirprofil', {'id': trip.organiser.id}) }}"><span class="btn btn-secondary">{{ trip.organiser.username }}</span></a></td>
                 <td>{{ trip.state.name }}</td>

@@ -8,6 +8,7 @@
     <h3>Modifier sortie</h3>
 
     {{ include('trip/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+    <hr/>
     <a class="btn btn-primary" href="{{ path('trip_publish',{'id': trip.id}) }}">Publier</a>
 
     <form method="post" action="{{ path('trip_delete', {'id': trip.id}) }}">

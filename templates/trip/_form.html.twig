@@ -2,19 +2,19 @@
 
     <div class="col-md my-auto">
         {{ form_start(form) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.startDateTime) }}
-        {{ form_row(form.endDateTime) }}
-        {{ form_row(form.maxRegistration) }}
-    </div>
-    <div class="col-md my-auto">
-        {{ form_row(form.informations) }}
         {{ form_row(form.Spot) }}
-
-
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ajoutLieu">
             +
         </button>
+        {{ form_row(form.name) }}
+        {{ form_row(form.startDateTime) }}
+        {{ form_row(form.endDateTime) }}
+    </div>
+    <div class="col-md my-auto">
+
+        {{ form_row(form.maxRegistration) }}
+        {{ form_row(form.informations) }}
+
         {{ form_row(form.State) }}
         <button class="btn btn-success">{{ button_label|default('Sauvegarder') }}</button>
         {{ form_end(form) }}
