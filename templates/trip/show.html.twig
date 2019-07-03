@@ -28,7 +28,7 @@
                 <td>
                     {% for register in registereds %}
                         <ul>
-                            <li><a href="{{ path("user_voirprofil", {'id': register.id}) }}">{{ register.username }}</a></li>
+                            <li><a class="btn btn-info" href="{{ path("user_voirprofil", {'id': register.id}) }}">{{ register.username }}</a></li>
                         </ul>
                     {% endfor %}
                 </td>
@@ -38,7 +38,7 @@
 
 
             {#                Fonctions supprimer/modifer pour organisateur et inscription/désistement pour l'utilisateur#}
-            <a href="{{ path('trip_index') }}" class="card-link">Retour à la liste</a>
+            <a class="btn btn-primary" href="{{ path('trip_index') }}" class="card-link">Retour à la liste</a><br>
             {#Si l'utilisateur est l'organisateur#}
             {% if trip.organiser.id == user.id %}
 
@@ -80,15 +80,16 @@
                                 <form action="{{ path("trip_pullOut", {'id': trip.id}) }}">
                                     <input type="hidden" name="_method">
                                     <input type="hidden" name="_token" value="{{ csrf_token('pullOut'~trip.id) }}">
-                                    <button type="submit">Se désister</button>
+                                    <button class="btn btn-danger" type="submit">Se désister</button>
                                 </form>
                                 {# Si l'utilisateur n'est pas inscrit-> on lui propose de s'inscrire#}
                             {% elseif registereds|length < trip.maxRegistration %}
 
                                 <form action="{{ path("trip_register", {'id': trip.id}) }}">
                                     <input type="hidden" name="_method">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('register'~trip.id) }}">
-                                    <button type="submit">S'inscrire</button>
+                                    <input type="hidden" name="_token" value="{{ csrf_token('register'~trip.id) }}"><br>
+                                    
+                                    <button class="btn btn-primary" type="submit">S'inscrire</button>
                                 </form>
                             {% endif %}
                         {% endif %}
