@@ -34,7 +34,7 @@ class TripController extends Controller
 
 
         foreach ($trips as $trip) {
-            $diff1month = new DateInterval('P1M');
+            $diff1month = new DateInterval('PT60S');
             $dateArchived=$trip->getEndDateTime()->add($diff1month);
             if ($dateArchived >= $now) {
                 if($trip->getEndDateTime() < $now){
