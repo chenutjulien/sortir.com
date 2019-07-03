@@ -34,7 +34,7 @@
                 <td>{{ trip.endDateTime ? trip.endDateTime|date('d-m-Y H:i') : '' }}</td>
                 <td>{{ trip.maxRegistration }}</td>
 {#                <td>{{ trip.informations }}</td>#}
-                <td>{{ trip.organiser.username }}</td>
+                <td><a href="{{ path('user_voirprofil', {'id': 'x'}) }}">{{ trip.organiser.username }}</a></td>
                 <td>{{ trip.state.name }}</td>
 
                 <td>

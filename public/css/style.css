@@ -5,6 +5,7 @@ body {
     /*background-attachment: scroll;*/
     color: black!important;
     background-image: linear-gradient(to right, #8ab5e5, #8cbde8, #90c5eb, #96cded, #9dd5ef, #a7daf0, #b1dff1, #bbe4f2, #c9e8f2, #d6ecf3, #e3eff3, #f0f3f4);
+    font-family: Bahnschrift!important;
 }
 .container {
     background-color: #D3D3D3;

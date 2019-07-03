@@ -31,7 +31,7 @@
 
                         <form method="post" action="{{ path("user_inactive", {'id': user.id}) }}">
                             <input type="hidden" id="desactive" name="desactive">
-                            <button type="submit">Désactiver</button>
+                            <button class="btn btn-danger" type="submit">Désactiver</button>
                         </form>
 
 
@@ -39,7 +39,7 @@
                         <p>inactif</p>
                         <form method="post" action="{{ path("user_active", {'id': user.id}) }}">
                             <input type="hidden" id="active" name="active">
-                            <button type="submit">Réactiver</button>
+                            <button class="btn btn-success" type="submit">Réactiver</button>
                         </form>
                     {% endif %}
                 </td>
