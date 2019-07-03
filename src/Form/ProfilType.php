@@ -22,19 +22,22 @@ class ProfilType extends AbstractType
         'attr'=> [
             'placeholder'=>'Votre pseudo/identifiant',
             'required'=>true
-        ]
+        ],
+                'label' => 'Pseudo'
     ])
             ->add('name',TextType::class, [
                 'attr'=> [
                     'placeholder'=>'Votre nom',
                     'required'=>true
-                ]
+                ],
+                'label' => 'Nom'
             ])
             ->add('firstname',TextType::class, [
                 'attr'=> [
                     'placeholder'=>'Votre prénom',
                     'required'=>true
-                ]
+                ],
+                'label' => 'Prénom'
             ])
 //            ->add('picture', FileType::class, [
 //                'attr'=> [
@@ -46,7 +49,8 @@ class ProfilType extends AbstractType
                 'attr'=> [
                     'placeholder'=>'Votre adresse mail',
                     'required'=>true
-                ]
+                ],
+                'label' => 'Email'
             ])
             ->add('password', RepeatedType::class, [
                 'type'=> PasswordType::class,
