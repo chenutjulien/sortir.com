@@ -16,8 +16,8 @@
             <tbody>
             <td>{{ city.name  }}</td>
             <td>{{ city.postalcode }}</td>
-            <td><a href="{{ path('city_index') }}">Retour à la liste</a> /
-                <a href="{{ path('city_edit', {'id': city.id}) }}">Modifier</a></td>
+            <td><a class="btn btn-success" href="{{ path('city_index') }}">Retour à la liste</a>
+                <a class="btn btn-warning ml-3" href="{{ path('city_edit', {'id': city.id}) }}">Modifier</a></td>
             </tbody>
 
         </table>
