@@ -14,8 +14,9 @@ class SiteType extends AbstractType
     {
         $builder
             ->add('name',TextType::class,[
+                'label'=>'Nom',
                 'attr'=>[
-                    'label'=>'Nom',
+
                     'placeholder'=>"Invente ton site sympa"
                 ]
             ])
