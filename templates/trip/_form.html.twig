@@ -10,7 +10,7 @@
     <div class="col-md my-auto">
         {{ form_row(form.informations) }}
         {{ form_row(form.Spot) }}
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ajoutLieu">
             +
         </button>
         {{ form_row(form.State) }}
@@ -18,21 +18,9 @@
         {{ form_end(form) }}
     </div>
 </div>
-{#<div class="" row>#}
-{#    <div class="col-md my-auto">#}
-{#        <div id="addSpot" class="collapse">#}
-{#        </div>#}
-{#        <div id="addSpot" class="collapse">#}
-
-{#        </div>#}
-{#    </div>#}
-
-{#</div>#}
-<!-- Button trigger modal -->
-
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ajoutLieu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
