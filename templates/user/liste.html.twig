@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-<p> Ici.</p>
+    <p> Ici.</p>
     <table class="table">
         <thead>
         <tr>
@@ -15,38 +15,37 @@
         </tr>
         </thead>
         <tbody>
-<form method="post" action="{{ path("user_ac", {'id': trip.id}) }}">
+
         {% for user in users %}
-       <tr>
-        <td>
-                {{ user.id }}
-{#                <ul>#}
-{#                    <li><a href="{{ path("user_voirprofil", {'id': register.id}) }}">{{ register.username }}</a></li>#}
-{#                </ul>#}
+            <tr>
+                <td>
+                    {{ user.id }}
+                </td>
+                <td> {{ user.site.id }}</td>
+                <td> {{ user.username }}</td>
+                <td> {{ user.name }}</td>
+                <td> {{ user.firstname }}</td>
+                <td> {{ user.mail }}</td>
+                <td> {% if user.active==1 %}
+                        <p>actif</p>
 
-        </td>
-        <td> {{ user.site.id }}</td>
-        <td> {{ user.username }}</td>
-        <td> {{ user.name }}</td>
-        <td> {{ user.firstname }}</td>
-        <td> {{ user.mail }}</td>
-        <td> {% if user.active==1  %}
-        <p>actif</p>
-                <input type="checkbox" id="desactive" name="desactive">
-                <label for="scales">Désactiver</label>
-                {% else %}
-                    <p>inactif</p>
-
-                    <input type="checkbox" id="active" name="active">
-                    <label for="scales">Réactiver</label>
-            {% endif %}
+                        <form method="post" action="{{ path("user_inactive", {'id': user.id}) }}">
+                            <input type="hidden" id="desactive" name="desactive">
+                            <button type="submit">Désactiver</button>
+                        </form>
 
 
-        </td>
-       </tr>
+                    {% else %}
+                        <p>inactif</p>
+                        <form method="post" action="{{ path("user_active", {'id': user.id}) }}">
+                            <input type="hidden" id="active" name="active">
+                            <button type="submit">Réactiver</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
         {% endfor %}
-    <button type="submit"
-</form>
+
         </tbody>
     </table>
 

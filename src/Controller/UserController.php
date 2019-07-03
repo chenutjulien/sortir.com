@@ -144,4 +144,24 @@ return $this->render("user/liste.html.twig", [
 ]);
 
     }
+    /**
+     * @Route("/Desactiver/{id}", name="user_inactive")
+     */
+    public function inactivate($id, EntityManagerInterface $em){
+        $user=$em->getRepository(User::class)->find($id);
+$user->setActive(0);
+$em->persist($user);
+$em->flush();
+return $this->redirectToRoute("user_liste");
+    }
+    /**
+     * @Route("/Activer/{id}", name="user_active")
+     */
+    public function activate($id, EntityManagerInterface $em){
+        $user=$em->getRepository(User::class)->find($id);
+        $user->setActive(1);
+        $em->persist($user);
+        $em->flush();
+        return $this->redirectToRoute("user_liste");
+    }
 }
