@@ -40,7 +40,7 @@
                 <td>
                     <a class="btn btn-info" href="{{ path('trip_show', {'id': trip.id}) }}">Voir</a>
                     {% if trip.organiser.id == app.user.id %}
-                        /<a class="btn btn-warning" href="{{ path('trip_edit', {'id': trip.id}) }}">Editer</a>
+                        <a class="btn btn-warning ml-3" href="{{ path('trip_edit', {'id': trip.id}) }}">Editer</a>
                     {% endif %}
                 </td>
             </tr>
