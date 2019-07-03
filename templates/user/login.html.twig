@@ -9,7 +9,7 @@
 {% block main %}
 <br>
     <div class="container-fluid bgdiv">
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and user.active==1 %}
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <h4>Bienvenue  {{ app.user.username }} sur Sortir.com</h4>
         {% else %}
             <h1>Bienvenue sur Sortir.com</h1>

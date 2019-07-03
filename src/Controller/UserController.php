@@ -60,12 +60,17 @@ class UserController extends Controller
     public function login(AuthenticationUtils $authenticationUtils) {
         $error = $authenticationUtils->getLastAuthenticationError(); //Utilisations des outils d'identification
         $lastUsername = $authenticationUtils->getLastUsername(); //Verification si l'utilisateur est bien identifié
+        $user=$this->getUser();
+       if($user===null){
+           return $this->redirectToRoute("user_logout");
+       }
         if ($this->getUser()) {
             return $this->redirectToRoute("trip_index");
         }
         return $this->render("user/login.html.twig", [
             'error' => $error,
-            'lastUsername' => $lastUsername
+            'lastUsername' => $lastUsername,
+            'user'=>$user
         ]);
     }
     /**
