@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Filter;
+use App\Entity\Spot;
 use App\Entity\Trip;
 use App\Entity\User;
 use App\Form\FilterType;
+use App\Form\SpotType;
 use App\Form\TripType;
 use App\Repository\TripRepository;
 use DateInterval;
@@ -54,6 +56,7 @@ class TripController extends Controller
                 }
             }
         }
+
 
 
         $filter = new Filter();
@@ -108,9 +111,25 @@ class TripController extends Controller
             return $this->redirectToRoute('trip_index');
         }
 
+        $spot = new Spot();
+        $formspot = $this->createForm(SpotType::class, $spot);
+        $formspot->handleRequest($request);
+
+        if ($formspot->isSubmitted() && $formspot->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($spot);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('trip_new');
+        }
+
+
+
         return $this->render('trip/new.html.twig', [
             'trip' => $trip,
             'form' => $form->createView(),
+            'spot' => $spot,
+            'formspot' => $formspot->createView(),
         ]);
     }
 
