@@ -28,7 +28,7 @@
                 <td>
                     {% for register in registereds %}
                         <ul>
-                            <li><a class="btn btn-info" href="{{ path("user_voirprofil", {'id': register.id}) }}">{{ register.username }}</a></li>
+                            <li><a class="btn btn-secondary" href="{{ path("user_voirprofil", {'id': register.id}) }}">{{ register.username }}</a></li>
                         </ul>
                     {% endfor %}
                 </td>
@@ -50,7 +50,7 @@
                     {#Si l'état de la sortie n'est pas annulée#}
                 {% else %}
 
-                    <a href="{{ path('trip_edit', {'id': trip.id}) }}" class="card-link">Editer</a>
+                    <a class="btn btn-warning mt-4" href="{{ path('trip_edit', {'id': trip.id}) }}" class="card-link">Editer</a>
                 {% endif %}
                 {#Si l'utilisateur n'est pas l'organisateur#}
             {% else %}
@@ -80,6 +80,7 @@
                                 <form action="{{ path("trip_pullOut", {'id': trip.id}) }}">
                                     <input type="hidden" name="_method">
                                     <input type="hidden" name="_token" value="{{ csrf_token('pullOut'~trip.id) }}">
+                                    <br>
                                     <button class="btn btn-danger" type="submit">Se désister</button>
                                 </form>
                                 {# Si l'utilisateur n'est pas inscrit-> on lui propose de s'inscrire#}
@@ -88,8 +89,8 @@
                                 <form action="{{ path("trip_register", {'id': trip.id}) }}">
                                     <input type="hidden" name="_method">
                                     <input type="hidden" name="_token" value="{{ csrf_token('register'~trip.id) }}"><br>
-                                    
-                                    <button class="btn btn-primary" type="submit">S'inscrire</button>
+
+                                    <button class="btn btn-success" type="submit">S'inscrire</button>
                                 </form>
                             {% endif %}
                         {% endif %}

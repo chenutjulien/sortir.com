@@ -22,8 +22,8 @@
                 <td>{{ city.name }}</td>
                 <td>{{ city.postalCode }}</td>
                 <td>
-                    <a class="btn btn-success" href="{{ path('city_show', {'id': city.id}) }}">Voir</a> /
-                    <a class="btn btn-warning" href="{{ path('city_edit', {'id': city.id}) }}">editer</a>
+                    <a class="btn btn-success" href="{{ path('city_show', {'id': city.id}) }}">Voir</a>
+                    <a class="btn btn-warning ml-3" href="{{ path('city_edit', {'id': city.id}) }}">editer</a>
                 </td>
             </tr>
         {% else %}
