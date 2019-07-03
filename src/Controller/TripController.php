@@ -31,7 +31,7 @@ class TripController extends Controller
 
         $now= new \DateTime('now');
         $trips=$em->getRepository(Trip::class)->findAll();
-$fp=fopen('CSV/archive.csv','w');
+
 
         foreach ($trips as $trip) {
             $diff1month = new DateInterval('P1M');
@@ -49,10 +49,11 @@ $fp=fopen('CSV/archive.csv','w');
                 $em->flush();
             }
         }else{
-                fputcsv($fp,$trips,"\t");
+               $em->remove($trip);
+               $em->flush();
             }
         }
-fclose($fp);
+
 
         $filter= new Filter();
         $auj=new \DateTime('now');
