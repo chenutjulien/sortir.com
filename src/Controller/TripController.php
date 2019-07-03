@@ -29,36 +29,37 @@ class TripController extends Controller
     {
 
 
-        $now= new \DateTime('now');
-        $trips=$em->getRepository(Trip::class)->findAll();
+        $now = new \DateTime('now');
+        $trips = $em->getRepository(Trip::class)->findAll();
 
 
         foreach ($trips as $trip) {
-            $diff1month = new DateInterval('P1M');
-            $dateArchived=$trip->getEndDateTime()->add($diff1month);
-            if ($dateArchived >= $now) {
-                if($trip->getEndDateTime() < $now){
-                $state = $this->getDoctrine()->getRepository(\App\Entity\State::class)->find(4);
-                $trip->setState($state);
-                $em->persist($trip);
+            $diff1month = new DateInterval('PT60S');
+            $dateArchived = $trip->getEndDateTime()->add($diff1month);
+
+            if ($dateArchived < $now) {
+                $em->remove($trip);
                 $em->flush();
-            } elseif ($trip->getStartDateTime() < $now) {
-                $state = $this->getDoctrine()->getRepository(\App\Entity\State::class)->find(3);
-                $trip->setState($state);
-                $em->persist($trip);
-                $em->flush();
-            }
-        }else{
-               $em->remove($trip);
-               $em->flush();
+            } else {
+                if ($trip->getEndDateTime() < $now) {
+                    $state = $this->getDoctrine()->getRepository(\App\Entity\State::class)->find(4);
+                    $trip->setState($state);
+                    $em->persist($trip);
+                    $em->flush();
+                } elseif ($trip->getStartDateTime() < $now) {
+                    $state = $this->getDoctrine()->getRepository(\App\Entity\State::class)->find(3);
+                    $trip->setState($state);
+                    $em->persist($trip);
+                    $em->flush();
+                }
             }
         }
 
 
-        $filter= new Filter();
-        $auj=new \DateTime('now');
+        $filter = new Filter();
+        $auj = new \DateTime('now');
         $filter->setDebDate($auj);
-        $fin=new \DateTime('now');
+        $fin = new \DateTime('now');
         date_add($fin, date_interval_create_from_date_string('60 days'));
         $filter->setEndDateTime($fin);
         $form = $this->createForm(FilterType::class, $filter);
@@ -89,10 +90,11 @@ class TripController extends Controller
     /**
      * @Route("/new", name="trip_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public
+    function new(Request $request): Response
     {
         $trip = new Trip();
-        $user=$this->getUser();
+        $user = $this->getUser();
         $trip->setOrganiser($user);
 
         $form = $this->createForm(TripType::class, $trip);
@@ -117,18 +119,18 @@ class TripController extends Controller
      */
     public function show(Trip $trip): Response
     {
-        $user= new User();
-        $user=$this->getUser();
-        $registereds= $trip->getRegistereds();
-        if($user== null) {
+        $user = new User();
+        $user = $this->getUser();
+        $registereds = $trip->getRegistereds();
+        if ($user == null) {
             $this->addFlash("danger", "L'utilisateur est vide");
 
-            return $this ->redirectToRoute('trip_index');
-        }else{
+            return $this->redirectToRoute('trip_index');
+        } else {
             return $this->render('trip/show.html.twig', [
                 'trip' => $trip,
-                'user'=>$user,
-                'registereds'=>$registereds]);
+                'user' => $user,
+                'registereds' => $registereds]);
         }
     }
 
@@ -136,17 +138,17 @@ class TripController extends Controller
     /**
      * @Route("/inscription/{id}", name="trip_register")
      */
-    public function register($id, EntityManagerInterface $em, Request  $rq)
+    public function register($id, EntityManagerInterface $em, Request $rq)
 
     {
-        $user=$this->getUser();
-        $trip=$em->getRepository(Trip::class)->find($id);
+        $user = $this->getUser();
+        $trip = $em->getRepository(Trip::class)->find($id);
         $trip->addRegistered($user);
         $em->persist($trip);
         $em->flush();
-        $this->addFlash("success","Vous êtes bien inscrit(e) à cette sortie");
+        $this->addFlash("success", "Vous êtes bien inscrit(e) à cette sortie");
         return $this->redirectToRoute('trip_show', [
-            'id'=>$trip->getId(),
+            'id' => $trip->getId(),
         ]);
 
     }
@@ -155,14 +157,15 @@ class TripController extends Controller
     /**
      * @Route("/desistement/{id}", name="trip_pullOut")
      */
-    public function pullOut($id, EntityManagerInterface $em, Request $rq){
-        $user=$this->getUser();
-        $trip=$em->getRepository(Trip::class)->find($id);
+    public function pullOut($id, EntityManagerInterface $em, Request $rq)
+    {
+        $user = $this->getUser();
+        $trip = $em->getRepository(Trip::class)->find($id);
         $trip->removeRegistered($user);
         $em->flush();
-        $this->addFlash("success","Vous n'êtes plus inscrit(e)s à cette sortie");
-        return $this->redirectToRoute('trip_show',[
-            'id'=>$trip->getId(),
+        $this->addFlash("success", "Vous n'êtes plus inscrit(e)s à cette sortie");
+        return $this->redirectToRoute('trip_show', [
+            'id' => $trip->getId(),
         ]);
     }
 
@@ -197,15 +200,15 @@ class TripController extends Controller
      */
     public function delete(Request $request, Trip $trip, EntityManagerInterface $em): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$trip->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $trip->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $state=$this->getDoctrine()->getRepository(\App\Entity\State::class)->find(5);
+            $state = $this->getDoctrine()->getRepository(\App\Entity\State::class)->find(5);
             $trip->setState($state);
-            if (isset($_POST['cancelReason'])){
+            if (isset($_POST['cancelReason'])) {
                 $cancelReason = $_POST['cancelReason'];
                 $trip->setCancelReason($cancelReason);
-            }else{
-                $this->addFlash("danger","La raison d'annulation est nulle");
+            } else {
+                $this->addFlash("danger", "La raison d'annulation est nulle");
             }
             $cancelReason = $_POST['cancelReason'];
             $trip->setCancelReason($cancelReason);
