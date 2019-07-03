@@ -21,9 +21,9 @@ class UserChecker implements UserCheckerInterface
             return;
         }
 
-        // user account is expired, the user may be notified
+        // Le compte n'est pas actif
         if (!$user->getActive()) {
-            throw new \Exception("ce membre n'est pas actif");
+            throw new \Exception("Ce membre n'est pas actif");
         }
     }
 }
