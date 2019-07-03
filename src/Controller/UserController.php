@@ -134,4 +134,14 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/listeUser", name="user_liste")
+     */
+    public function printList(EntityManagerInterface $em){
+$users=$em->getRepository(User::class)->findAll();
+return $this->render("user/liste.html.twig", [
+    'users'=>$users
+]);
+
+    }
 }
