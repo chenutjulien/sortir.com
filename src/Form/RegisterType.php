@@ -22,24 +22,24 @@ class RegisterType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
+                'label' => 'Pseudo',
                 'attr'=> [
                     'placeholder'=>'Votre identifiant',
                     'required'=>true,
-                    'label' => 'Pseudo'
                 ]
             ])
             ->add('name', TextType::class, [
+                'label' => 'Nom',
                 'attr'=> [
                     'placeholder'=>'Votre nom',
                     'required'=>true,
-                    'label' => 'Nom'
                 ]
             ])
             ->add('firstname', TextType::class, [
+                'label'=> 'Prénom',
                 'attr'=> [
                     'placeholder'=>'Votre prénom',
                     'required'=>true,
-                    'label'=> 'Prénom'
                 ]
             ])
 //            ->add('picture', FileType::class, [
@@ -49,10 +49,10 @@ class RegisterType extends AbstractType
 //                ]
 //            ])
             ->add('mail', EmailType::class, [
+                'label'=>'Email',
                 'attr'=> [
                     'placeholder'=>'Votre adresse mail',
                     'required'=>true,
-                    'label'=>'Email'
                 ]
             ])
             ->add('password', RepeatedType::class, [
