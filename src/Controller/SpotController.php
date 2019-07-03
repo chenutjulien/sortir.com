@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Spot;
 use App\Form\SpotType;
 use App\Repository\SpotRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +19,12 @@ class SpotController extends Controller
     /**
      * @Route("/", name="spot_index", methods={"GET"})
      */
-    public function index(SpotRepository $spotRepository): Response
+    public function index(EntityManagerInterface $em, SpotRepository $spotRepository): Response
     {
+        $user = $this->getUser();
         return $this->render('spot/index.html.twig', [
             'spots' => $spotRepository->findAll(),
+            'user'=>$user
         ]);
     }
 
