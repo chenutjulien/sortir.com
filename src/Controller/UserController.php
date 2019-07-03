@@ -164,4 +164,15 @@ return $this->redirectToRoute("user_liste");
         $em->flush();
         return $this->redirectToRoute("user_liste");
     }
+
+    /**
+     * @Route("/Supprimer/{id}", name="user_delete")
+     */
+    public function delete($id, EntityManagerInterface $em){
+        $user=$em->getRepository(User::class)->find($id);
+        $em->remove($user);
+        $em->flush();
+        return $this->redirectToRoute("user_liste");
+    }
+
 }
