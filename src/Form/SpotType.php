@@ -5,7 +5,7 @@ namespace App\Form;
 use App\Entity\Spot;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,13 +28,13 @@ class SpotType extends AbstractType
                     'required'=>'true'
                 ]
             ])
-            ->add('latitude', IntegerType::class, [
+            ->add('latitude', NumberType::class, [
                 'attr'=>[
                     'label'=> 'Latitude',
                     'required'=>'true'
                 ]
             ])
-            ->add('longitude', IntegerType::class, [
+            ->add('longitude', NumberType::class, [
                 'attr'=>[
                     'label'=> 'Latitude',
                     'required'=>'true'
