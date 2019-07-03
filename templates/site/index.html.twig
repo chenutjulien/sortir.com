@@ -21,8 +21,8 @@
 {#                <td>{{ site.id }}</td>#}
                 <td>{{ site.name }}</td>
                 <td>
-                    <a class="btn btn-success" href="{{ path('site_show', {'id': site.id}) }}">Voir</a> /
-                    <a class="btn btn-warning" href="{{ path('site_edit', {'id': site.id}) }}">Modifier</a>
+                    <a class="btn btn-success" href="{{ path('site_show', {'id': site.id}) }}">Voir</a>
+                    <a class="btn btn-warning ml-3" href="{{ path('site_edit', {'id': site.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -34,7 +34,7 @@
     </table>
 
     <a class="btn btn-success" href="{{ path('site_new') }}">Créer un nouveau site</a>
-    <a class="btn btn-primary" href="{{ path('trip_index') }}">Retour à l'accueil</a>
+    <a class="btn btn-primary ml-3" href="{{ path('trip_index') }}">Retour à l'accueil</a>
 </div>
 
 {% endblock %}

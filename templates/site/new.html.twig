@@ -8,5 +8,7 @@
     <div class="container-fluid bgdiv">
         <h3>Créer ton nouveau site (comme Dark Sidious)</h3>
         {{ include('site/_form.html.twig') }}
+        <br>
+        <a class="btn btn-primary" href="{{ path('site_index') }}">Retour à la liste des sites</a>
     </div>
 {% endblock %}
