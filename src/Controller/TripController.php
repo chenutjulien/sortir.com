@@ -94,9 +94,12 @@ class TripController extends Controller
      * @Route("/new", name="trip_new", methods={"GET","POST"})
      */
     public
-    function new(Request $request): Response
+    function new(Request $request)
     {
         $trip = new Trip();
+
+
+
         $user = $this->getUser();
         $trip->setOrganiser($user);
 
@@ -119,11 +122,10 @@ class TripController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($spot);
             $entityManager->flush();
-
-            return $this->redirectToRoute('trip_new');
+            return $this->redirectToRoute('trip_new',[
+                'spot' => $spot->getId()
+            ]);
         }
-
-
 
         return $this->render('trip/new.html.twig', [
             'trip' => $trip,
