@@ -78,3 +78,6 @@ a {
 .kiki {
     margin: auto;
 }
+.row {
+    justify-content: space-around;
+}
