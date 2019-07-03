@@ -1,14 +1,19 @@
 
+
 <div class="row">
 
-    <div class="col-md">
+    <div class="col-6 align-self-start">
         {{ form_start(form) }}
         {{ form_row(form.Site) }}
         {{ form_row(form.search) }}
         {{ form_row(form.debDate) }}
         {{ form_row(form.endDateTime) }}
     </div>
-    <div class="col-md my-auto">
+    <div class="col-2 align-self-center">
+
+    </div>
+
+    <div class="col-4 align-self-end mt-5 mb-5 offset-mt-2">
 
         {{ form_row(form.organiser) }}
         {{ form_row(form.registered) }}
@@ -18,4 +23,6 @@
         {{ form_end(form) }}
     </div>
 
+
 </div>
+
