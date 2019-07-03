@@ -28,7 +28,9 @@
                 <td>{{ spot.longitude }}</td>
                 <td>
                     <a class="btn btn-success" href="{{ path('spot_show', {'id': spot.id}) }}">Voir</a>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <a class="btn btn-warning ml-3" href="{{ path('spot_edit', {'id': spot.id}) }}">Editer</a>
+                     {% endif %}
                 </td>
             </tr>
         {% else %}

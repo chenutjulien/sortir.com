@@ -41,5 +41,4 @@ security:
           - { path: ^/register, roles: ROLE_ADMIN }
           - { path: ^/site, roles: ROLE_ADMIN }
           - { path: ^/city, roles: ROLE_ADMIN }
-          - { path: ^/spot, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
