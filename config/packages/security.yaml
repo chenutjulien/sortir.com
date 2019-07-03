@@ -12,8 +12,11 @@ security:
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
+            user_checker: App\Security\UserChecker
             security: false
         main:
+            pattern: ^/
+            user_checker: App\Security\UserChecker
             anonymous: true
             logout_on_user_change: true
             provider: app_user_provider
