@@ -23,7 +23,7 @@ class TripType extends AbstractType
                 'required' => true
             ])
             ->add('startDateTime', DateTimeType::class, [
-                'label' => 'Heure et date de fin',
+                'label' => 'Heure et date de début',
                 'widget' => 'choice',
                 'format' => 'd-M-y HH:mm:ss',
                 'model_timezone' => 'Europe/Paris',
