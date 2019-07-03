@@ -27,8 +27,8 @@
                 <td>{{ spot.latitude }}</td>
                 <td>{{ spot.longitude }}</td>
                 <td>
-                    <a href="{{ path('spot_show', {'id': spot.id}) }}">Voir</a> /
-                    <a href="{{ path('spot_edit', {'id': spot.id}) }}">Editer</a>
+                    <a class="btn btn-success" href="{{ path('spot_show', {'id': spot.id}) }}">Voir</a>
+                    <a class="btn btn-warning ml-3" href="{{ path('spot_edit', {'id': spot.id}) }}">Editer</a>
                 </td>
             </tr>
         {% else %}

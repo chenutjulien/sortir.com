@@ -1,5 +1,6 @@
 <form method="post" action="{{ path('spot_delete', {'id': spot.id}) }}" onsubmit="return confirm('La hshouma, tu vas pas effacer ca ?!');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ spot.id) }}">
+    <br>
     <button class="btn btn-danger">Supprimer</button>
 </form>
