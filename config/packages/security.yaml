@@ -44,4 +44,8 @@ security:
           - { path: ^/register, roles: ROLE_ADMIN }
           - { path: ^/site, roles: ROLE_ADMIN }
           - { path: ^/city, roles: ROLE_ADMIN }
+          - { path: ^/listeUser, roles: ROLE_ADMIN }
+          - { path: ^/Desactiver, roles: ROLE_ADMIN }
+          - { path: ^/Activer, roles: ROLE_ADMIN }
+          - { path: ^/Supprimer, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
