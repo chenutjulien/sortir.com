@@ -65,6 +65,7 @@ class ProfilType extends AbstractType
 //            ->add('administrator')
 //            ->add('active')
             ->add('phoneNumber', TelType::class, [
+                'label'=>'T\'as pas un 06',
                 'attr'=> [
                     'placeholder'=>'Votre télephone',
                     'required'=>true

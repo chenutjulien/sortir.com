@@ -71,7 +71,13 @@ class RegisterType extends AbstractType
             ->add('active', CheckboxType::class,
                 array('label'=>'active',
                     'required'=>false))
-            ->add('phoneNumber')
+            ->add('phoneNumber', TelType::class, [
+                'label'=>'Numéro de téléphone',
+                'attr'=> [
+                    'placeholder'=>'Votre télephone',
+                    'required'=>true
+                ]
+            ])
             ->add('Site', EntityType::class,[
                     'class' => 'App\Entity\Site',
                     'choice_label' => 'name',
