@@ -63,7 +63,7 @@ class TripController extends Controller
         $auj = new \DateTime('now');
         $filter->setDebDate($auj);
         $fin = new \DateTime('now');
-        date_add($fin, date_interval_create_from_date_string('60 days'));
+        date_add($fin, date_interval_create_from_date_string('160 days'));
         $filter->setEndDateTime($fin);
         $form = $this->createForm(FilterType::class, $filter);
         $form->handleRequest($request);
