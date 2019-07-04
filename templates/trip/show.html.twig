@@ -8,6 +8,15 @@
     {#Informations Sortie#}
     <div class="container-fluid card">
         <div class="card-body">
+            {% if trip.organiser.site.id == '1' %}
+                <img src="{{ asset('images/Chartres.jpg') }}" class="card-img tof" alt="...">
+            {% elseif trip.organiser.site.id == '3' %}
+                <img src="{{ asset('images/redon.jpg') }}" class="card-img tof" alt="...">
+            {% elseif trip.organiser.site.id == '4' %}
+                <img src="{{ asset('images/sucy.jpg') }}" class="card-img tof" alt="...">
+            {% elseif trip.organiser.site.id == '5' %}
+                <img src="{{ asset('images/creteil.jpg') }}" class="card-img tof" alt="...">
+            {% endif %}
             <h3 class="card-title">Détail de la sortie - Proposée par {{ trip.organiser.username }}</h3>
             <h4 class="card-subtitle mb-2 text-muted">{{ trip.name }} à {{ trip.spot.city.name }} / {{ trip.spot.name }}
                 du {{ trip.startDateTime ? trip.startDateTime|date('Y-m-d H:i:s') : '' }}
@@ -95,6 +104,7 @@
                 {% if trip.startDateTime|date('m/d/Y') < "now"|date('m/d/Y') %}
 
                     <p>Inscriptions closes </p>
+                    <a class="btn btn-primary" href="{{ path('trip_index') }}">Retour</a>
                     {#Si la sortie n'a pas commencée#}
                 {% else %}
 
