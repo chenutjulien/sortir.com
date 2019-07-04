@@ -1,0 +1,85 @@
+@media all and (max-width: 1024px) {
+    body {
+        /*background-image:  url("images/montreal.jpg");*/
+        /*background-color: #494737;*/
+        /*background-size: cover;*/
+        /*background-attachment: scroll;*/
+        color: black!important;
+        background-image: linear-gradient(to right, #8ab5e5, #8cbde8, #90c5eb, #96cded, #9dd5ef, #a7daf0, #b1dff1, #bbe4f2, #c9e8f2, #d6ecf3, #e3eff3, #f0f3f4);
+        font-family: Bahnschrift!important;
+    }
+    .container {
+        background-color: #D3D3D3;
+        min-height: 100vh;
+        border-radius: 25px;
+        color:#494737!important;
+    }
+    h4, h3{
+        color: black;
+        font-style: italic;
+    }
+    .bordure {
+        border-radius: 25px;
+        color: black!important;
+        background-image:  url("images/singapour.jpg");
+    }
+    .coco {
+        /*background-image:  url("images/montreal.jpg");*/
+        color: black!important;
+    }
+    .photo {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+    .cadre {
+        border:2px solid black;
+        -moz-border-radius:10% / 50%;
+        -webkit-border-radius:10% / 50%;
+        border-radius:10% / 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .zozo {
+        color: black!important;
+    }
+    .navbar-nav li a{
+        color: black!important;
+    }
+    a {
+        color: black;
+    }
+    .dropdown-menu{
+        /*background:rgba(255,255,255,0.5);*/
+        background-color: #5eb5e0;
+        color: black!important;
+    }
+    .dropdown-item {
+        color: black!important;
+    }
+    .bgdiv {
+        /*background-color: #D3D3D3;*/
+        background-color: transparent;
+        height: 100vh;
+        border-radius: 25px;
+    }
+    .montreal {
+        background-image:  url("images/montreal.jpg");
+    }
+    .card {
+        border: black 2px solid;
+        background-color: transparent;
+        border-radius: 25px;
+    }
+    .profil {
+        font-weight: bold;
+        color: black;
+    }
+    .kiki {
+        margin: auto;
+    }
+    .row {
+        justify-content: space-around;
+    }
+}
