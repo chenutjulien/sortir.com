@@ -13,7 +13,7 @@
             <div class="col-md-6 offset-md-3 mt-2"><label>Nom : </label> <span class="profil">{{ user.name }}</span></div>
             <div class="col-md-6 offset-md-3 mt-2"><label>Téléphone : </label> <span class="profil">{{ user.phoneNumber }}</span></div>
             <div class="col-md-6 offset-md-3 mt-2"><label>Email : </label> <span class="profil">{{ user.mail }}</span></div>
-{#            <div class="col-md-6 offset-md-3 mt-2"><label>Ville de rattachement : </label><span class="profil">{{ site.name }}</span></div>#}
+            <div class="col-md-6 offset-md-3 mt-2"><label>Ville de rattachement : </label><span class="profil">{{ user.site.name }}</span></div>
         </div>
         <div class="row">
             <a class="btn btn-primary kiki mt-5" href="{{ path('trip_index') }}">Retour</a>
