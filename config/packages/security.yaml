@@ -48,4 +48,5 @@ security:
           - { path: ^/Desactiver, roles: ROLE_ADMIN }
           - { path: ^/Activer, roles: ROLE_ADMIN }
           - { path: ^/Supprimer, roles: ROLE_ADMIN }
+          - { path: ^/spot, roles: ROLE_USER, ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
