@@ -81,3 +81,8 @@ a {
 .row {
     justify-content: space-around;
 }
+.tof {
+    float: right;
+    width: 20%;
+    border-radius: 10% / 10%;
+}
