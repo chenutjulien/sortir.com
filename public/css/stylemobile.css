@@ -1,4 +1,4 @@
-@media all and (max-width: 1024px) {
+@media all and (max-width: 980px) {
     body {
         /*background-image:  url("images/montreal.jpg");*/
         /*background-color: #494737;*/
@@ -82,4 +82,7 @@
     .row {
         justify-content: space-around;
     }
+}
+.ghost {
+    display: none;
 }

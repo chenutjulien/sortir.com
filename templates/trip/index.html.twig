@@ -13,30 +13,30 @@
         <thead>
             <tr>
 {#                <th>Id</th>#}
-                <th>Site</th>
+                <th class="ghost">Site</th>
                 <th>Nom</th>
                 <th>Ville</th>
                 <th>Date de début</th>
-                <th>Date de fin</th>
-                <th>Inscrits</th>
+                <th class="ghost">Date de fin</th>
+                <th class="ghost">Inscrits</th>
 {#                <th>Informations</th>#}
-                <th>Organisateur</th>
-                <th>Statut</th>
+                <th class="ghost">Organisateur</th>
+                <th class="ghost">Statut</th>
             </tr>
         </thead>
         <tbody>
         {% for trip in trips %}
 
             <tr>
-                <td>{{ trip.organiser.site.name }}</td>
+                <td class="ghost">{{ trip.organiser.site.name }}</td>
                 <td>{{ trip.name }}</td>
                 <td>{{ trip.spot.city.name }}</td>
                 <td>{{ trip.startDateTime ? trip.startDateTime|date('d-m-Y H:i') : '' }}</td>
-                <td>{{ trip.endDateTime ? trip.endDateTime|date('d-m-Y H:i') : '' }}</td>
-                <td>{{ trip.registereds.count }}/{{ trip.maxRegistration }}</td>
+                <td class="ghost">{{ trip.endDateTime ? trip.endDateTime|date('d-m-Y H:i') : '' }}</td>
+                <td class="ghost">{{ trip.registereds.count }}/{{ trip.maxRegistration }}</td>
 {#                <td>{{ trip.informations }}</td>#}
-                <td><a href="{{ path('user_voirprofil', {'id': trip.organiser.id}) }}"><span class="btn btn-secondary">{{ trip.organiser.username }}</span></a></td>
-                <td>{{ trip.state.name }}</td>
+                <td class="ghost"><a href="{{ path('user_voirprofil', {'id': trip.organiser.id}) }}"><span class="btn btn-secondary">{{ trip.organiser.username }}</span></a></td>
+                <td class="ghost">{{ trip.state.name }}</td>
 
                 <td>
                     <a class="btn btn-info" href="{{ path('trip_show', {'id': trip.id}) }}">Voir</a>
