@@ -52,7 +52,7 @@
 
             {#                Fonctions supprimer/modifer pour organisateur et inscription/désistement pour l'utilisateur#}
             <hr/>
-            <a class="btn btn-primary mt-4" href="{{ path('trip_index') }}" class="card-link">Retour à la liste</a><br>
+            <a class="btn btn-primary" href="{{ path('trip_index') }}" class="card-link">Retour à la liste</a><br>
             {#Si l'utilisateur est l'organisateur#}
             {% if trip.organiser.id == user.id %}
 
@@ -64,7 +64,7 @@
                     {#Si l'état de la sortie n'est pas annulée#}
                 {% else %}
 
-                    <a class="btn btn-warning " href="{{ path('trip_edit', {'id': trip.id}) }}" class="card-link">Editer</a><br>
+                    <a class="btn btn-warning mt-4" href="{{ path('trip_edit', {'id': trip.id}) }}" class="card-link">Editer</a><br>
 
                     {% if trip.state.id==2 %}
                         {% if registereds.contains(user) %}
