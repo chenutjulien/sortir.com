@@ -104,6 +104,7 @@
                 {% if trip.startDateTime|date('m/d/Y') < "now"|date('m/d/Y') %}
 
                     <p>Inscriptions closes </p>
+                    <a class="btn btn-primary" href="{{ path('trip_index') }}">Retour</a>
                     {#Si la sortie n'a pas commencée#}
                 {% else %}
 
